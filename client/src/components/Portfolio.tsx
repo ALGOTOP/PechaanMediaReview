@@ -1,6 +1,7 @@
 import { Card } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { useState } from "react";
+import { useStaggeredReveal } from "@/hooks/useScrollReveal";
 
 interface Project {
   title: string;
@@ -65,6 +66,8 @@ export default function Portfolio() {
       ? projects
       : projects.filter((p) => p.category === activeFilter);
 
+  const { containerRef, visibleItems } = useStaggeredReveal(filteredProjects.length, 100);
+
   const getGridClass = (aspectRatio: string) => {
     switch (aspectRatio) {
       case "landscape":
@@ -104,13 +107,17 @@ export default function Portfolio() {
           </div>
         </div>
 
-        <div className="grid md:grid-cols-3 auto-rows-[280px] gap-4">
+        <div ref={containerRef} className="grid md:grid-cols-3 auto-rows-[280px] gap-4">
           {filteredProjects.map((project, index) => (
             <Card
               key={index}
-              className={`group overflow-hidden hover-elevate active-elevate-2 cursor-pointer transition-all duration-300 ${getGridClass(
+              className={`group overflow-hidden hover-elevate active-elevate-2 cursor-pointer transition-all duration-700 ${getGridClass(
                 project.aspectRatio
-              )}`}
+              )} ${
+                visibleItems.has(index)
+                  ? "opacity-100 scale-100"
+                  : "opacity-0 scale-95"
+              }`}
               data-testid={`card-project-${index}`}
             >
               <div className="relative h-full overflow-hidden">

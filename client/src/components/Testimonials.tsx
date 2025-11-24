@@ -1,5 +1,6 @@
 import { Card } from "@/components/ui/card";
 import { Avatar, AvatarFallback } from "@/components/ui/avatar";
+import { useStaggeredReveal } from "@/hooks/useScrollReveal";
 
 interface Testimonial {
   quote: string;
@@ -48,6 +49,8 @@ export default function Testimonials() {
     },
   ];
 
+  const { containerRef, visibleItems } = useStaggeredReveal(testimonials.length, 120);
+
   return (
     <section className="py-24 md:py-32 bg-muted/30" data-testid="section-testimonials">
       <div className="max-w-7xl mx-auto px-6">
@@ -60,12 +63,16 @@ export default function Testimonials() {
           </p>
         </div>
 
-        <div className="grid md:grid-cols-2 gap-8 md:gap-6">
+        <div ref={containerRef} className="grid md:grid-cols-2 gap-8 md:gap-6">
           {testimonials.map((testimonial, index) => (
             <Card
               key={index}
-              className={`p-8 hover-elevate transition-all ${
+              className={`p-8 hover-elevate transition-all duration-700 ${
                 index % 3 === 0 ? "md:mt-8" : ""
+              } ${
+                visibleItems.has(index)
+                  ? "opacity-100 translate-y-0"
+                  : "opacity-0 translate-y-12"
               }`}
               data-testid={`card-testimonial-${index}`}
             >
