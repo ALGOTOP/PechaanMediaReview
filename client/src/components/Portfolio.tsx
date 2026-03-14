@@ -37,6 +37,13 @@ export default function Portfolio() {
       aspectRatio: "square",
     },
     {
+      title: "NOVA",
+      category: "Branding",
+      description: "Visual identity and packaging design for wellness startup",
+      image: "https://images.unsplash.com/photo-1558618666-fcd25c85cd64?w=800&q=80",
+      aspectRatio: "square",
+    },
+    {
       title: "Zarrafa Coffee",
       category: "Strategy",
       description: "Creative strategy and brand positioning",
