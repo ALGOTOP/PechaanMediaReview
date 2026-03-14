@@ -11,14 +11,14 @@ interface Stat {
 const stats: Stat[] = [
   { value: 40,  suffix: "+", label: "International\nBrands",     sub: "Worldwide" },
   { value: 3.2, suffix: "×", decimals: 1, label: "Higher\nNoticeability", sub: "On Average" },
-  { value: 92,  suffix: "%", label: "Client\nRetention",         sub: "Year on Year" },
+  { value: 2,   suffix: "+", label: "Years of\nCraft",           sub: "& Counting" },
   { value: 70,  suffix: "+", label: "Global\nCampaigns",         sub: "Delivered" },
 ];
 
 const tickerItems = [
   "40+ Brands",
   "3.2× Noticeability",
-  "92% Retention",
+  "2+ Years of Craft",
   "70+ Campaigns",
   "Award-Winning Work",
   "Global Reach",
