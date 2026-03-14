@@ -2,7 +2,7 @@ import { useRef } from "react";
 import { motion, useScroll, useTransform } from "framer-motion";
 
 const STATEMENT =
-  "We are Pehchaan Media, a creative collective crafting digital landmarks that turn fleeting clicks into lasting legacies.";
+  "We are Pehchaan Media, a creative agency, crafting digital landmarks that turn fleeting clicks into lasting legacies.";
 
 const words = STATEMENT.split(" ");
 
