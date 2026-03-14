@@ -1,80 +1,95 @@
-import { Card } from "@/components/ui/card";
-import { useScrollReveal } from "@/hooks/useScrollReveal";
-import officeImage from "@assets/generated_images/creative_office_space.png";
+import { useRef } from "react";
+import { motion, useScroll, useTransform } from "framer-motion";
+
+const STATEMENT =
+  "We are Pehchaan Media, a creative collective crafting digital landmarks that turn fleeting clicks into lasting legacies.";
+
+const words = STATEMENT.split(" ");
+
+const metadata = [
+  { num: "01", label: "STRATEGY" },
+  { num: "02", label: "DESIGN" },
+  { num: "03", label: "IMPACT" },
+];
 
 export default function About() {
-  const { ref: titleRef, isVisible: titleVisible } = useScrollReveal();
-  const { ref: contentRef, isVisible: contentVisible } = useScrollReveal({ delay: 200 });
+  const containerRef = useRef<HTMLDivElement>(null);
 
-  const values = [
-    {
-      title: "Visual Storytelling",
-      description: "We capture emotion through design and film to make every brand story unforgettable.",
-    },
-    {
-      title: "Creative Strategy",
-      description: "We craft narratives that align creativity with business goals for meaningful impact.",
-    },
-    {
-      title: "Collaborative Approach",
-      description: "Our team works as an extension of yours — open, transparent, and relentlessly passionate.",
-    },
-  ];
+  const { scrollYProgress } = useScroll({
+    target: containerRef,
+    offset: ["start 0.85", "end 0.3"],
+  });
 
   return (
-    <section id="about" className="py-24 md:py-32" data-testid="section-about">
-      <div className="max-w-7xl mx-auto px-6">
-        <div className="grid lg:grid-cols-2 gap-12 lg:gap-16 items-center">
-          <div
-            ref={titleRef}
-            className={`space-y-8 transition-all duration-1000 ${
-              titleVisible ? "opacity-100 translate-x-0" : "opacity-0 -translate-x-8"
-            }`}
+    <section
+      id="about"
+      ref={containerRef}
+      className="py-32 md:py-40 border-t border-border/40"
+      style={{ backgroundColor: "#f9f9f9" }}
+      data-testid="section-about"
+    >
+      <div className="max-w-5xl mx-auto px-6">
+        {/* Scroll-reveal statement */}
+        <div className="mb-24 md:mb-32">
+          <h2
+            className="text-4xl md:text-5xl lg:text-6xl font-bold text-center leading-tight tracking-tight"
+            data-testid="text-about-title"
           >
-            <div>
-              <h2 className="text-4xl md:text-5xl lg:text-6xl font-bold mb-6 leading-tight" data-testid="text-about-title">
-                Who We Are
-              </h2>
-              <p className="text-lg md:text-xl text-muted-foreground leading-relaxed mb-8">
-                We are thinkers, storytellers, and dreamers. At Pehchaan Media, we blend strategy with creativity to build experiences that transform businesses into beloved brands.
+            {words.map((word, i) => {
+              const start = i / words.length;
+              const end = (i + 1) / words.length;
+
+              return (
+                <Word
+                  key={i}
+                  word={word}
+                  progress={scrollYProgress}
+                  range={[start, end]}
+                />
+              );
+            })}
+          </h2>
+        </div>
+
+        {/* Metadata footer */}
+        <div className="grid grid-cols-3 gap-8 border-t border-black/10 pt-12">
+          {metadata.map(({ num, label }) => (
+            <div key={num} className="text-center" data-testid={`meta-${num}`}>
+              <p
+                className="text-xs md:text-sm tracking-widest font-mono text-black/40 mb-1"
+              >
+                {num}
               </p>
-              <p className="text-base md:text-lg text-muted-foreground leading-relaxed">
-                With over 70 global campaigns and partnerships with 40+ international brands, we've proven that great design isn't just about aesthetics—it's about creating meaningful connections that drive real business results.
+              <p
+                className="text-sm md:text-base tracking-widest font-semibold text-black uppercase"
+              >
+                {label}
               </p>
             </div>
-
-            <div className="space-y-4">
-              {values.map((value, index) => (
-                <div
-                  key={index}
-                  className="border-l-2 border-primary pl-6 py-2"
-                  data-testid={`value-${index}`}
-                >
-                  <h3 className="text-lg font-bold mb-2">{value.title}</h3>
-                  <p className="text-muted-foreground text-sm leading-relaxed">
-                    {value.description}
-                  </p>
-                </div>
-              ))}
-            </div>
-          </div>
-
-          <div
-            ref={contentRef}
-            className={`transition-all duration-1000 delay-300 ${
-              contentVisible ? "opacity-100 translate-x-0" : "opacity-0 translate-x-8"
-            }`}
-          >
-            <Card className="overflow-hidden">
-              <img
-                src={officeImage}
-                alt="Pehchaan Media studio"
-                className="w-full h-auto object-cover"
-              />
-            </Card>
-          </div>
+          ))}
         </div>
       </div>
     </section>
+  );
+}
+
+function Word({
+  word,
+  progress,
+  range,
+}: {
+  word: string;
+  progress: ReturnType<typeof useScroll>["scrollYProgress"];
+  range: [number, number];
+}) {
+  const opacity = useTransform(progress, range, [0.15, 1]);
+
+  return (
+    <motion.span
+      style={{ opacity }}
+      className="inline-block mr-[0.25em] text-black"
+    >
+      {word}
+    </motion.span>
   );
 }
