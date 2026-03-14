@@ -1,6 +1,6 @@
 import { useState, useRef, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
-import { Play, ArrowRight, ArrowUpRight } from "lucide-react";
+import { Play, ArrowRight, ArrowUpRight, ChevronRight, ChevronLeft } from "lucide-react";
 
 interface ReelProject {
   num: string;
@@ -97,6 +97,22 @@ export default function Showreel() {
   const [expanded, setExpanded] = useState<number | null>(null);
   const heroRef = useRef<HTMLDivElement>(null);
   const mouse = useMousePosition(heroRef as React.RefObject<HTMLElement>);
+  const touchStartX = useRef<number | null>(null);
+
+  const goNext = () => setActive((p) => (p + 1) % projects.length);
+  const goPrev = () => setActive((p) => (p - 1 + projects.length) % projects.length);
+
+  const handleTouchStart = (e: React.TouchEvent) => {
+    touchStartX.current = e.touches[0].clientX;
+  };
+  const handleTouchEnd = (e: React.TouchEvent) => {
+    if (touchStartX.current === null) return;
+    const delta = e.changedTouches[0].clientX - touchStartX.current;
+    if (Math.abs(delta) > 50) {
+      delta < 0 ? goNext() : goPrev();
+    }
+    touchStartX.current = null;
+  };
 
   return (
     <section
@@ -137,6 +153,8 @@ export default function Showreel() {
           className="relative w-full overflow-hidden rounded-lg cursor-pointer"
           style={{ aspectRatio: "16/7" }}
           onClick={() => setModalOpen(true)}
+          onTouchStart={handleTouchStart}
+          onTouchEnd={handleTouchEnd}
           data-testid="button-play-showreel"
         >
           {/* Featured image with parallax */}
@@ -194,6 +212,26 @@ export default function Showreel() {
                 <Play className="w-5 h-5 text-white fill-white ml-0.5" />
               </div>
             </div>
+          </div>
+
+          {/* Prev / Next arrows — right side, inside container */}
+          <div className="absolute right-5 top-1/2 -translate-y-1/2 z-20 flex flex-col gap-2">
+            <button
+              className="w-9 h-9 rounded-full flex items-center justify-center border border-white/10 bg-[#141414]/80 backdrop-blur-sm text-white/40 hover:text-white/80 hover:border-white/25 hover:bg-[#1e1e1e]/90 transition-all duration-200"
+              onClick={(e) => { e.stopPropagation(); goPrev(); }}
+              data-testid="button-prev-project"
+              aria-label="Previous project"
+            >
+              <ChevronLeft className="w-4 h-4" />
+            </button>
+            <button
+              className="w-9 h-9 rounded-full flex items-center justify-center border border-white/10 bg-[#141414]/80 backdrop-blur-sm text-white/40 hover:text-white/80 hover:border-white/25 hover:bg-[#1e1e1e]/90 transition-all duration-200"
+              onClick={(e) => { e.stopPropagation(); goNext(); }}
+              data-testid="button-next-project"
+              aria-label="Next project"
+            >
+              <ChevronRight className="w-4 h-4" />
+            </button>
           </div>
 
           {/* Project info — bottom */}
@@ -389,7 +427,7 @@ function ProjectRow({
 
         {/* Arrow */}
         <div
-          className="shrink-0 w-8 h-8 rounded-full border flex items-center justify-center transition-all duration-300"
+          className="shrink-0 w-8 h-8 rounded-full border flex items-center justify-center transition-all duration-300 mr-2 md:mr-4"
           style={{
             borderColor: isActive ? "rgba(255,255,255,0.3)" : "rgba(255,255,255,0.1)",
             backgroundColor: isActive ? "rgba(255,255,255,0.05)" : "transparent",
