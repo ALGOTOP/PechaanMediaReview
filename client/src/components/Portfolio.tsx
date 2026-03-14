@@ -118,7 +118,7 @@ function MobileCarousel({ items }: { items: Project[] }) {
             <img
               src={project.image}
               alt={project.title}
-              className="w-full h-full object-cover transition-transform duration-500 group-active:scale-105"
+              className="absolute inset-0 w-full h-full object-cover transition-transform duration-500 group-active:scale-105"
             />
             <div className="absolute inset-0 bg-gradient-to-t from-black/90 via-black/40 to-transparent" />
             <div className="absolute bottom-0 left-0 right-0 p-5 text-white">
@@ -214,18 +214,18 @@ export default function Portfolio() {
           {filteredProjects.map((project, index) => (
             <Card
               key={index}
-              className={`group overflow-hidden hover-elevate active-elevate-2 cursor-pointer transition-all duration-700 ${getGridClass(
+              className={`group overflow-hidden hover-elevate active-elevate-2 cursor-pointer transition-all duration-700 h-full ${getGridClass(
                 project.aspectRatio
               )} ${
                 visibleItems.has(index) ? "opacity-100 scale-100" : "opacity-0 scale-95"
               }`}
               data-testid={`card-project-${index}`}
             >
-              <div className="relative h-full overflow-hidden">
+              <div className="relative w-full h-full overflow-hidden">
                 <img
                   src={project.image}
                   alt={project.title}
-                  className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110"
+                  className="absolute inset-0 w-full h-full object-cover transition-transform duration-500 group-hover:scale-110"
                 />
                 <div className="absolute inset-0 bg-gradient-to-t from-black/90 via-black/50 to-transparent opacity-80 group-hover:opacity-100 transition-opacity" />
                 <div className="absolute bottom-0 left-0 right-0 p-6 text-white transform translate-y-2 group-hover:translate-y-0 transition-transform">
