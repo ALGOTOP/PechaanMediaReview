@@ -56,7 +56,7 @@ export default function Hero() {
         <div className="space-y-10">
           {/* Main headline with stagger animation */}
           <div className="space-y-2">
-            <h1 className="text-6xl md:text-7xl lg:text-[120px] font-bold text-white leading-[0.95] tracking-tighter">
+            <h1 className="text-5xl md:text-6xl lg:text-[102px] font-bold text-white leading-[0.95] tracking-tighter">
               <span
                 className={`inline-block transition-all duration-1000 ${
                   isVisible
@@ -90,7 +90,7 @@ export default function Hero() {
           </div>
 
           <p
-            className={`text-xl md:text-2xl lg:text-3xl text-white/90 max-w-4xl mx-auto font-light leading-relaxed transition-all duration-1000 delay-500 ${
+            className={`text-lg md:text-xl lg:text-2xl text-white/90 max-w-4xl mx-auto font-light leading-relaxed transition-all duration-1000 delay-500 ${
               isVisible
                 ? "opacity-100 translate-y-0"
                 : "opacity-0 translate-y-12"
@@ -111,7 +111,7 @@ export default function Hero() {
               size="lg"
               variant="default"
               onClick={scrollToWork}
-              className="text-base px-10 py-6 h-auto bg-white text-black hover:bg-white/90 border border-white/20 font-semibold"
+              className="text-sm px-8 py-4 h-auto bg-white text-black hover:bg-white/90 border border-white/20 font-semibold"
               data-testid="button-view-work"
             >
               View Our Work
@@ -125,7 +125,7 @@ export default function Hero() {
                   element.scrollIntoView({ behavior: "smooth" });
                 }
               }}
-              className="text-base px-10 py-6 h-auto bg-white/5 backdrop-blur-md text-white border-white/20 hover:bg-white/10 font-semibold"
+              className="text-sm px-8 py-4 h-auto bg-white/5 backdrop-blur-md text-white border-white/20 hover:bg-white/10 font-semibold"
               data-testid="button-get-started"
             >
               Get Started
