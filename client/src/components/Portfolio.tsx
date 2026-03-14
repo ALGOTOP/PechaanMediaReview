@@ -8,76 +8,96 @@ interface Project {
   category: string;
   description: string;
   image: string;
-  aspectRatio: "square" | "portrait" | "landscape";
+  height: string;
 }
 
 export default function Portfolio() {
   const [activeFilter, setActiveFilter] = useState("all");
 
-  const projects: Project[] = [
+  const allProjects: Project[] = [
     {
       title: "LUMINA",
       category: "Branding",
       description: "Complete brand identity and creative direction for luxury beauty brand",
       image: "https://images.unsplash.com/photo-1522335789203-aabd1fc54bc9?w=800&q=80",
-      aspectRatio: "landscape",
+      height: "h-96",
     },
     {
       title: "AMWAJ",
       category: "Web",
       description: "Website redesign and development for hospitality group",
       image: "https://images.unsplash.com/photo-1460925895917-afdab827c52f?w=800&q=80",
-      aspectRatio: "portrait",
+      height: "h-72",
     },
     {
       title: "KENETIK",
       category: "Film",
       description: "3D motion ad and brand identity for tech startup",
       image: "https://images.unsplash.com/photo-1536240478700-b869070f9279?w=800&q=80",
-      aspectRatio: "square",
+      height: "h-72",
     },
     {
       title: "Zarrafa Coffee",
       category: "Strategy",
       description: "Creative strategy and brand positioning",
       image: "https://images.unsplash.com/photo-1495474472287-4d71bcdd2085?w=800&q=80",
-      aspectRatio: "landscape",
+      height: "h-96",
     },
     {
       title: "TRULY",
       category: "Film",
       description: "4D graphic post production and advertising campaign",
       image: "https://images.unsplash.com/photo-1492619375914-88005aa9e8fb?w=800&q=80",
-      aspectRatio: "portrait",
+      height: "h-72",
     },
     {
       title: "Matrix",
       category: "Branding",
       description: "Brand identity for fintech platform",
       image: "https://images.unsplash.com/photo-1551288049-bebda4e38f71?w=800&q=80",
-      aspectRatio: "square",
+      height: "h-72",
     },
   ];
 
   const categories = ["all", "Branding", "Film", "Web", "Strategy"];
 
-  const filteredProjects =
+  const filtered =
     activeFilter === "all"
-      ? projects
-      : projects.filter((p) => p.category === activeFilter);
+      ? allProjects
+      : allProjects.filter((p) => p.category === activeFilter);
 
-  const { containerRef, visibleItems } = useStaggeredReveal(filteredProjects.length, 100);
+  // Split into two columns for gap-free masonry look
+  const leftCol = filtered.filter((_, i) => i % 2 === 0);
+  const rightCol = filtered.filter((_, i) => i % 2 === 1);
 
-  const getGridClass = (aspectRatio: string) => {
-    switch (aspectRatio) {
-      case "landscape":
-        return "md:col-span-2";
-      case "portrait":
-        return "md:row-span-2";
-      default:
-        return "";
-    }
-  };
+  const { containerRef, visibleItems } = useStaggeredReveal(filtered.length, 100);
+
+  const ProjectCard = ({ project, index }: { project: Project; index: number }) => (
+    <Card
+      className={`group overflow-hidden hover-elevate active-elevate-2 cursor-pointer transition-all duration-700 ${
+        visibleItems.has(index) ? "opacity-100 translate-y-0" : "opacity-0 translate-y-8"
+      }`}
+      data-testid={`card-project-${index}`}
+    >
+      <div className={`relative ${project.height} overflow-hidden`}>
+        <img
+          src={project.image}
+          alt={project.title}
+          className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110"
+        />
+        <div className="absolute inset-0 bg-gradient-to-t from-black/90 via-black/50 to-transparent opacity-80 group-hover:opacity-100 transition-opacity" />
+        <div className="absolute bottom-0 left-0 right-0 p-6 text-white transform translate-y-2 group-hover:translate-y-0 transition-transform">
+          <Badge variant="outline" className="mb-3 border-white/30 text-white text-xs">
+            {project.category}
+          </Badge>
+          <h3 className="text-2xl font-bold mb-2">{project.title}</h3>
+          <p className="text-white/90 text-sm opacity-0 group-hover:opacity-100 transition-opacity leading-relaxed">
+            {project.description}
+          </p>
+        </div>
+      </div>
+    </Card>
+  );
 
   return (
     <section id="work" className="py-24 md:py-32" data-testid="section-portfolio">
@@ -107,39 +127,22 @@ export default function Portfolio() {
           </div>
         </div>
 
-        <div ref={containerRef} className="grid md:grid-cols-3 auto-rows-[280px] gap-4">
-          {filteredProjects.map((project, index) => (
-            <Card
-              key={index}
-              className={`group overflow-hidden hover-elevate active-elevate-2 cursor-pointer transition-all duration-700 ${getGridClass(
-                project.aspectRatio
-              )} ${
-                visibleItems.has(index)
-                  ? "opacity-100 scale-100"
-                  : "opacity-0 scale-95"
-              }`}
-              data-testid={`card-project-${index}`}
-            >
-              <div className="relative h-full overflow-hidden">
-                <img
-                  src={project.image}
-                  alt={project.title}
-                  className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110"
-                />
-                <div className="absolute inset-0 bg-gradient-to-t from-black/90 via-black/50 to-transparent opacity-80 group-hover:opacity-100 transition-opacity" />
+        <div ref={containerRef} className="grid md:grid-cols-2 gap-4">
+          {/* Left column */}
+          <div className="flex flex-col gap-4">
+            {leftCol.map((project) => {
+              const idx = filtered.indexOf(project);
+              return <ProjectCard key={idx} project={project} index={idx} />;
+            })}
+          </div>
 
-                <div className="absolute bottom-0 left-0 right-0 p-6 text-white transform translate-y-2 group-hover:translate-y-0 transition-transform">
-                  <Badge variant="outline" className="mb-3 border-white/30 text-white">
-                    {project.category}
-                  </Badge>
-                  <h3 className="text-2xl font-bold mb-2">{project.title}</h3>
-                  <p className="text-white/90 text-sm opacity-0 group-hover:opacity-100 transition-opacity">
-                    {project.description}
-                  </p>
-                </div>
-              </div>
-            </Card>
-          ))}
+          {/* Right column — offset slightly for stagger effect */}
+          <div className="flex flex-col gap-4 md:mt-12">
+            {rightCol.map((project) => {
+              const idx = filtered.indexOf(project);
+              return <ProjectCard key={idx} project={project} index={idx} />;
+            })}
+          </div>
         </div>
       </div>
     </section>
