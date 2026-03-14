@@ -1,6 +1,6 @@
 import { Card } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
-import { useState } from "react";
+import { useState, useRef, useEffect } from "react";
 import { useStaggeredReveal } from "@/hooks/useScrollReveal";
 
 interface Project {
@@ -11,62 +11,146 @@ interface Project {
   aspectRatio: "square" | "portrait" | "landscape";
 }
 
+const projects: Project[] = [
+  {
+    title: "LUMINA",
+    category: "Branding",
+    description: "Complete brand identity and creative direction for luxury beauty brand",
+    image: "https://images.unsplash.com/photo-1522335789203-aabd1fc54bc9?w=800&q=80",
+    aspectRatio: "landscape",
+  },
+  {
+    title: "AMWAJ",
+    category: "Web",
+    description: "Website redesign and development for hospitality group",
+    image: "https://images.unsplash.com/photo-1460925895917-afdab827c52f?w=800&q=80",
+    aspectRatio: "portrait",
+  },
+  {
+    title: "KENETIK",
+    category: "Film",
+    description: "3D motion ad and brand identity for tech startup",
+    image: "https://images.unsplash.com/photo-1536240478700-b869070f9279?w=800&q=80",
+    aspectRatio: "square",
+  },
+  {
+    title: "NOVA",
+    category: "Branding",
+    description: "Visual identity and packaging design for wellness startup",
+    image: "https://images.unsplash.com/photo-1558618666-fcd25c85cd64?w=800&q=80",
+    aspectRatio: "square",
+  },
+  {
+    title: "Zarrafa Coffee",
+    category: "Strategy",
+    description: "Creative strategy and brand positioning",
+    image: "https://images.unsplash.com/photo-1495474472287-4d71bcdd2085?w=800&q=80",
+    aspectRatio: "landscape",
+  },
+  {
+    title: "TRULY",
+    category: "Film",
+    description: "4D graphic post production and advertising campaign",
+    image: "https://images.unsplash.com/photo-1492619375914-88005aa9e8fb?w=800&q=80",
+    aspectRatio: "portrait",
+  },
+  {
+    title: "Matrix",
+    category: "Branding",
+    description: "Brand identity for fintech platform",
+    image: "https://images.unsplash.com/photo-1551288049-bebda4e38f71?w=800&q=80",
+    aspectRatio: "square",
+  },
+];
+
+const categories = ["all", "Branding", "Film", "Web", "Strategy"];
+
+function MobileCarousel({ items }: { items: Project[] }) {
+  const scrollRef = useRef<HTMLDivElement>(null);
+  const [activeIndex, setActiveIndex] = useState(0);
+
+  useEffect(() => {
+    setActiveIndex(0);
+    scrollRef.current?.scrollTo({ left: 0, behavior: "instant" });
+  }, [items]);
+
+  const handleScroll = () => {
+    const el = scrollRef.current;
+    if (!el) return;
+    const cardWidth = el.scrollWidth / items.length;
+    const idx = Math.round(el.scrollLeft / cardWidth);
+    setActiveIndex(Math.min(idx, items.length - 1));
+  };
+
+  if (items.length === 0) {
+    return (
+      <div className="h-64 flex items-center justify-center text-muted-foreground text-sm">
+        No projects in this category.
+      </div>
+    );
+  }
+
+  return (
+    <div className="relative">
+      {/* Counter */}
+      <div className="flex items-center justify-between mb-4 px-1">
+        <span className="text-xs font-mono text-muted-foreground tracking-widest">
+          DRAG TO EXPLORE
+        </span>
+        <span className="text-xs font-mono text-muted-foreground tabular-nums">
+          {String(activeIndex + 1).padStart(2, "0")} / {String(items.length).padStart(2, "0")}
+        </span>
+      </div>
+
+      {/* Scroll strip */}
+      <div
+        ref={scrollRef}
+        onScroll={handleScroll}
+        className="flex gap-4 overflow-x-auto snap-x snap-mandatory pb-4"
+        style={{ scrollbarWidth: "none", msOverflowStyle: "none" }}
+      >
+        {items.map((project, index) => (
+          <div
+            key={index}
+            className="snap-start shrink-0 w-[78vw] h-[420px] rounded-md overflow-hidden relative cursor-pointer group"
+            data-testid={`mobile-card-project-${index}`}
+          >
+            <img
+              src={project.image}
+              alt={project.title}
+              className="w-full h-full object-cover transition-transform duration-500 group-active:scale-105"
+            />
+            <div className="absolute inset-0 bg-gradient-to-t from-black/90 via-black/40 to-transparent" />
+            <div className="absolute bottom-0 left-0 right-0 p-5 text-white">
+              <span className="text-[10px] font-mono tracking-widest text-white/60 uppercase block mb-2">
+                {project.category}
+              </span>
+              <h3 className="text-xl font-bold mb-1">{project.title}</h3>
+              <p className="text-white/80 text-xs leading-relaxed">{project.description}</p>
+            </div>
+          </div>
+        ))}
+        {/* trailing spacer so last card doesn't hug the right edge */}
+        <div className="shrink-0 w-6" />
+      </div>
+
+      {/* Progress dots */}
+      <div className="flex gap-1.5 justify-center mt-2">
+        {items.map((_, i) => (
+          <span
+            key={i}
+            className={`block rounded-full transition-all duration-300 ${
+              i === activeIndex ? "w-5 h-1.5 bg-foreground" : "w-1.5 h-1.5 bg-foreground/20"
+            }`}
+          />
+        ))}
+      </div>
+    </div>
+  );
+}
+
 export default function Portfolio() {
   const [activeFilter, setActiveFilter] = useState("all");
-
-  const projects: Project[] = [
-    {
-      title: "LUMINA",
-      category: "Branding",
-      description: "Complete brand identity and creative direction for luxury beauty brand",
-      image: "https://images.unsplash.com/photo-1522335789203-aabd1fc54bc9?w=800&q=80",
-      aspectRatio: "landscape",
-    },
-    {
-      title: "AMWAJ",
-      category: "Web",
-      description: "Website redesign and development for hospitality group",
-      image: "https://images.unsplash.com/photo-1460925895917-afdab827c52f?w=800&q=80",
-      aspectRatio: "portrait",
-    },
-    {
-      title: "KENETIK",
-      category: "Film",
-      description: "3D motion ad and brand identity for tech startup",
-      image: "https://images.unsplash.com/photo-1536240478700-b869070f9279?w=800&q=80",
-      aspectRatio: "square",
-    },
-    {
-      title: "NOVA",
-      category: "Branding",
-      description: "Visual identity and packaging design for wellness startup",
-      image: "https://images.unsplash.com/photo-1558618666-fcd25c85cd64?w=800&q=80",
-      aspectRatio: "square",
-    },
-    {
-      title: "Zarrafa Coffee",
-      category: "Strategy",
-      description: "Creative strategy and brand positioning",
-      image: "https://images.unsplash.com/photo-1495474472287-4d71bcdd2085?w=800&q=80",
-      aspectRatio: "landscape",
-    },
-    {
-      title: "TRULY",
-      category: "Film",
-      description: "4D graphic post production and advertising campaign",
-      image: "https://images.unsplash.com/photo-1492619375914-88005aa9e8fb?w=800&q=80",
-      aspectRatio: "portrait",
-    },
-    {
-      title: "Matrix",
-      category: "Branding",
-      description: "Brand identity for fintech platform",
-      image: "https://images.unsplash.com/photo-1551288049-bebda4e38f71?w=800&q=80",
-      aspectRatio: "square",
-    },
-  ];
-
-  const categories = ["all", "Branding", "Film", "Web", "Strategy"];
 
   const filteredProjects =
     activeFilter === "all"
@@ -91,7 +175,10 @@ export default function Portfolio() {
       <div className="max-w-7xl mx-auto px-6">
         <div className="flex flex-col md:flex-row md:items-end md:justify-between gap-8 mb-12">
           <div className="max-w-2xl">
-            <h2 className="text-4xl md:text-5xl lg:text-6xl font-bold mb-4 leading-tight" data-testid="text-portfolio-title">
+            <h2
+              className="text-4xl md:text-5xl lg:text-6xl font-bold mb-4 leading-tight"
+              data-testid="text-portfolio-title"
+            >
               Selected Work
             </h2>
             <p className="text-lg text-muted-foreground">
@@ -114,16 +201,23 @@ export default function Portfolio() {
           </div>
         </div>
 
-        <div ref={containerRef} className="grid md:grid-cols-3 auto-rows-[280px] gap-4">
+        {/* Mobile: horizontal snap-scroll carousel */}
+        <div className="md:hidden -mx-6 px-6">
+          <MobileCarousel items={filteredProjects} />
+        </div>
+
+        {/* Desktop: masonry grid */}
+        <div
+          ref={containerRef}
+          className="hidden md:grid md:grid-cols-3 auto-rows-[280px] gap-4"
+        >
           {filteredProjects.map((project, index) => (
             <Card
               key={index}
               className={`group overflow-hidden hover-elevate active-elevate-2 cursor-pointer transition-all duration-700 ${getGridClass(
                 project.aspectRatio
               )} ${
-                visibleItems.has(index)
-                  ? "opacity-100 scale-100"
-                  : "opacity-0 scale-95"
+                visibleItems.has(index) ? "opacity-100 scale-100" : "opacity-0 scale-95"
               }`}
               data-testid={`card-project-${index}`}
             >
@@ -134,7 +228,6 @@ export default function Portfolio() {
                   className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110"
                 />
                 <div className="absolute inset-0 bg-gradient-to-t from-black/90 via-black/50 to-transparent opacity-80 group-hover:opacity-100 transition-opacity" />
-
                 <div className="absolute bottom-0 left-0 right-0 p-6 text-white transform translate-y-2 group-hover:translate-y-0 transition-transform">
                   <Badge variant="outline" className="mb-3 border-white/30 text-white">
                     {project.category}
