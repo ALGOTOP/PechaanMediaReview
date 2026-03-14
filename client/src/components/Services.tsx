@@ -9,38 +9,70 @@ interface Service {
   title: string;
   description: string;
   image: string;
-  size: "large" | "medium";
+  height: string;
 }
 
 export default function Services() {
-  const services: Service[] = [
+  const leftColumn: Service[] = [
     {
       title: "Brand Identity & Design",
       description: "From logos to full brand systems, we design visuals that communicate your essence and create lasting impressions.",
       image: brandImage,
-      size: "large",
-    },
-    {
-      title: "Film & Production",
-      description: "Cinematic storytelling that builds emotional connections and elevates your message through powerful visuals.",
-      image: productImage,
-      size: "medium",
-    },
-    {
-      title: "Web & Digital",
-      description: "Responsive, elegant, and high-performance digital experiences that engage and convert.",
-      image: webImage,
-      size: "medium",
+      height: "h-[480px]",
     },
     {
       title: "Marketing & Strategy",
       description: "Integrated campaigns combining creativity with data-driven growth strategies for measurable impact.",
       image: marketingImage,
-      size: "large",
+      height: "h-72",
     },
   ];
 
-  const { containerRef, visibleItems } = useStaggeredReveal(services.length, 150);
+  const rightColumn: Service[] = [
+    {
+      title: "Film & Production",
+      description: "Cinematic storytelling that builds emotional connections and elevates your message through powerful visuals.",
+      image: productImage,
+      height: "h-72",
+    },
+    {
+      title: "Web & Digital",
+      description: "Responsive, elegant, and high-performance digital experiences that engage and convert.",
+      image: webImage,
+      height: "h-72",
+    },
+  ];
+
+  const allServices = [...leftColumn, ...rightColumn];
+  const { containerRef, visibleItems } = useStaggeredReveal(allServices.length, 150);
+
+  const ServiceCard = ({
+    service,
+    index,
+  }: {
+    service: Service;
+    index: number;
+  }) => (
+    <Card
+      className={`group overflow-hidden hover-elevate active-elevate-2 cursor-pointer transition-all duration-700 ${
+        visibleItems.has(index) ? "opacity-100 translate-y-0" : "opacity-0 translate-y-12"
+      }`}
+      data-testid={`card-service-${index}`}
+    >
+      <div className={`relative ${service.height} overflow-hidden`}>
+        <img
+          src={service.image}
+          alt={service.title}
+          className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
+        />
+        <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/40 to-transparent" />
+        <div className="absolute bottom-0 left-0 right-0 p-6 md:p-8 text-white">
+          <h3 className="text-2xl md:text-3xl font-bold mb-3">{service.title}</h3>
+          <p className="text-white/90 text-base leading-relaxed">{service.description}</p>
+        </div>
+      </div>
+    </Card>
+  );
 
   return (
     <section id="services" className="py-24 md:py-32 bg-muted/30" data-testid="section-services">
@@ -55,62 +87,19 @@ export default function Services() {
         </div>
 
         <div ref={containerRef} className="grid md:grid-cols-2 gap-6">
-          {services.map((service, index) => {
-            const isLarge = service.size === "large";
+          {/* Left column */}
+          <div className="flex flex-col gap-6">
+            {leftColumn.map((service, i) => (
+              <ServiceCard key={i} service={service} index={i} />
+            ))}
+          </div>
 
-            return (
-              <Card
-                key={index}
-                className={`group overflow-hidden hover-elevate active-elevate-2 cursor-pointer transition-all duration-700 ${
-                  isLarge ? "md:row-span-2 flex flex-col" : ""
-                } ${
-                  visibleItems.has(index)
-                    ? "opacity-100 translate-y-0"
-                    : "opacity-0 translate-y-12"
-                }`}
-                data-testid={`card-service-${index}`}
-              >
-                {isLarge ? (
-                  /* Large card: 30% image top, 70% text content below */
-                  <>
-                    <div className="relative h-[30%] overflow-hidden shrink-0">
-                      <img
-                        src={service.image}
-                        alt={service.title}
-                        className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
-                      />
-                    </div>
-                    <div className="flex flex-col justify-center flex-1 p-8 md:p-10">
-                      <h3 className="text-2xl md:text-3xl font-bold mb-4">
-                        {service.title}
-                      </h3>
-                      <p className="text-muted-foreground text-base leading-relaxed">
-                        {service.description}
-                      </p>
-                    </div>
-                  </>
-                ) : (
-                  /* Medium card: full-bleed image with text overlay */
-                  <div className="relative h-80 overflow-hidden">
-                    <img
-                      src={service.image}
-                      alt={service.title}
-                      className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
-                    />
-                    <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/40 to-transparent" />
-                    <div className="absolute bottom-0 left-0 right-0 p-6 md:p-8 text-white">
-                      <h3 className="text-2xl md:text-3xl font-bold mb-3">
-                        {service.title}
-                      </h3>
-                      <p className="text-white/90 text-base leading-relaxed">
-                        {service.description}
-                      </p>
-                    </div>
-                  </div>
-                )}
-              </Card>
-            );
-          })}
+          {/* Right column */}
+          <div className="flex flex-col gap-6">
+            {rightColumn.map((service, i) => (
+              <ServiceCard key={i} service={service} index={i + leftColumn.length} />
+            ))}
+          </div>
         </div>
       </div>
     </section>
