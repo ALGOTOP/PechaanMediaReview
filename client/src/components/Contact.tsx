@@ -35,7 +35,7 @@ export default function Contact() {
               Your Story
             </h2>
             <p className="text-lg md:text-xl text-muted-foreground mb-8 leading-relaxed">
-              Ready to elevate your brand? Whether you need film production, web design, or marketing strategy — we're here to turn your vision into impact.
+              Ready to elevate your brand? Whether you need film production, web design, or marketing strategy, we're here to turn your vision into impact.
             </p>
 
             <div className="space-y-4">
