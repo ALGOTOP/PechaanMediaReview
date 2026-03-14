@@ -9,7 +9,7 @@ interface Service {
   title: string;
   description: string;
   image: string;
-  size: "large" | "medium" | "small";
+  size: "large" | "medium";
 }
 
 export default function Services() {
@@ -55,43 +55,62 @@ export default function Services() {
         </div>
 
         <div ref={containerRef} className="grid md:grid-cols-2 gap-6">
-          {services.map((service, index) => (
-            <Card
-              key={index}
-              className={`group overflow-hidden hover-elevate active-elevate-2 cursor-pointer transition-all duration-700 ${
-                service.size === "large" ? "md:row-span-2" : ""
-              } ${
-                visibleItems.has(index)
-                  ? "opacity-100 translate-y-0"
-                  : "opacity-0 translate-y-12"
-              }`}
-              data-testid={`card-service-${index}`}
-            >
-              <div className="relative overflow-hidden">
-                <div
-                  className={`relative ${
-                    service.size === "large" ? "h-96 md:h-full" : "h-80"
-                  }`}
-                >
-                  <img
-                    src={service.image}
-                    alt={service.title}
-                    className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
-                  />
-                  <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/40 to-transparent" />
-                </div>
+          {services.map((service, index) => {
+            const isLarge = service.size === "large";
 
-                <div className="absolute bottom-0 left-0 right-0 p-6 md:p-8 text-white">
-                  <h3 className="text-2xl md:text-3xl font-bold mb-3">
-                    {service.title}
-                  </h3>
-                  <p className="text-white/90 text-base leading-relaxed">
-                    {service.description}
-                  </p>
-                </div>
-              </div>
-            </Card>
-          ))}
+            return (
+              <Card
+                key={index}
+                className={`group overflow-hidden hover-elevate active-elevate-2 cursor-pointer transition-all duration-700 ${
+                  isLarge ? "md:row-span-2 flex flex-col" : ""
+                } ${
+                  visibleItems.has(index)
+                    ? "opacity-100 translate-y-0"
+                    : "opacity-0 translate-y-12"
+                }`}
+                data-testid={`card-service-${index}`}
+              >
+                {isLarge ? (
+                  /* Large card: 30% image top, 70% text content below */
+                  <>
+                    <div className="relative h-[30%] overflow-hidden shrink-0">
+                      <img
+                        src={service.image}
+                        alt={service.title}
+                        className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
+                      />
+                    </div>
+                    <div className="flex flex-col justify-center flex-1 p-8 md:p-10">
+                      <h3 className="text-2xl md:text-3xl font-bold mb-4">
+                        {service.title}
+                      </h3>
+                      <p className="text-muted-foreground text-base leading-relaxed">
+                        {service.description}
+                      </p>
+                    </div>
+                  </>
+                ) : (
+                  /* Medium card: full-bleed image with text overlay */
+                  <div className="relative h-80 overflow-hidden">
+                    <img
+                      src={service.image}
+                      alt={service.title}
+                      className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
+                    />
+                    <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/40 to-transparent" />
+                    <div className="absolute bottom-0 left-0 right-0 p-6 md:p-8 text-white">
+                      <h3 className="text-2xl md:text-3xl font-bold mb-3">
+                        {service.title}
+                      </h3>
+                      <p className="text-white/90 text-base leading-relaxed">
+                        {service.description}
+                      </p>
+                    </div>
+                  </div>
+                )}
+              </Card>
+            );
+          })}
         </div>
       </div>
     </section>
