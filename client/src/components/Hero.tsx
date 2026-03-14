@@ -1,5 +1,4 @@
 import { Button } from "@/components/ui/button";
-import { ArrowDown } from "lucide-react";
 import { useEffect, useState } from "react";
 import heroImage from "@assets/generated_images/hero_film_production_scene.png";
 
@@ -135,19 +134,6 @@ export default function Hero() {
         </div>
       </div>
 
-      {/* Scroll Indicator */}
-      <button
-        onClick={scrollToWork}
-        className={`absolute bottom-12 left-1/2 -translate-x-1/2 z-10 text-white/60 hover:text-white transition-all duration-1000 delay-1000 ${
-          isVisible ? "opacity-100" : "opacity-0"
-        }`}
-        data-testid="button-scroll-indicator"
-      >
-        <div className="flex flex-col items-center gap-2 animate-bounce">
-          <span className="text-xs uppercase tracking-widest font-medium">Scroll</span>
-          <ArrowDown className="w-5 h-5" />
-        </div>
-      </button>
     </section>
   );
 }
