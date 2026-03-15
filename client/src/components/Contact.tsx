@@ -18,19 +18,22 @@ export default function Contact() {
             </p>
 
             <h2
-              className="text-5xl md:text-6xl lg:text-[5rem] font-black leading-[1.05] text-gray-950 mb-6"
+              className="text-4xl md:text-5xl lg:text-6xl font-bold leading-tight tracking-tight text-gray-950 mb-6"
               data-testid="text-contact-title"
             >
               See if Pehchaan
               <br />
               is the right fit
               <br />
-              <em className="not-italic text-gray-400">for you</em>
+              <span className="text-gray-400">for you</span>
             </h2>
 
             <p className="text-base md:text-lg text-gray-500 leading-relaxed max-w-sm mb-10">
-              Schedule a free 30-minute discovery call. We'll walk you through
-              our process and see how we can bring your brand to life.
+              Schedule a quick, 15 minute guided call with us to see if we can
+              help you in anyway.{" "}
+              <span className="text-gray-400 font-medium">
+                [Free &amp; no strings attached]
+              </span>
             </p>
 
             <div className="space-y-3 text-sm text-gray-500">
