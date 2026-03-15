@@ -1,7 +1,7 @@
 export default function Footer() {
   return (
     <footer className="border-t bg-card" data-testid="footer">
-      <div className="max-w-7xl mx-auto px-6 py-12">
+      <div className="max-w-7xl mx-auto px-6 py-12 relative">
         <div className="grid md:grid-cols-3 gap-8">
           <div>
             <h3 className="text-xl font-bold mb-4">Pehchaan Media</h3>
@@ -45,9 +45,9 @@ export default function Footer() {
           </div>
         </div>
 
-        <div className="mt-12 pt-8 border-t text-center text-sm text-muted-foreground">
-          <p>© {new Date().getFullYear()} Pehchaan Media. All rights reserved.</p>
-        </div>
+        <p className="absolute bottom-6 right-6 text-xs text-muted-foreground">
+          © {new Date().getFullYear()} Pehchaan Media. All rights reserved.
+        </p>
       </div>
     </footer>
   );
