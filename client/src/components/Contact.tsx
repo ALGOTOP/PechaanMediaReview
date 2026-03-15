@@ -13,10 +13,6 @@ export default function Contact() {
 
           {/* ── LEFT ── */}
           <div>
-            <p className="text-[11px] font-mono tracking-[0.22em] text-gray-400 uppercase mb-7">
-              Book a Discovery Call
-            </p>
-
             <h2
               className="text-4xl md:text-5xl lg:text-6xl font-bold leading-tight tracking-tight text-gray-950 mb-6"
               data-testid="text-contact-title"
