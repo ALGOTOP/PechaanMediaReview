@@ -5,6 +5,7 @@ import { useStaggeredReveal } from "@/hooks/useScrollReveal";
 import luminaImage from "@assets/10001_(3)_(1)_1773614757212.png";
 import halvaImage from "@assets/10001_1773615095169.png";
 import amwajImage from "@assets/10001_1773615811419.png";
+import zarrafaImage from "@assets/10001_(4)_1773617271339.png";
 
 interface Project {
   title: string;
@@ -47,7 +48,7 @@ const projects: Project[] = [
     title: "Zarrafa Coffee",
     category: "Strategy",
     description: "Creative strategy and brand positioning",
-    image: "https://i.ibb.co/LXdzRmFW/Zarraffa-s-id-IDzk-CXha-0.png",
+    image: zarrafaImage,
     aspectRatio: "landscape",
   },
   {
