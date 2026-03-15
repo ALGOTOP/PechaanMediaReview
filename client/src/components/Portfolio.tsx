@@ -2,6 +2,7 @@ import { Card } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { useState, useRef, useEffect } from "react";
 import { useStaggeredReveal } from "@/hooks/useScrollReveal";
+import luminaImage from "@assets/10001_(3)_(1)_1773614757212.png";
 
 interface Project {
   title: string;
@@ -16,7 +17,7 @@ const projects: Project[] = [
     title: "LUMINA",
     category: "Branding",
     description: "Complete brand identity and creative direction for luxury beauty brand",
-    image: "https://images.unsplash.com/photo-1522335789203-aabd1fc54bc9?w=800&q=80",
+    image: luminaImage,
     aspectRatio: "landscape",
   },
   {
