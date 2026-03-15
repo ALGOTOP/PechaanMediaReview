@@ -23,9 +23,9 @@ const projects: Project[] = [
     aspectRatio: "landscape",
   },
   {
-    title: "AMWAJ",
+    title: "SPHINX",
     category: "Web",
-    description: "Website redesign and development for hospitality group",
+    description: "Website redesign and development for an engineering service management eco-system",
     image: amwajImage,
     aspectRatio: "portrait",
   },
