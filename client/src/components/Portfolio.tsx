@@ -5,7 +5,7 @@ import { useStaggeredReveal } from "@/hooks/useScrollReveal";
 import luminaImage from "@assets/10001_(3)_(1)_1773614757212.png";
 import halvaImage from "@assets/10001_1773615095169.png";
 import amwajImage from "@assets/10001_1773615811419.png";
-import zarrafaImage from "@assets/10001_(4)_1773617271339.png";
+import zarrafaImage from "@assets/10002_1773617422555.jpeg";
 
 interface Project {
   title: string;
@@ -45,9 +45,9 @@ const projects: Project[] = [
     aspectRatio: "square",
   },
   {
-    title: "Zarrafa Coffee",
+    title: "KURA",
     category: "Strategy",
-    description: "Creative strategy and brand positioning",
+    description: "Brand architecture and cross-channel creative strategy built around a defined visual system.",
     image: zarrafaImage,
     aspectRatio: "landscape",
   },
