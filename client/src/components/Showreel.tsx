@@ -157,8 +157,7 @@ export default function Showreel() {
       <div className="max-w-[1680px] mx-auto px-6 md:px-10">
         <div
           ref={heroRef}
-          className="relative w-full overflow-hidden rounded-lg cursor-pointer"
-          style={{ aspectRatio: "16/7" }}
+          className="relative w-full overflow-hidden rounded-lg cursor-pointer aspect-[16/9.1] md:aspect-[16/7]"
           onClick={() => setModalOpen(true)}
           onTouchStart={handleTouchStart}
           onTouchEnd={handleTouchEnd}
