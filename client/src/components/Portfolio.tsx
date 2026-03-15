@@ -15,9 +15,9 @@ interface Project {
 
 const projects: Project[] = [
   {
-    title: "LUMINA",
+    title: "WHIPPED",
     category: "Branding",
-    description: "Complete brand identity and creative direction for luxury beauty brand",
+    description: "Complete brand identity and creative direction for premium-casual beauty brand",
     image: luminaImage,
     aspectRatio: "landscape",
   },
