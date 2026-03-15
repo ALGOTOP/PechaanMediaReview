@@ -20,13 +20,12 @@ import { cn } from "@/lib/utils";
 const DAY_HEADERS = ["SUN", "MON", "TUE", "WED", "THU", "FRI", "SAT"];
 const MONTH_ABBR = ["JAN","FEB","MAR","APR","MAY","JUN","JUL","AUG","SEP","OCT","NOV","DEC"];
 
-const TIME_SLOTS_24 = [
-  "09:00","09:30","10:00","10:30","11:00","11:30",
-  "12:00","12:30","13:00","13:30","14:00","14:30",
-  "15:00","15:30","16:00","16:30","17:00","17:30",
-  "18:00","18:30","19:00","19:30","20:00","20:30",
-  "21:00","21:30","22:00","22:30",
-];
+const TIME_SLOTS_24: string[] = [];
+for (let h = 0; h < 24; h++) {
+  for (const m of ["00", "15", "30", "45"]) {
+    TIME_SLOTS_24.push(`${String(h).padStart(2, "0")}:${m}`);
+  }
+}
 
 function to12h(t: string) {
   const [hStr, m] = t.split(":");
@@ -371,10 +370,10 @@ export default function BookingCalendar() {
           style={{
             display: "flex",
             flexDirection: "column",
-            gap: "12px",
-            maxHeight: "220px",
+            gap: "10px",
+            maxHeight: "320px",
             overflowY: "auto",
-            paddingRight: "2px",
+            paddingRight: "4px",
           }}
         >
           {displayTimes.map((t, i) => (
@@ -382,26 +381,20 @@ export default function BookingCalendar() {
               key={i}
               onClick={() => setSelectedTime(t)}
               data-testid={`time-slot-${i}`}
-              className={cn(
-                "transition-colors",
-                selectedTime === t
-                  ? ""
-                  : "hover:border-[#a1a1aa]"
-              )}
+              className="transition-colors"
               style={{
                 width: "100%",
-                padding: "12px",
-                border: selectedTime === t
-                  ? "1px solid #ffffff"
-                  : "1px solid #27272a",
-                borderRadius: "8px",
-                background: selectedTime === t ? "#ffffff" : "transparent",
+                padding: "14px 12px",
+                border: "none",
+                borderRadius: "12px",
+                background: selectedTime === t ? "#ffffff" : "#1c1c1e",
                 color: selectedTime === t ? "#000000" : "#ffffff",
-                fontSize: "14px",
+                fontSize: "15px",
                 fontWeight: selectedTime === t ? 700 : 500,
                 textAlign: "center",
                 cursor: "pointer",
                 flexShrink: 0,
+                letterSpacing: "0.01em",
               }}
             >
               {t}
