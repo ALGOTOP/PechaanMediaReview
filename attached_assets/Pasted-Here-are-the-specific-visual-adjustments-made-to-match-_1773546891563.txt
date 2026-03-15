@@ -1,0 +1,323 @@
+Here are the specific visual adjustments made to match it pixel-for-pixel:
+
+The Time Slots: Replaced the single box with a flex column of individual, border-only time slots (00:00, 00:15, etc.).
+
+The Colors: The available date blocks (#3F3F46) are a noticeably lighter gray than the main background (#18181B), and the borders are a very specific dark gray (#27272A).
+
+The Separator Lines: Added the subtle 1px horizontal lines below the month header and below the days of the week.
+
+Typography & Details: Replicated the 12h/24h toggle pill precisely, and added the tiny "APR" label above the 1st of the next month.
+
+Here is the highly refined, exact HTML/CSS structure:
+
+HTML
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pixel Perfect Calendar</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap');
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        :root {
+            --bg-main: #18181b; /* Darker zinc background */
+            --bg-available: #3f3f46; /* Lighter zinc for available dates */
+            --bg-hover: #52525b;
+            --border-subtle: #27272a;
+            --text-white: #ffffff;
+            --text-gray: #a1a1aa;
+            --text-dark: #52525b;
+        }
+
+        body {
+            background-color: #000; /* Just for contrast against the widget */
+            font-family: 'Inter', sans-serif;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            color: var(--text-white);
+        }
+
+        .calendar-widget {
+            background-color: var(--bg-main);
+            width: 360px;
+            border-radius: 12px;
+            padding: 24px;
+            box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.5);
+        }
+
+        /* Header Section */
+        .month-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding-bottom: 20px;
+            border-bottom: 1px solid var(--border-subtle);
+        }
+
+        .month-header h2 {
+            font-size: 16px;
+            font-weight: 700;
+        }
+
+        .month-header h2 span {
+            color: var(--text-gray);
+            font-weight: 500;
+            margin-left: 4px;
+        }
+
+        .nav-arrows {
+            color: var(--text-dark);
+            font-size: 14px;
+            font-weight: 600;
+            letter-spacing: 8px;
+            cursor: pointer;
+        }
+
+        /* Days of the Week */
+        .weekdays {
+            display: grid;
+            grid-template-columns: repeat(7, 1fr);
+            text-align: center;
+            padding: 20px 0;
+            border-bottom: 1px solid var(--border-subtle);
+        }
+
+        .weekdays span {
+            font-size: 11px;
+            font-weight: 700;
+            color: var(--text-gray);
+            letter-spacing: 0.05em;
+        }
+
+        /* Calendar Grid */
+        .days-grid {
+            display: grid;
+            grid-template-columns: repeat(7, 1fr);
+            gap: 6px;
+            padding-top: 20px;
+            text-align: center;
+        }
+
+        .day {
+            aspect-ratio: 1;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            border-radius: 8px;
+            font-size: 14px;
+            font-weight: 500;
+            cursor: pointer;
+            position: relative;
+        }
+
+        .day.empty {
+            color: transparent;
+            pointer-events: none;
+        }
+
+        .day.muted {
+            color: var(--text-gray);
+        }
+
+        /* The Today Dot */
+        .day.today::after {
+            content: '';
+            position: absolute;
+            bottom: 6px;
+            width: 4px;
+            height: 4px;
+            background-color: var(--text-white);
+            border-radius: 50%;
+        }
+
+        /* Available Dates */
+        .day.available {
+            background-color: var(--bg-available);
+            font-weight: 600;
+            transition: background-color 0.2s;
+        }
+
+        .day.available:hover {
+            background-color: var(--bg-hover);
+        }
+
+        /* Selected Date */
+        .day.selected {
+            background-color: var(--text-white);
+            color: #000;
+            font-weight: 700;
+        }
+
+        /* Month transition label (APR 1) */
+        .month-label {
+            font-size: 9px;
+            font-weight: 700;
+            line-height: 1;
+            margin-bottom: 2px;
+            color: var(--text-gray);
+        }
+
+        /* Bottom Time Section */
+        .time-section {
+            margin-top: 24px;
+            padding-top: 24px;
+            border-top: 1px solid var(--border-subtle);
+        }
+
+        .time-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 16px;
+        }
+
+        .selected-date-text {
+            font-size: 16px;
+        }
+
+        .selected-date-text strong {
+            font-weight: 700;
+        }
+
+        .selected-date-text span {
+            font-weight: 500;
+        }
+
+        /* 12h / 24h Toggle */
+        .format-toggle {
+            display: flex;
+            background-color: #121212;
+            border: 1px solid var(--border-subtle);
+            border-radius: 20px;
+            padding: 2px;
+        }
+
+        .format-toggle span {
+            font-size: 12px;
+            padding: 4px 8px;
+            border-radius: 16px;
+            font-weight: 500;
+            cursor: pointer;
+        }
+
+        .format-toggle .inactive {
+            color: var(--text-gray);
+        }
+
+        .format-toggle .active {
+            color: var(--text-white);
+        }
+
+        /* Time Slots List */
+        .time-slots {
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+        }
+
+        .time-slot {
+            width: 100%;
+            padding: 12px;
+            border: 1px solid var(--border-subtle);
+            border-radius: 8px;
+            background: transparent;
+            color: var(--text-white);
+            font-size: 14px;
+            font-weight: 500;
+            text-align: center;
+            cursor: pointer;
+            transition: border-color 0.2s;
+        }
+
+        .time-slot:hover {
+            border-color: var(--text-gray);
+        }
+    </style>
+</head>
+<body>
+
+<div class="calendar-widget">
+    <div class="month-header">
+        <h2>March <span>2026</span></h2>
+        <div class="nav-arrows">&lt; &gt;</div>
+    </div>
+
+    <div class="weekdays">
+        <span>SUN</span><span>MON</span><span>TUE</span><span>WED</span><span>THU</span><span>FRI</span><span>SAT</span>
+    </div>
+
+    <div class="days-grid">
+        <div class="day muted">8</div>
+        <div class="day muted">9</div>
+        <div class="day muted">10</div>
+        <div class="day muted">11</div>
+        <div class="day muted">12</div>
+        <div class="day muted">13</div>
+        <div class="day muted">14</div>
+
+        <div class="day today">15</div>
+        <div class="day muted">16</div>
+        <div class="day available">17</div>
+        <div class="day selected">18</div>
+        <div class="day available">19</div>
+        <div class="day available">20</div>
+        <div class="day muted">21</div>
+
+        <div class="day muted">22</div>
+        <div class="day muted">23</div>
+        <div class="day available">24</div>
+        <div class="day available">25</div>
+        <div class="day available">26</div>
+        <div class="day available">27</div>
+        <div class="day muted">28</div>
+
+        <div class="day muted">29</div>
+        <div class="day muted">30</div>
+        <div class="day available">31</div>
+        <div class="day available" style="flex-direction: column;">
+            <span class="month-label">APR</span>
+            <span>1</span>
+        </div>
+        <div class="day available">2</div>
+        <div class="day available">3</div>
+        <div class="day muted">4</div>
+        
+        <div class="day muted">5</div>
+        <div class="day muted">6</div>
+        <div class="day available">7</div>
+        <div class="day available">8</div>
+        <div class="day available">9</div>
+        <div class="day available">10</div>
+        <div class="day muted">11</div>
+    </div>
+
+    <div class="time-section">
+        <div class="time-header">
+            <div class="selected-date-text"><strong>Wed</strong> <span>18</span></div>
+            <div class="format-toggle">
+                <span class="inactive">12h</span>
+                <span class="active">24h</span>
+            </div>
+        </div>
+
+        <div class="time-slots">
+            <button class="time-slot">00:00</button>
+            <button class="time-slot">00:15</button>
+            <button class="time-slot">00:30</button>
+            <button class="time-slot">00:45</button>
+        </div>
+    </div>
+</div>
+
+</body>
+</html>
