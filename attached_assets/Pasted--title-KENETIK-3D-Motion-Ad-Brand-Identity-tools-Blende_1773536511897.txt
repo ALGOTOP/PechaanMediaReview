@@ -1,0 +1,40 @@
+    title: "KENETIK - 3D Motion Ad + Brand Identity",
+    tools: "Blender • After Effects • Premiere Pro • DaVinci",
+    video:
+      "https://ia803108.us.archive.org/17/items/ketone.-drink.-2025.final-6/Ketone.Drink.2025.final%286%29.mp4",
+    poster: "/thumbnails/kenetik.jpg",
+  },
+  {
+    title: "TRULY - 4D Graphic Post + Ad",
+    tools: "Cinema 4D • Redshift • After Effects",
+    video:
+      "https://ia601506.us.archive.org/2/items/110c-2cbf-42fc-32faec-789114fdda-0196/110c2cbf42fc32faec789114fdda0196.mp4",
+    poster: "/thumbnails/truly.jpg",
+  },
+  {
+    title: "Denver Fragrances - Videography",
+    tools: "Sony FX3 • DaVinci Resolve • Lightroom",
+    video:
+      "https://ia601506.us.archive.org/2/items/110c-2cbf-42fc-32faec-789114fdda-0196/Denver%20Fragrance%20Videography%20adverts%20Final.Cut%289%29~2.mp4",
+    poster: "/thumbnails/denver.jpg",
+  },
+  {
+    title: "Kinstu By BRIZO - Motion Ad + Major Rebranding",
+    tools: "Canon R5 • After Effects • Adobe Premiere Pro • Cinema 4D",
+    video:
+      "https://ia600504.us.archive.org/32/items/from-klick-pin-cf-kintsur-kitchen-collection-by-brizo-video-in-2025-kitchen-coll/From%20KlickPin%20CF%20Kintsu%C2%AE%20Kitchen%20Collection%20by%20Brizo%20%5BVideo%5D%20in%202025%20_%20Kitchen%20collection%20Motion%20design%20Motion%20design%20video.mp4",
+    poster: "/thumbnails/kinstu.jpg",
+  },
+  {
+    title: "CellCosmet - Creative Direction",
+    tools: "Illustrator • After Effects • Premiere Pro • Maxon Cinema 4D",
+    video:
+      "https://ia601506.us.archive.org/2/items/110c-2cbf-42fc-32faec-789114fdda-0196/From%20KlickPin%20CF%20Motion%20inspiration%20-%20cellCosmet%20%5BVideo%5D%20en%202025%20_%20Anuncios%20creativos%20Disenos%20de%20unas%20Fondos%20para%20fotografia.mp4",
+    poster: "/thumbnails/cellcosmet.jpg",
+  },
+  {
+    title: "URÉE - 3D Motion Ad",
+    tools: "Blender • After Effects • Premiere Pro",
+    video:
+      "https://ia600501.us.archive.org/26/items/ure-e-serums-oils-luxury-graphic-design-motion-graphics-design-cut-8-finalized/UR%C3%88E%20Serums%20%26%20Oils%20Luxury%20graphic%20design%20Motion%20graphics%20design%20Cut%288%29%20Finalized.mp4",
+    poster: "/thumbnails/uree.jpg",

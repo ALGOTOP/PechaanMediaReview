@@ -10,69 +10,76 @@ interface ReelProject {
   description: string;
   thumbnail: string;
   featured: string;
+  video: string;
   year: string;
 }
 
 const projects: ReelProject[] = [
   {
     num: "01",
-    title: "KENETIK",
+    title: "KENETIK - 3D Motion Ad + Brand Identity",
     category: "Film & Motion",
-    tools: "Blender · After Effects · Premiere Pro",
-    description: "3D motion identity for an energy brand built around kinetic force",
+    tools: "Blender · After Effects · Premiere Pro · DaVinci",
+    description: "3D motion identity and full brand campaign for an energy drink built around kinetic force",
     thumbnail: "https://images.unsplash.com/photo-1626785774573-4b799315345d?w=800&q=80",
     featured: "https://images.unsplash.com/photo-1626785774573-4b799315345d?w=1600&q=90",
-    year: "2024",
+    video: "https://ia803108.us.archive.org/17/items/ketone.-drink.-2025.final-6/Ketone.Drink.2025.final%286%29.mp4",
+    year: "2025",
   },
   {
     num: "02",
-    title: "LUMINA",
-    category: "Brand Identity",
-    tools: "Illustrator · Figma · Photoshop",
-    description: "Complete visual identity and creative direction for a luxury beauty label",
-    thumbnail: "https://images.unsplash.com/photo-1522335789203-aabd1fc54bc9?w=800&q=80",
-    featured: "https://images.unsplash.com/photo-1522335789203-aabd1fc54bc9?w=1600&q=90",
-    year: "2024",
+    title: "TRULY - 4D Graphic Post + Ad",
+    category: "Film & Production",
+    tools: "Cinema 4D · Redshift · After Effects",
+    description: "4D graphic post-production and high-impact advertising campaign for a lifestyle brand",
+    thumbnail: "https://images.unsplash.com/photo-1611162616305-c69b3fa7fbe0?w=800&q=80",
+    featured: "https://images.unsplash.com/photo-1611162616305-c69b3fa7fbe0?w=1600&q=90",
+    video: "https://ia601506.us.archive.org/2/items/110c-2cbf-42fc-32faec-789114fdda-0196/110c2cbf42fc32faec789114fdda0196.mp4",
+    year: "2025",
   },
   {
     num: "03",
-    title: "TRULY",
+    title: "Denver Fragrances - Videography",
     category: "Film & Production",
-    tools: "Cinema 4D · Redshift · After Effects",
-    description: "4D graphic post-production and advertising campaign for a lifestyle brand",
-    thumbnail: "https://images.unsplash.com/photo-1611162616305-c69b3fa7fbe0?w=800&q=80",
-    featured: "https://images.unsplash.com/photo-1611162616305-c69b3fa7fbe0?w=1600&q=90",
+    tools: "Sony FX3 · DaVinci Resolve · Lightroom",
+    description: "Cinematic fragrance campaign shot on location, colour-graded to a signature editorial tone",
+    thumbnail: "https://images.unsplash.com/photo-1541963463532-d68292c34b19?w=800&q=80",
+    featured: "https://images.unsplash.com/photo-1541963463532-d68292c34b19?w=1600&q=90",
+    video: "https://ia601506.us.archive.org/2/items/110c-2cbf-42fc-32faec-789114fdda-0196/Denver%20Fragrance%20Videography%20adverts%20Final.Cut%289%29~2.mp4",
     year: "2025",
   },
   {
     num: "04",
-    title: "DENVER",
-    category: "Film & Production",
-    tools: "Sony FX3 · DaVinci Resolve",
-    description: "Cinematic fragrance campaign shot across three locations in one day",
-    thumbnail: "https://images.unsplash.com/photo-1541963463532-d68292c34b19?w=800&q=80",
-    featured: "https://images.unsplash.com/photo-1541963463532-d68292c34b19?w=1600&q=90",
+    title: "Kinstu By BRIZO - Motion Ad + Major Rebranding",
+    category: "Brand Identity",
+    tools: "Canon R5 · After Effects · Adobe Premiere Pro · Cinema 4D",
+    description: "Full motion campaign and major visual rebranding for the Kintsu Kitchen Collection by Brizo",
+    thumbnail: "https://images.unsplash.com/photo-1560347876-aeef00ee58a1?w=800&q=80",
+    featured: "https://images.unsplash.com/photo-1560347876-aeef00ee58a1?w=1600&q=90",
+    video: "https://ia600504.us.archive.org/32/items/from-klick-pin-cf-kintsur-kitchen-collection-by-brizo-video-in-2025-kitchen-coll/From%20KlickPin%20CF%20Kintsu%C2%AE%20Kitchen%20Collection%20by%20Brizo%20%5BVideo%5D%20in%202025%20_%20Kitchen%20collection%20Motion%20design%20Motion%20design%20video.mp4",
     year: "2025",
   },
   {
     num: "05",
-    title: "AMWAJ",
-    category: "Web & Digital",
-    tools: "Figma · React · Framer",
-    description: "Website redesign and bespoke digital experience for a hospitality group",
-    thumbnail: "https://images.unsplash.com/photo-1560347876-aeef00ee58a1?w=800&q=80",
-    featured: "https://images.unsplash.com/photo-1560347876-aeef00ee58a1?w=1600&q=90",
+    title: "CellCosmet - Creative Direction",
+    category: "Brand Identity",
+    tools: "Illustrator · After Effects · Premiere Pro · Maxon Cinema 4D",
+    description: "Creative direction and motion design for a luxury Swiss skincare brand",
+    thumbnail: "https://images.unsplash.com/photo-1522335789203-aabd1fc54bc9?w=800&q=80",
+    featured: "https://images.unsplash.com/photo-1522335789203-aabd1fc54bc9?w=1600&q=90",
+    video: "https://ia601506.us.archive.org/2/items/110c-2cbf-42fc-32faec-789114fdda-0196/From%20KlickPin%20CF%20Motion%20inspiration%20-%20cellCosmet%20%5BVideo%5D%20en%202025%20_%20Anuncios%20creativos%20Disenos%20de%20unas%20Fondos%20para%20fotografia.mp4",
     year: "2025",
   },
   {
     num: "06",
-    title: "ZARRAFA",
-    category: "Strategy",
-    tools: "Brand Audit · Positioning · Creative Strategy",
-    description: "Full-spectrum brand repositioning for a specialty coffee house chain",
+    title: "URÉE - 3D Motion Ad",
+    category: "Film & Motion",
+    tools: "Blender · After Effects · Premiere Pro",
+    description: "Luxury 3D motion ad for a high-end serum and oils brand, shot in a single cinematic sequence",
     thumbnail: "https://images.unsplash.com/photo-1495474472287-4d71bcdd2085?w=800&q=80",
     featured: "https://images.unsplash.com/photo-1495474472287-4d71bcdd2085?w=1600&q=90",
-    year: "2024",
+    video: "https://ia600501.us.archive.org/26/items/ure-e-serums-oils-luxury-graphic-design-motion-graphics-design-cut-8-finalized/UR%C3%88E%20Serums%20%26%20Oils%20Luxury%20graphic%20design%20Motion%20graphics%20design%20Cut%288%29%20Finalized.mp4",
+    year: "2025",
   },
 ];
 
@@ -287,9 +294,9 @@ export default function Showreel() {
           <div className="flex items-center gap-8 text-white/30 text-[11px] font-mono tracking-widest uppercase">
             <span>120+ Projects</span>
             <span className="hidden md:inline text-white/10">·</span>
-            <span className="hidden md:inline">5 Years</span>
+            <span className="hidden md:inline">2 Years</span>
             <span className="hidden md:inline text-white/10">·</span>
-            <span className="hidden md:inline">30+ Clients</span>
+            <span className="hidden md:inline">80+ Clients</span>
           </div>
           <a
             href="#work"
@@ -326,19 +333,14 @@ export default function Showreel() {
                 className="relative w-full bg-[#111] rounded-lg overflow-hidden"
                 style={{ aspectRatio: "16/9" }}
               >
-                <img
-                  src={projects[active].featured}
-                  alt={projects[active].title}
-                  className="w-full h-full object-cover opacity-40"
+                <video
+                  key={projects[active].video}
+                  src={projects[active].video}
+                  controls
+                  autoPlay
+                  className="w-full h-full object-contain bg-black"
+                  data-testid="video-player"
                 />
-                <div className="absolute inset-0 flex flex-col items-center justify-center gap-4">
-                  <div className="w-16 h-16 rounded-full border border-white/20 flex items-center justify-center">
-                    <Play className="w-6 h-6 text-white fill-white ml-0.5" />
-                  </div>
-                  <p className="text-white/40 text-xs font-mono tracking-widest uppercase">
-                    Video embed — replace with production URL
-                  </p>
-                </div>
               </div>
               <button
                 className="absolute -top-10 right-0 text-white/40 hover:text-white text-xs font-mono tracking-widest uppercase transition-colors"
