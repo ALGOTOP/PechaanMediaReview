@@ -4,6 +4,7 @@ import { useState, useRef, useEffect } from "react";
 import { useStaggeredReveal } from "@/hooks/useScrollReveal";
 import luminaImage from "@assets/10001_(3)_(1)_1773614757212.png";
 import halvaImage from "@assets/10001_1773615095169.png";
+import amwajImage from "@assets/10001_1773615811419.png";
 
 interface Project {
   title: string;
@@ -25,7 +26,7 @@ const projects: Project[] = [
     title: "AMWAJ",
     category: "Web",
     description: "Website redesign and development for hospitality group",
-    image: "https://i.ibb.co/d4p5RzTB/awsim.jpg",
+    image: amwajImage,
     aspectRatio: "portrait",
   },
   {
