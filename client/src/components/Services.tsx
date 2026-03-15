@@ -3,7 +3,7 @@ import { Card } from "@/components/ui/card";
 import { motion, AnimatePresence } from "framer-motion";
 import { Plus, Minus } from "lucide-react";
 import { useStaggeredReveal } from "@/hooks/useScrollReveal";
-import brandImage from "@assets/10003_1773591158202.jpg";
+import brandImage from "@assets/10002_1773591659727.jpg";
 import webImage from "@assets/generated_images/web_design_workspace.png";
 import marketingImage from "@assets/generated_images/marketing_strategy_session.png";
 import productImage from "@assets/generated_images/product_photography_example.png";
