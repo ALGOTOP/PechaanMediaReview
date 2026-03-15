@@ -220,8 +220,8 @@ export default function Showreel() {
             </div>
           </div>
 
-          {/* Prev / Next arrows — right side, inside container */}
-          <div className="absolute right-5 top-1/2 -translate-y-1/2 z-20 flex flex-col gap-2">
+          {/* Prev / Next arrows — right side, inside container (desktop only) */}
+          <div className="hidden md:flex absolute right-5 top-1/2 -translate-y-1/2 z-20 flex-col gap-2">
             <button
               className="w-9 h-9 rounded-full flex items-center justify-center border border-white/10 bg-[#141414]/80 backdrop-blur-sm text-white/40 hover:text-white/80 hover:border-white/25 hover:bg-[#1e1e1e]/90 transition-all duration-200"
               onClick={(e) => { e.stopPropagation(); goPrev(); }}
@@ -244,17 +244,17 @@ export default function Showreel() {
           <AnimatePresence mode="wait">
             <motion.div
               key={active}
-              className="absolute bottom-0 left-0 right-0 p-6 md:p-10 z-10 flex items-end justify-between pointer-events-none"
+              className="absolute bottom-0 left-0 right-0 p-4 md:p-10 z-10 flex items-end justify-between pointer-events-none"
               initial={{ opacity: 0, y: 10 }}
               animate={{ opacity: 1, y: 0 }}
               exit={{ opacity: 0 }}
               transition={{ duration: 0.4 }}
             >
               <div>
-                <p className="text-[10px] font-mono tracking-[0.2em] text-white/50 uppercase mb-2">
+                <p className="text-[7px] md:text-[10px] font-mono tracking-[0.2em] text-white/50 uppercase mb-1 md:mb-2">
                   {projects[active].category} · {projects[active].year}
                 </p>
-                <h3 className="text-2xl md:text-4xl font-bold tracking-tight">
+                <h3 className="text-lg md:text-4xl font-bold tracking-tight">
                   {projects[active].title}
                 </h3>
                 <p className="text-white/60 text-sm mt-1 hidden md:block max-w-md">
