@@ -124,9 +124,6 @@ function MobileCarousel({ items }: { items: Project[] }) {
             />
             <div className="absolute inset-0 bg-gradient-to-t from-black/90 via-black/40 to-transparent" />
             <div className="absolute bottom-0 left-0 right-0 p-5 text-white">
-              <span className="text-[10px] font-mono tracking-widest text-white/60 uppercase block mb-2">
-                {project.category}
-              </span>
               <h3 className="text-xl font-bold mb-1">{project.title}</h3>
               <p className="text-white/80 text-xs leading-relaxed">{project.description}</p>
             </div>
@@ -231,9 +228,6 @@ export default function Portfolio() {
                 />
                 <div className="absolute inset-0 bg-gradient-to-t from-black/90 via-black/50 to-transparent opacity-80 group-hover:opacity-100 transition-opacity" />
                 <div className="absolute bottom-0 left-0 right-0 p-6 text-white transform translate-y-2 group-hover:translate-y-0 transition-transform">
-                  <Badge variant="outline" className="mb-3 border-white/30 text-white">
-                    {project.category}
-                  </Badge>
                   <h3 className="text-2xl font-bold mb-2">{project.title}</h3>
                   <p className="text-white/90 text-sm opacity-0 group-hover:opacity-100 transition-opacity">
                     {project.description}
