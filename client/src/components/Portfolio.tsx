@@ -3,6 +3,7 @@ import { Badge } from "@/components/ui/badge";
 import { useState, useRef, useEffect } from "react";
 import { useStaggeredReveal } from "@/hooks/useScrollReveal";
 import luminaImage from "@assets/10001_(3)_(1)_1773614757212.png";
+import halvaImage from "@assets/10001_1773615095169.png";
 
 interface Project {
   title: string;
@@ -35,10 +36,10 @@ const projects: Project[] = [
     aspectRatio: "square",
   },
   {
-    title: "NOVA",
+    title: "HALVA",
     category: "Branding",
-    description: "Visual identity and packaging design for wellness startup",
-    image: "https://i.ibb.co/YBDkQ69X/tech-launch.jpg",
+    description: "Packaging design that blends bold flavour cues with clean, shelf-ready identity",
+    image: halvaImage,
     aspectRatio: "square",
   },
   {
