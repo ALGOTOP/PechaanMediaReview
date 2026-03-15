@@ -32,7 +32,7 @@ const projects: Project[] = [
   {
     title: "KENETIK",
     category: "Film",
-    description: "3D motion ad and brand identity for tech startup",
+    description: "Filmed and made content + ads for them in 3D and IRL",
     image: "https://i.ibb.co/XxWLxsbJ/573450692-17863784577498906-6594209907700496751-n.jpg",
     aspectRatio: "square",
   },
