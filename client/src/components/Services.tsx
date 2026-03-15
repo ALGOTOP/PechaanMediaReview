@@ -7,6 +7,7 @@ import brandImage from "@assets/10002_1773591659727.jpg";
 import webImage from "@assets/generated_images/web_design_workspace.png";
 import marketingImage from "@assets/generated_images/marketing_strategy_session.png";
 import productImage from "@assets/generated_images/product_photography_example.png";
+import filmImage from "@assets/generated_images/film_production_cover.png";
 
 interface Service {
   title: string;
@@ -41,7 +42,7 @@ const rightColumn: Service[] = [
     title: "Film & Production",
     description:
       "Cinematic storytelling that builds emotional connections and elevates your message through powerful visuals.",
-    image: productImage,
+    image: filmImage,
     height: "h-72",
   },
   {
