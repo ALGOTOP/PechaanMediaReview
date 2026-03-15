@@ -1,6 +1,5 @@
 import { Mail, Phone } from "lucide-react";
-
-const CALENDLY_URL = "https://calendly.com/pehchaanmedia";
+import BookingCalendar from "./BookingCalendar";
 
 export default function Contact() {
   return (
@@ -19,14 +18,14 @@ export default function Contact() {
             </p>
 
             <h2
-              className="text-5xl md:text-6xl lg:text-[5.5rem] font-black leading-[1.05] text-gray-950 mb-6"
+              className="text-5xl md:text-6xl lg:text-[5rem] font-black leading-[1.05] text-gray-950 mb-6"
               data-testid="text-contact-title"
             >
               See if Pehchaan
               <br />
               is the right fit
               <br />
-              <em className="font-black not-italic text-gray-400">for you</em>
+              <em className="not-italic text-gray-400">for you</em>
             </h2>
 
             <p className="text-base md:text-lg text-gray-500 leading-relaxed max-w-sm mb-10">
@@ -58,20 +57,8 @@ export default function Contact() {
             </div>
           </div>
 
-          {/* ── RIGHT — Calendly embed ── */}
-          <div
-            className="rounded-2xl overflow-hidden border border-gray-100 shadow-sm min-h-[680px]"
-            data-testid="calendly-embed"
-          >
-            <iframe
-              src={`${CALENDLY_URL}?hide_landing_page_details=1&hide_gdpr_banner=1&background_color=ffffff&text_color=111111&primary_color=111111`}
-              width="100%"
-              height="680"
-              frameBorder="0"
-              title="Schedule a call with Pehchaan Media"
-              className="w-full"
-            />
-          </div>
+          {/* ── RIGHT — Custom booking calendar ── */}
+          <BookingCalendar />
 
         </div>
       </div>
