@@ -151,13 +151,13 @@ export default function Portfolio() {
       ? projects
       : projects.filter((p) => p.category === activeFilter);
 
-  // Desktop-only reorder: KURA (large) on left cols 1-2, TRULY on right col 3
+  // Desktop-only reorder: TRULY on left col 1, KURA (large) on right cols 2-3
   const desktopProjects = (() => {
     const items = [...filteredProjects];
     const trulyIdx = items.findIndex((p) => p.title === "TRULY");
     const kuraIdx = items.findIndex((p) => p.title === "KURA");
-    // Ensure KURA (large, left cols 1-2) comes before TRULY (right col 3)
-    if (trulyIdx !== -1 && kuraIdx !== -1 && trulyIdx < kuraIdx) {
+    // Ensure TRULY comes before KURA
+    if (trulyIdx !== -1 && kuraIdx !== -1 && trulyIdx > kuraIdx) {
       const [truly] = items.splice(trulyIdx, 1);
       items.splice(kuraIdx, 0, truly);
     }
