@@ -373,7 +373,7 @@ export default function BookingCalendar() {
         <div style={{ display: "flex", flexDirection: "column", gap: "8px" }}>
           {/* Up chevron */}
           <button
-            onClick={() => setSlotOffset((o) => Math.max(0, o - 1))}
+            onClick={() => setSlotOffset((o) => Math.max(0, o - SLOTS_PER_PAGE))}
             disabled={slotOffset === 0}
             data-testid="button-slots-up"
             style={{
@@ -422,7 +422,7 @@ export default function BookingCalendar() {
           <button
             onClick={() =>
               setSlotOffset((o) =>
-                Math.min(displayTimes.length - SLOTS_PER_PAGE, o + 1)
+                Math.min(displayTimes.length - SLOTS_PER_PAGE, o + SLOTS_PER_PAGE)
               )
             }
             disabled={slotOffset >= displayTimes.length - SLOTS_PER_PAGE}
