@@ -371,9 +371,6 @@ export default function BookingCalendar() {
             display: "flex",
             flexDirection: "column",
             gap: "10px",
-            maxHeight: "320px",
-            overflowY: "auto",
-            paddingRight: "4px",
           }}
         >
           {displayTimes.map((t, i) => (
