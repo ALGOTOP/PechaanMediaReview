@@ -151,14 +151,15 @@ export default function Portfolio() {
       ? projects
       : projects.filter((p) => p.category === activeFilter);
 
-  // Desktop-only reorder: move TRULY before Zarrafa Coffee
+  // Desktop-only reorder: KURA (large) on left cols 1-2, TRULY on right col 3
   const desktopProjects = (() => {
     const items = [...filteredProjects];
     const trulyIdx = items.findIndex((p) => p.title === "TRULY");
-    const zarrafaIdx = items.findIndex((p) => p.title === "Zarrafa Coffee");
-    if (trulyIdx !== -1 && zarrafaIdx !== -1 && trulyIdx > zarrafaIdx) {
+    const kuraIdx = items.findIndex((p) => p.title === "KURA");
+    // Ensure KURA (large, left cols 1-2) comes before TRULY (right col 3)
+    if (trulyIdx !== -1 && kuraIdx !== -1 && trulyIdx < kuraIdx) {
       const [truly] = items.splice(trulyIdx, 1);
-      items.splice(zarrafaIdx, 0, truly);
+      items.splice(kuraIdx, 0, truly);
     }
     return items;
   })();
