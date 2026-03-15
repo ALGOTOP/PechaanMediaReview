@@ -1,4 +1,4 @@
-import { useState, useMemo } from "react";
+import { useState, useMemo, useRef } from "react";
 import {
   format,
   addDays,
@@ -58,6 +58,23 @@ export default function BookingCalendar() {
   const [selectedTime, setSelectedTime] = useState<string | null>(null);
   const [confirmed, setConfirmed] = useState(false);
   const [slotOffset, setSlotOffset] = useState(0);
+  const touchStartY = useRef<number | null>(null);
+
+  const handleTouchStart = (e: React.TouchEvent) => {
+    touchStartY.current = e.touches[0].clientY;
+  };
+
+  const handleTouchEnd = (e: React.TouchEvent) => {
+    if (touchStartY.current === null) return;
+    const delta = touchStartY.current - e.changedTouches[0].clientY;
+    if (Math.abs(delta) < 30) return;
+    if (delta > 0) {
+      setSlotOffset((o) => Math.min(displayTimes.length - SLOTS_PER_PAGE, o + SLOTS_PER_PAGE));
+    } else {
+      setSlotOffset((o) => Math.max(0, o - SLOTS_PER_PAGE));
+    }
+    touchStartY.current = null;
+  };
 
   const calDays = useMemo(() => {
     const ms = startOfMonth(viewMonth);
@@ -370,7 +387,11 @@ export default function BookingCalendar() {
         </div>
 
         {/* Time slots list with chevron navigation */}
-        <div style={{ display: "flex", flexDirection: "column", gap: "8px" }}>
+        <div
+          style={{ display: "flex", flexDirection: "column", gap: "8px" }}
+          onTouchStart={handleTouchStart}
+          onTouchEnd={handleTouchEnd}
+        >
           {/* Up chevron */}
           <button
             onClick={() => setSlotOffset((o) => Math.max(0, o - SLOTS_PER_PAGE))}
