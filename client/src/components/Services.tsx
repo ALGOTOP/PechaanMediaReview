@@ -73,8 +73,8 @@ function ServiceCard({ service, index, visibleItems }: { service: Service; index
         />
         <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/40 to-transparent" />
         <div className="absolute bottom-0 left-0 right-0 p-6 md:p-8 text-white">
-          <h3 className="text-2xl md:text-3xl font-bold mb-3">{service.title}</h3>
-          <p className="text-white/90 text-base leading-relaxed">{service.description}</p>
+          <h3 className="text-xl md:text-2xl font-bold mb-3">{service.title}</h3>
+          <p className="text-white/90 text-sm leading-relaxed">{service.description}</p>
         </div>
       </div>
     </Card>
