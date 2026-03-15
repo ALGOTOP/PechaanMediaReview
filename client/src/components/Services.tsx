@@ -4,7 +4,7 @@ import { motion, AnimatePresence } from "framer-motion";
 import { Plus, Minus } from "lucide-react";
 import { useStaggeredReveal } from "@/hooks/useScrollReveal";
 import brandImage from "@assets/10002_1773591659727.jpg";
-import webImage from "@assets/generated_images/web_design_workspace.png";
+import webImage from "@assets/10001_1773610986000.png";
 import marketingImage from "@assets/10001_(2)_1773610275677.png";
 import productImage from "@assets/generated_images/product_photography_example.png";
 import filmImage from "@assets/10001_(1)_1773596168609.png";
