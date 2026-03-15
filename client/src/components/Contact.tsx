@@ -30,10 +30,7 @@ export default function Contact() {
 
             <p className="text-base md:text-lg text-gray-500 leading-relaxed max-w-sm mb-10">
               Schedule a quick, 15 minute guided call with us to see if we can
-              help you in anyway.{" "}
-              <span className="text-gray-400 font-medium">
-                [Free &amp; no strings attached]
-              </span>
+              help you in anyway.
             </p>
 
             <div className="flex flex-col gap-3">
