@@ -152,23 +152,37 @@ export default function BookingCalendar() {
   }
 
   if (showForm) {
-    const inputStyle: React.CSSProperties = {
+    const isValidEmail = (v: string) => /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(v.trim());
+    const nameErr   = formName.trim().length < 2   ? "Name must be at least 2 characters." : "";
+    const emailErr  = !isValidEmail(formEmail)      ? "Please enter a valid email address." : "";
+    const aboutErr  = formAbout.trim().length < 10  ? "Please write at least 10 characters." : "";
+    const formValid = !nameErr && !emailErr && !aboutErr;
+
+    const inputBase: React.CSSProperties = {
       width: "100%",
       padding: "10px 14px",
       background: "#232326",
-      border: "1px solid #3f3f46",
       borderRadius: "8px",
       color: "#ffffff",
       fontSize: "14px",
       outline: "none",
       boxSizing: "border-box",
+      transition: "border-color 0.15s",
     };
+    const inputOk:  React.CSSProperties = { ...inputBase, border: "1px solid #3f3f46" };
+    const inputErr: React.CSSProperties = { ...inputBase, border: "1px solid #ef4444" };
+
     const labelStyle: React.CSSProperties = {
       display: "block",
       fontSize: "14px",
       fontWeight: 600,
       color: "#ffffff",
       marginBottom: "6px",
+    };
+    const errStyle: React.CSSProperties = {
+      fontSize: "11px",
+      color: "#f87171",
+      marginTop: "4px",
     };
 
     return (
@@ -180,38 +194,43 @@ export default function BookingCalendar() {
         <div style={{ display: "flex", flexDirection: "column", gap: "16px" }}>
           {/* Your name */}
           <div>
-            <label style={labelStyle}>Your name <span style={{ color: "#ffffff" }}>*</span></label>
+            <label style={labelStyle}>Your name <span>*</span></label>
             <input
               type="text"
               value={formName}
               onChange={(e) => setFormName(e.target.value)}
-              style={inputStyle}
+              style={formName.length > 0 && nameErr ? inputErr : inputOk}
               data-testid="input-name"
             />
+            {formName.length > 0 && nameErr && <p style={errStyle}>{nameErr}</p>}
           </div>
 
           {/* Email */}
           <div>
-            <label style={labelStyle}>Email address <span style={{ color: "#ffffff" }}>*</span></label>
+            <label style={labelStyle}>Email address <span>*</span></label>
             <input
               type="email"
               value={formEmail}
               onChange={(e) => setFormEmail(e.target.value)}
-              style={inputStyle}
+              style={formEmail.length > 0 && emailErr ? inputErr : inputOk}
               data-testid="input-email"
             />
+            {formEmail.length > 0 && emailErr && <p style={errStyle}>{emailErr}</p>}
           </div>
 
           {/* Meeting about */}
           <div>
-            <label style={labelStyle}>What is this meeting about? <span style={{ color: "#ffffff" }}>*</span></label>
+            <label style={labelStyle}>What is this meeting about? <span>*</span></label>
             <input
               type="text"
               value={formAbout}
               onChange={(e) => setFormAbout(e.target.value)}
-              style={inputStyle}
+              style={formAbout.length > 0 && aboutErr ? inputErr : inputOk}
               data-testid="input-about"
             />
+            {formAbout.length > 0 && aboutErr && (
+              <p style={errStyle}>{aboutErr} ({formAbout.trim().length}/10)</p>
+            )}
           </div>
 
           {/* Additional notes */}
@@ -223,7 +242,7 @@ export default function BookingCalendar() {
               placeholder="Please share anything that will help prepare for our meeting."
               rows={4}
               style={{
-                ...inputStyle,
+                ...inputOk,
                 resize: "vertical",
                 fontFamily: "inherit",
                 lineHeight: "1.5",
@@ -241,7 +260,7 @@ export default function BookingCalendar() {
                 value={formGuests}
                 onChange={(e) => setFormGuests(e.target.value)}
                 placeholder="guest@example.com"
-                style={inputStyle}
+                style={inputOk}
                 data-testid="input-guests"
               />
             </div>
@@ -277,20 +296,20 @@ export default function BookingCalendar() {
             </button>
             <button
               onClick={() => {
-                if (!formName || !formEmail || !formAbout) return;
+                if (!formValid) return;
                 setConfirmed(true);
                 setShowForm(false);
               }}
-              disabled={!formName || !formEmail || !formAbout}
+              disabled={!formValid}
               style={{
                 padding: "10px 22px",
                 borderRadius: "8px",
-                background: (!formName || !formEmail || !formAbout) ? "#3f3f46" : "#ffffff",
-                color: (!formName || !formEmail || !formAbout) ? "#71717a" : "#000000",
+                background: formValid ? "#ffffff" : "#3f3f46",
+                color: formValid ? "#000000" : "#71717a",
                 fontSize: "14px",
                 fontWeight: 700,
                 border: "none",
-                cursor: (!formName || !formEmail || !formAbout) ? "not-allowed" : "pointer",
+                cursor: formValid ? "pointer" : "not-allowed",
                 transition: "all 0.2s",
               }}
               data-testid="button-form-confirm"
