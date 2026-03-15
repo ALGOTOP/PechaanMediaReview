@@ -58,13 +58,6 @@ const projects: Project[] = [
     image: "https://i.ibb.co/cKYw95TN/573922484-17864593854498906-87146158841521532-n.jpg",
     aspectRatio: "portrait",
   },
-  {
-    title: "Matrix",
-    category: "Branding",
-    description: "Brand identity for fintech platform",
-    image: "https://i.ibb.co/0j97mTS5/matrix.jpg",
-    aspectRatio: "square",
-  },
 ];
 
 const categories = ["all", "Branding", "Film", "Web", "Strategy"];
