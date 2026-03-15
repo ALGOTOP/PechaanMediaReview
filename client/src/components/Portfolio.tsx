@@ -12,7 +12,7 @@ interface Project {
   category: string;
   description: string;
   image: string;
-  aspectRatio: "square" | "portrait" | "landscape";
+  aspectRatio: "square" | "portrait" | "landscape" | "large";
 }
 
 const projects: Project[] = [
@@ -49,7 +49,7 @@ const projects: Project[] = [
     category: "Strategy",
     description: "Brand architecture and cross-channel creative strategy built around a defined visual system.",
     image: zarrafaImage,
-    aspectRatio: "landscape",
+    aspectRatio: "large",
   },
   {
     title: "TRULY",
@@ -171,6 +171,8 @@ export default function Portfolio() {
         return "md:col-span-2";
       case "portrait":
         return "md:row-span-2";
+      case "large":
+        return "md:col-span-2 md:row-span-2";
       default:
         return "";
     }
