@@ -264,16 +264,13 @@ export default function BookingCalendar() {
                 type="text"
                 value={formGuests}
                 onChange={(e) => setFormGuests(e.target.value)}
-                placeholder="guest@example.com, another@example.com"
+                placeholder="guest@example.com"
                 style={formGuests.trim().length > 0 && guestsErr ? inputErr : inputOk}
                 data-testid="input-guests"
               />
               {formGuests.trim().length > 0 && guestsErr && (
                 <p style={errStyle}>{guestsErr}</p>
               )}
-              <p style={{ fontSize: "11px", color: "#52525b", marginTop: "4px" }}>
-                Separate multiple addresses with a comma.
-              </p>
             </div>
           ) : (
             <button
