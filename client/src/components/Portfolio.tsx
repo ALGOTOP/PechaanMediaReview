@@ -157,7 +157,19 @@ export default function Portfolio() {
       ? projects
       : projects.filter((p) => p.category === activeFilter);
 
-  const { containerRef, visibleItems } = useStaggeredReveal(filteredProjects.length, 100);
+  // Desktop-only reorder: move TRULY before Zarrafa Coffee
+  const desktopProjects = (() => {
+    const items = [...filteredProjects];
+    const trulyIdx = items.findIndex((p) => p.title === "TRULY");
+    const zarrafaIdx = items.findIndex((p) => p.title === "Zarrafa Coffee");
+    if (trulyIdx !== -1 && zarrafaIdx !== -1 && trulyIdx > zarrafaIdx) {
+      const [truly] = items.splice(trulyIdx, 1);
+      items.splice(zarrafaIdx, 0, truly);
+    }
+    return items;
+  })();
+
+  const { containerRef, visibleItems } = useStaggeredReveal(desktopProjects.length, 100);
 
   const getGridClass = (aspectRatio: string) => {
     switch (aspectRatio) {
@@ -211,7 +223,7 @@ export default function Portfolio() {
           ref={containerRef}
           className="hidden md:grid md:grid-cols-3 auto-rows-[280px] gap-4"
         >
-          {filteredProjects.map((project, index) => (
+          {desktopProjects.map((project, index) => (
             <Card
               key={index}
               className={`group overflow-hidden hover-elevate active-elevate-2 cursor-pointer transition-all duration-700 h-full ${getGridClass(
