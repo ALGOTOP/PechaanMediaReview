@@ -20,12 +20,12 @@ import { cn } from "@/lib/utils";
 const DAY_HEADERS = ["SUN", "MON", "TUE", "WED", "THU", "FRI", "SAT"];
 const MONTH_ABBR = ["JAN","FEB","MAR","APR","MAY","JUN","JUL","AUG","SEP","OCT","NOV","DEC"];
 
-const TIME_SLOTS_24: string[] = [];
-for (let h = 0; h < 24; h++) {
-  for (const m of ["00", "15", "30", "45"]) {
-    TIME_SLOTS_24.push(`${String(h).padStart(2, "0")}:${m}`);
-  }
-}
+const TIME_SLOTS_24 = [
+  "00:00","00:15","00:30","00:45",
+  "09:00","09:15","09:30","09:45",
+  "10:00","10:15","10:30","10:45",
+  "11:00","11:15","11:30","11:45",
+];
 
 function to12h(t: string) {
   const [hStr, m] = t.split(":");
