@@ -156,7 +156,12 @@ export default function BookingCalendar() {
     const nameErr   = formName.trim().length < 2   ? "Name must be at least 2 characters." : "";
     const emailErr  = !isValidEmail(formEmail)      ? "Please enter a valid email address." : "";
     const aboutErr  = formAbout.trim().length < 10  ? "Please write at least 10 characters." : "";
-    const formValid = !nameErr && !emailErr && !aboutErr;
+    const guestsErr = showGuests && formGuests.trim().length > 0
+      ? formGuests.split(",").map((e) => e.trim()).filter(Boolean).some((e) => !isValidEmail(e))
+        ? "One or more guest emails are invalid."
+        : ""
+      : "";
+    const formValid = !nameErr && !emailErr && !aboutErr && !guestsErr;
 
     const inputBase: React.CSSProperties = {
       width: "100%",
@@ -259,10 +264,16 @@ export default function BookingCalendar() {
                 type="text"
                 value={formGuests}
                 onChange={(e) => setFormGuests(e.target.value)}
-                placeholder="guest@example.com"
-                style={inputOk}
+                placeholder="guest@example.com, another@example.com"
+                style={formGuests.trim().length > 0 && guestsErr ? inputErr : inputOk}
                 data-testid="input-guests"
               />
+              {formGuests.trim().length > 0 && guestsErr && (
+                <p style={errStyle}>{guestsErr}</p>
+              )}
+              <p style={{ fontSize: "11px", color: "#52525b", marginTop: "4px" }}>
+                Separate multiple addresses with a comma.
+              </p>
             </div>
           ) : (
             <button
