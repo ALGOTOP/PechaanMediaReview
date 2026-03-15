@@ -12,7 +12,7 @@ export default function Contact() {
         <div className="grid md:grid-cols-2 gap-12 md:gap-20 items-start">
 
           {/* ── LEFT ── */}
-          <div className="md:sticky md:top-24">
+          <div>
             <p className="text-[11px] font-mono tracking-[0.22em] text-gray-400 uppercase mb-7">
               Book a Discovery Call
             </p>
