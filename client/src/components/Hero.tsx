@@ -1,6 +1,6 @@
 import { Button } from "@/components/ui/button";
 import { useEffect, useState } from "react";
-import heroImage from "@assets/10001_(1)_1773596168609.png";
+import heroImage from "@assets/generated_images/hero_film_production_scene.png";
 
 export default function Hero() {
   const [isVisible, setIsVisible] = useState(false);
