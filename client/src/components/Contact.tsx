@@ -28,42 +28,85 @@ export default function Contact() {
               <span className="text-gray-400">for you</span>
             </h2>
 
-            <p className="text-base md:text-lg text-gray-500 leading-relaxed max-w-sm mb-10">
+            <p className="text-base md:text-lg text-gray-500 leading-relaxed max-w-sm">
               Schedule a quick, 15 minute guided call with us to see if we can
               help you in anyway.{" "}
               <span className="text-gray-400 font-medium">
                 [Free &amp; no strings attached]
               </span>
             </p>
-
-            <div className="space-y-3 text-sm text-gray-500">
-              <a
-                href="mailto:infopehchaanmedia@gmail.com"
-                className="flex items-center gap-3 hover:text-gray-900 transition-colors group"
-                data-testid="link-email"
-              >
-                <div className="w-8 h-8 rounded-full border border-gray-200 flex items-center justify-center group-hover:border-gray-400 transition-colors shrink-0">
-                  <Mail className="w-3.5 h-3.5" />
-                </div>
-                infopehchaanmedia@gmail.com
-              </a>
-              <a
-                href="tel:+923355312242"
-                className="flex items-center gap-3 hover:text-gray-900 transition-colors group"
-                data-testid="link-phone"
-              >
-                <div className="w-8 h-8 rounded-full border border-gray-200 flex items-center justify-center group-hover:border-gray-400 transition-colors shrink-0">
-                  <Phone className="w-3.5 h-3.5" />
-                </div>
-                +92 335 5312242
-              </a>
-            </div>
           </div>
 
           {/* ── RIGHT — Custom booking calendar ── */}
           <BookingCalendar />
 
         </div>
+
+        {/* ── CONTACT INFO — full-width strip below ── */}
+        <div
+          className="mt-20 pt-12 border-t border-gray-100"
+        >
+          <p className="text-[11px] font-mono tracking-[0.22em] text-gray-400 uppercase mb-6 text-center">
+            Or reach us directly
+          </p>
+
+          <div className="flex flex-col sm:flex-row gap-4 justify-center items-center">
+            {/* Email pill */}
+            <a
+              href="mailto:infopehchaanmedia@gmail.com"
+              data-testid="link-email"
+              className="group flex items-center gap-3 px-6 py-3.5 rounded-full transition-all duration-300"
+              style={{
+                background: "rgba(255,255,255,0.55)",
+                backdropFilter: "blur(20px)",
+                WebkitBackdropFilter: "blur(20px)",
+                border: "1px solid rgba(0,0,0,0.08)",
+                boxShadow: "0 2px 20px rgba(0,0,0,0.06), inset 0 1px 0 rgba(255,255,255,0.8)",
+              }}
+            >
+              <div
+                className="w-8 h-8 rounded-full flex items-center justify-center transition-all duration-300 group-hover:scale-110"
+                style={{
+                  background: "rgba(0,0,0,0.05)",
+                  border: "1px solid rgba(0,0,0,0.07)",
+                }}
+              >
+                <Mail className="w-3.5 h-3.5 text-gray-600" />
+              </div>
+              <span className="text-sm font-medium text-gray-700 group-hover:text-gray-900 transition-colors">
+                infopehchaanmedia@gmail.com
+              </span>
+            </a>
+
+            {/* Phone pill */}
+            <a
+              href="tel:+923355312242"
+              data-testid="link-phone"
+              className="group flex items-center gap-3 px-6 py-3.5 rounded-full transition-all duration-300"
+              style={{
+                background: "rgba(255,255,255,0.55)",
+                backdropFilter: "blur(20px)",
+                WebkitBackdropFilter: "blur(20px)",
+                border: "1px solid rgba(0,0,0,0.08)",
+                boxShadow: "0 2px 20px rgba(0,0,0,0.06), inset 0 1px 0 rgba(255,255,255,0.8)",
+              }}
+            >
+              <div
+                className="w-8 h-8 rounded-full flex items-center justify-center transition-all duration-300 group-hover:scale-110"
+                style={{
+                  background: "rgba(0,0,0,0.05)",
+                  border: "1px solid rgba(0,0,0,0.07)",
+                }}
+              >
+                <Phone className="w-3.5 h-3.5 text-gray-600" />
+              </div>
+              <span className="text-sm font-medium text-gray-700 group-hover:text-gray-900 transition-colors">
+                +92 335 5312242
+              </span>
+            </a>
+          </div>
+        </div>
+
       </div>
     </section>
   );
