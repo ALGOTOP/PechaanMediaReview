@@ -14,7 +14,7 @@ import {
   addMonths,
   subMonths,
 } from "date-fns";
-import { Check, ChevronUp, ChevronDown } from "lucide-react";
+import { Check, ChevronUp, ChevronDown, UserRoundPlus } from "lucide-react";
 import { motion, AnimatePresence } from "framer-motion";
 import { cn } from "@/lib/utils";
 
@@ -58,6 +58,13 @@ export default function BookingCalendar() {
   const [fmt, setFmt] = useState<"12h" | "24h">("24h");
   const [selectedTime, setSelectedTime] = useState<string | null>(null);
   const [confirmed, setConfirmed] = useState(false);
+  const [showForm, setShowForm] = useState(false);
+  const [formName, setFormName] = useState("");
+  const [formEmail, setFormEmail] = useState("");
+  const [formAbout, setFormAbout] = useState("");
+  const [formNotes, setFormNotes] = useState("");
+  const [formGuests, setFormGuests] = useState("");
+  const [showGuests, setShowGuests] = useState(false);
   const [slotOffset, setSlotOffset] = useState(0);
   const [slotDir, setSlotDir] = useState<1 | -1>(1);
   const touchStartY = useRef<number | null>(null);
@@ -108,6 +115,8 @@ export default function BookingCalendar() {
     setSelected(f);
     setSelectedTime(null);
     setConfirmed(false);
+    setShowForm(false);
+    setFormName(""); setFormEmail(""); setFormAbout(""); setFormNotes(""); setFormGuests(""); setShowGuests(false);
   };
 
   if (confirmed) {
@@ -138,6 +147,158 @@ export default function BookingCalendar() {
         >
           Book another slot
         </button>
+      </div>
+    );
+  }
+
+  if (showForm) {
+    const inputStyle: React.CSSProperties = {
+      width: "100%",
+      padding: "10px 14px",
+      background: "#232326",
+      border: "1px solid #3f3f46",
+      borderRadius: "8px",
+      color: "#ffffff",
+      fontSize: "14px",
+      outline: "none",
+      boxSizing: "border-box",
+    };
+    const labelStyle: React.CSSProperties = {
+      display: "block",
+      fontSize: "14px",
+      fontWeight: 600,
+      color: "#ffffff",
+      marginBottom: "6px",
+    };
+
+    return (
+      <div
+        style={{ background: "#18181b", borderRadius: "12px", color: "#ffffff", padding: "24px", boxShadow: "0 25px 50px -12px rgba(0,0,0,0.5)" }}
+        className="w-full max-w-[360px]"
+        data-testid="booking-form"
+      >
+        <div style={{ display: "flex", flexDirection: "column", gap: "16px" }}>
+          {/* Your name */}
+          <div>
+            <label style={labelStyle}>Your name <span style={{ color: "#ffffff" }}>*</span></label>
+            <input
+              type="text"
+              value={formName}
+              onChange={(e) => setFormName(e.target.value)}
+              style={inputStyle}
+              data-testid="input-name"
+            />
+          </div>
+
+          {/* Email */}
+          <div>
+            <label style={labelStyle}>Email address <span style={{ color: "#ffffff" }}>*</span></label>
+            <input
+              type="email"
+              value={formEmail}
+              onChange={(e) => setFormEmail(e.target.value)}
+              style={inputStyle}
+              data-testid="input-email"
+            />
+          </div>
+
+          {/* Meeting about */}
+          <div>
+            <label style={labelStyle}>What is this meeting about? <span style={{ color: "#ffffff" }}>*</span></label>
+            <input
+              type="text"
+              value={formAbout}
+              onChange={(e) => setFormAbout(e.target.value)}
+              style={inputStyle}
+              data-testid="input-about"
+            />
+          </div>
+
+          {/* Additional notes */}
+          <div>
+            <label style={{ ...labelStyle, fontWeight: 500, color: "#e4e4e7" }}>Additional notes</label>
+            <textarea
+              value={formNotes}
+              onChange={(e) => setFormNotes(e.target.value)}
+              placeholder="Please share anything that will help prepare for our meeting."
+              rows={4}
+              style={{
+                ...inputStyle,
+                resize: "vertical",
+                fontFamily: "inherit",
+                lineHeight: "1.5",
+              }}
+              data-testid="input-notes"
+            />
+          </div>
+
+          {/* Add guests */}
+          {showGuests ? (
+            <div>
+              <label style={{ ...labelStyle, fontWeight: 500, color: "#e4e4e7" }}>Guest email(s)</label>
+              <input
+                type="text"
+                value={formGuests}
+                onChange={(e) => setFormGuests(e.target.value)}
+                placeholder="guest@example.com"
+                style={inputStyle}
+                data-testid="input-guests"
+              />
+            </div>
+          ) : (
+            <button
+              onClick={() => setShowGuests(true)}
+              style={{ background: "none", border: "none", cursor: "pointer", color: "#a1a1aa", display: "flex", alignItems: "center", gap: "6px", fontSize: "13px", padding: 0 }}
+              className="hover:text-white transition-colors"
+              data-testid="button-add-guests"
+            >
+              <UserRoundPlus size={15} />
+              Add guests
+            </button>
+          )}
+
+          {/* Fine print */}
+          <p style={{ fontSize: "12px", color: "#71717a", lineHeight: "1.5", margin: 0 }}>
+            By proceeding, you agree to Cal.com's{" "}
+            <span style={{ textDecoration: "underline", cursor: "pointer" }}>Terms</span>{" "}
+            and{" "}
+            <span style={{ textDecoration: "underline", cursor: "pointer" }}>Privacy Policy</span>.
+          </p>
+
+          {/* Back + Confirm */}
+          <div style={{ display: "flex", justifyContent: "flex-end", alignItems: "center", gap: "16px", marginTop: "4px" }}>
+            <button
+              onClick={() => setShowForm(false)}
+              style={{ background: "none", border: "none", cursor: "pointer", color: "#a1a1aa", fontSize: "14px", fontWeight: 500 }}
+              className="hover:text-white transition-colors"
+              data-testid="button-form-back"
+            >
+              Back
+            </button>
+            <button
+              onClick={() => {
+                if (!formName || !formEmail || !formAbout) return;
+                setConfirmed(true);
+                setShowForm(false);
+              }}
+              disabled={!formName || !formEmail || !formAbout}
+              style={{
+                padding: "10px 22px",
+                borderRadius: "8px",
+                background: (!formName || !formEmail || !formAbout) ? "#3f3f46" : "#ffffff",
+                color: (!formName || !formEmail || !formAbout) ? "#71717a" : "#000000",
+                fontSize: "14px",
+                fontWeight: 700,
+                border: "none",
+                cursor: (!formName || !formEmail || !formAbout) ? "not-allowed" : "pointer",
+                transition: "all 0.2s",
+              }}
+              data-testid="button-form-confirm"
+            >
+              Confirm
+            </button>
+          </div>
+        </div>
       </div>
     );
   }
@@ -493,7 +654,7 @@ export default function BookingCalendar() {
         {/* Confirm button — only when a time is selected */}
         {selectedTime && (
           <button
-            onClick={() => setConfirmed(true)}
+            onClick={() => setShowForm(true)}
             data-testid="button-confirm-booking"
             className="hover:bg-zinc-200 transition-colors"
             style={{
