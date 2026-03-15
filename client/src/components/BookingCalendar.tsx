@@ -15,6 +15,7 @@ import {
   subMonths,
 } from "date-fns";
 import { Check, ChevronUp, ChevronDown } from "lucide-react";
+import { motion, AnimatePresence } from "framer-motion";
 import { cn } from "@/lib/utils";
 
 const SLOTS_PER_PAGE = 4;
@@ -58,7 +59,18 @@ export default function BookingCalendar() {
   const [selectedTime, setSelectedTime] = useState<string | null>(null);
   const [confirmed, setConfirmed] = useState(false);
   const [slotOffset, setSlotOffset] = useState(0);
+  const [slotDir, setSlotDir] = useState<1 | -1>(1);
   const touchStartY = useRef<number | null>(null);
+
+  const goNext = () => {
+    setSlotDir(1);
+    setSlotOffset((o) => Math.min(displayTimes.length - SLOTS_PER_PAGE, o + SLOTS_PER_PAGE));
+  };
+
+  const goPrev = () => {
+    setSlotDir(-1);
+    setSlotOffset((o) => Math.max(0, o - SLOTS_PER_PAGE));
+  };
 
   const handleTouchStart = (e: React.TouchEvent) => {
     touchStartY.current = e.touches[0].clientY;
@@ -68,11 +80,7 @@ export default function BookingCalendar() {
     if (touchStartY.current === null) return;
     const delta = touchStartY.current - e.changedTouches[0].clientY;
     if (Math.abs(delta) < 30) return;
-    if (delta > 0) {
-      setSlotOffset((o) => Math.min(displayTimes.length - SLOTS_PER_PAGE, o + SLOTS_PER_PAGE));
-    } else {
-      setSlotOffset((o) => Math.max(0, o - SLOTS_PER_PAGE));
-    }
+    if (delta > 0) goNext(); else goPrev();
     touchStartY.current = null;
   };
 
@@ -394,7 +402,7 @@ export default function BookingCalendar() {
         >
           {/* Up chevron */}
           <button
-            onClick={() => setSlotOffset((o) => Math.max(0, o - SLOTS_PER_PAGE))}
+            onClick={goPrev}
             disabled={slotOffset === 0}
             data-testid="button-slots-up"
             style={{
@@ -414,38 +422,45 @@ export default function BookingCalendar() {
           </button>
 
           {/* Visible slots */}
-          {displayTimes.slice(slotOffset, slotOffset + SLOTS_PER_PAGE).map((t, i) => (
-            <button
-              key={slotOffset + i}
-              onClick={() => setSelectedTime(t)}
-              data-testid={`time-slot-${slotOffset + i}`}
-              className="transition-colors"
-              style={{
-                width: "100%",
-                padding: "14px 12px",
-                border: "none",
-                borderRadius: "12px",
-                background: selectedTime === t ? "#ffffff" : "#1c1c1e",
-                color: selectedTime === t ? "#000000" : "#ffffff",
-                fontSize: "15px",
-                fontWeight: selectedTime === t ? 700 : 500,
-                textAlign: "center",
-                cursor: "pointer",
-                flexShrink: 0,
-                letterSpacing: "0.01em",
-              }}
+          <AnimatePresence mode="wait" initial={false}>
+            <motion.div
+              key={slotOffset}
+              initial={{ opacity: 0, y: slotDir * 10 }}
+              animate={{ opacity: 1, y: 0 }}
+              exit={{ opacity: 0, y: slotDir * -10 }}
+              transition={{ duration: 0.35, ease: [0.25, 0.46, 0.45, 0.94] }}
+              style={{ display: "flex", flexDirection: "column", gap: "10px" }}
             >
-              {t}
-            </button>
-          ))}
+              {displayTimes.slice(slotOffset, slotOffset + SLOTS_PER_PAGE).map((t, i) => (
+                <button
+                  key={i}
+                  onClick={() => setSelectedTime(t)}
+                  data-testid={`time-slot-${slotOffset + i}`}
+                  className="transition-colors"
+                  style={{
+                    width: "100%",
+                    padding: "14px 12px",
+                    border: "none",
+                    borderRadius: "12px",
+                    background: selectedTime === t ? "#ffffff" : "#1c1c1e",
+                    color: selectedTime === t ? "#000000" : "#ffffff",
+                    fontSize: "15px",
+                    fontWeight: selectedTime === t ? 700 : 500,
+                    textAlign: "center",
+                    cursor: "pointer",
+                    flexShrink: 0,
+                    letterSpacing: "0.01em",
+                  }}
+                >
+                  {t}
+                </button>
+              ))}
+            </motion.div>
+          </AnimatePresence>
 
           {/* Down chevron */}
           <button
-            onClick={() =>
-              setSlotOffset((o) =>
-                Math.min(displayTimes.length - SLOTS_PER_PAGE, o + SLOTS_PER_PAGE)
-              )
-            }
+            onClick={goNext}
             disabled={slotOffset >= displayTimes.length - SLOTS_PER_PAGE}
             data-testid="button-slots-down"
             style={{
