@@ -1,0 +1,211 @@
+The Component Breakdown
+Background: #121212 (Deep Charcoal/Black)
+
+Active State: #FFFFFF (Pure White) with Black Text
+
+Hover/Secondary States: #27272a (Zinc-800)
+
+Font: Inter or System Sans-Serif (Medium weight)
+
+The Code (HTML & CSS)
+You can drop this into a single .html file to see the result.
+
+HTML
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <style>
+        :root {
+            --bg-dark: #121212;
+            --card-bg: #18181b;
+            --text-main: #ffffff;
+            --text-muted: #a1a1aa;
+            --accent-gray: #27272a;
+            --accent-hover: #3f3f46;
+        }
+
+        body {
+            background-color: var(--bg-dark);
+            font-family: 'Inter', -apple-system, sans-serif;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+        }
+
+        .calendar-card {
+            background: var(--card-bg);
+            width: 380px;
+            padding: 24px;
+            border-radius: 12px;
+            color: var(--text-main);
+            box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.5);
+        }
+
+        .header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 24px;
+        }
+
+        .header h2 {
+            font-size: 1.2rem;
+            margin: 0;
+            font-weight: 700;
+        }
+
+        .header h2 span {
+            color: var(--text-muted);
+            font-weight: 400;
+        }
+
+        .days-grid {
+            display: grid;
+            grid-template-columns: repeat(7, 1fr);
+            gap: 8px;
+            text-align: center;
+        }
+
+        .day-name {
+            color: var(--text-muted);
+            font-size: 0.75rem;
+            font-weight: 700;
+            padding-bottom: 12px;
+            text-transform: uppercase;
+        }
+
+        .day-cell {
+            aspect-ratio: 1;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 8px;
+            cursor: pointer;
+            font-size: 0.95rem;
+            transition: all 0.2s;
+            position: relative;
+        }
+
+        /* The "Today" Dot */
+        .day-cell.today::after {
+            content: '';
+            position: absolute;
+            bottom: 6px;
+            width: 4px;
+            height: 4px;
+            background: white;
+            border-radius: 50%;
+        }
+
+        /* Available/Selected States */
+        .day-cell.available {
+            background: var(--accent-gray);
+            font-weight: 600;
+        }
+
+        .day-cell.available:hover {
+            background: var(--accent-hover);
+        }
+
+        .day-cell.selected {
+            background: white;
+            color: black;
+            font-weight: 700;
+        }
+
+        .day-cell.muted {
+            color: #3f3f46;
+        }
+
+        .footer-selector {
+            margin-top: 24px;
+            border-top: 1px solid #27272a;
+            padding-top: 20px;
+        }
+
+        .time-display {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 12px;
+        }
+
+        .time-box {
+            width: 100%;
+            border: 1px solid #27272a;
+            padding: 12px;
+            text-align: center;
+            border-radius: 8px;
+            background: transparent;
+            color: white;
+            font-size: 1rem;
+        }
+    </style>
+</head>
+<body>
+
+<div class="calendar-card">
+    <div class="header">
+        <h2>March <span>2026</span></h2>
+        <div style="color: #52525b;"> &lt; &nbsp; &gt; </div>
+    </div>
+
+    <div class="days-grid">
+        <div class="day-name">Sun</div>
+        <div class="day-name">Mon</div>
+        <div class="day-name">Tue</div>
+        <div class="day-name">Wed</div>
+        <div class="day-name">Thu</div>
+        <div class="day-name">Fri</div>
+        <div class="day-name">Sat</div>
+
+        <div class="day-cell today">8</div>
+        <div class="day-cell">9</div>
+        <div class="day-cell">10</div>
+        <div class="day-cell">11</div>
+        <div class="day-cell">12</div>
+        <div class="day-cell">13</div>
+        <div class="day-cell">14</div>
+
+        <div class="day-cell">15</div>
+        <div class="day-cell">16</div>
+        <div class="day-cell selected">17</div>
+        <div class="day-cell available">18</div>
+        <div class="day-cell available">19</div>
+        <div class="day-cell available">20</div>
+        <div class="day-cell">21</div>
+
+        <div class="day-cell">22</div>
+        <div class="day-cell">23</div>
+        <div class="day-cell available">24</div>
+        <div class="day-cell available">25</div>
+        <div class="day-cell available">26</div>
+        <div class="day-cell available">27</div>
+        <div class="day-cell">28</div>
+    </div>
+
+    <div class="footer-selector">
+        <div class="time-display">
+            <strong>Tue 17</strong>
+            <div style="font-size: 12px; background: #121212; padding: 4px 8px; border-radius: 4px; border: 1px solid #27272a;">12h <b>24h</b></div>
+        </div>
+        <div class="time-box">22:30</div>
+    </div>
+</div>
+
+</body>
+</html>
+Key Implementation Details:
+Grid System: Uses display: grid with grid-template-columns: repeat(7, 1fr) to ensure the days line up perfectly regardless of screen size.
+
+The "Available" Blocks: Those rounded gray squares use aspect-ratio: 1 to stay perfectly square and background: #27272a.
+
+Selected Day: The white box uses color: black and font-weight: 700 to create that high-contrast look from your screenshot.
+
+Responsiveness: The container is set to a fixed 380px width (standard for this widget), but you can change it to max-width: 100% to make it fluid for mobile.
+
+Would you like me to add the JavaScript logic so you can actually click through the days and change the time?

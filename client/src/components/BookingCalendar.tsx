@@ -14,11 +14,10 @@ import {
   addMonths,
   subMonths,
 } from "date-fns";
-import { ChevronLeft, ChevronRight, Check } from "lucide-react";
+import { ChevronUp, ChevronDown, Check } from "lucide-react";
 import { cn } from "@/lib/utils";
 
-const DAY_HEADERS = ["SUN", "MON", "TUE", "WED", "THU", "FRI", "SAT"];
-const MONTH_ABBR = ["JAN","FEB","MAR","APR","MAY","JUN","JUL","AUG","SEP","OCT","NOV","DEC"];
+const DAY_HEADERS = ["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"];
 
 const TIME_SLOTS_24 = [
   "09:00","09:30","10:00","10:30","11:00","11:30",
@@ -54,7 +53,7 @@ export default function BookingCalendar() {
   );
   const [selected, setSelected] = useState<Date>(initial);
   const [fmt, setFmt] = useState<"12h" | "24h">("24h");
-  const [selectedTime, setSelectedTime] = useState<string | null>(null);
+  const [timeIndex, setTimeIndex] = useState(0);
   const [confirmed, setConfirmed] = useState(false);
 
   const calDays = useMemo(() => {
@@ -67,40 +66,53 @@ export default function BookingCalendar() {
   }, [viewMonth]);
 
   const displayTimes = fmt === "12h" ? TIME_SLOTS_24.map(to12h) : TIME_SLOTS_24;
+  const currentTime = displayTimes[timeIndex];
 
   const selectDay = (d: Date) => {
     if (!isAvailable(d)) return;
     setSelected(d);
-    setSelectedTime(null);
+    setTimeIndex(0);
+  };
+
+  const stepTime = (dir: 1 | -1) => {
+    setTimeIndex((prev) => {
+      const next = prev + dir;
+      if (next < 0) return TIME_SLOTS_24.length - 1;
+      if (next >= TIME_SLOTS_24.length) return 0;
+      return next;
+    });
   };
 
   const reset = () => {
     const f = firstAvailable();
     setViewMonth(new Date(f.getFullYear(), f.getMonth(), 1));
     setSelected(f);
-    setSelectedTime(null);
+    setTimeIndex(0);
     setConfirmed(false);
   };
 
   if (confirmed) {
     return (
       <div
-        className="bg-[#111111] rounded-2xl flex flex-col items-center justify-center min-h-[540px] text-center p-10"
+        style={{ background: "#18181b", borderRadius: "12px" }}
+        className="flex flex-col items-center justify-center min-h-[420px] text-center p-10"
         data-testid="booking-confirmed"
       >
-        <div className="w-14 h-14 rounded-full bg-white/10 flex items-center justify-center mb-6">
+        <div className="w-14 h-14 rounded-full flex items-center justify-center mb-6" style={{ background: "#27272a" }}>
           <Check className="w-6 h-6 text-white" />
         </div>
         <h3 className="text-white text-xl font-bold mb-2">You're booked!</h3>
-        <p className="text-zinc-400 text-sm">
-          {format(selected, "EEEE, MMMM d")} at {selectedTime}
+        <p style={{ color: "#a1a1aa" }} className="text-sm">
+          {format(selected, "EEEE, MMMM d")} at {currentTime}
         </p>
-        <p className="text-zinc-600 text-xs mt-4 max-w-xs leading-relaxed">
+        <p className="text-xs mt-4 max-w-xs leading-relaxed" style={{ color: "#52525b" }}>
           We'll reach out to confirm the details. Looking forward to speaking with you.
         </p>
         <button
           onClick={reset}
-          className="mt-8 text-zinc-600 hover:text-zinc-400 text-xs underline underline-offset-2 transition-colors"
+          className="mt-8 text-xs underline underline-offset-2 transition-colors"
+          style={{ color: "#52525b" }}
+          data-testid="button-book-another"
         >
           Book another slot
         </button>
@@ -109,150 +121,225 @@ export default function BookingCalendar() {
   }
 
   return (
-    <div className="bg-[#111111] rounded-2xl overflow-hidden" data-testid="booking-calendar">
+    <div
+      style={{ background: "#18181b", borderRadius: "12px", color: "#ffffff", fontFamily: "'Inter', -apple-system, sans-serif" }}
+      className="w-full max-w-[380px]"
+      data-testid="booking-calendar"
+    >
+      <div style={{ padding: "24px" }}>
 
-      {/* ── Month header ── */}
-      <div className="flex items-center justify-between px-5 pt-5 pb-4">
-        <span className="text-white font-bold text-[15px]">
-          {format(viewMonth, "MMMM")}{" "}
-          <span className="text-zinc-500 font-medium">{format(viewMonth, "yyyy")}</span>
-        </span>
-        <div className="flex items-center gap-1">
-          <button
-            onClick={() => setViewMonth(subMonths(viewMonth, 1))}
-            className="w-7 h-7 flex items-center justify-center text-zinc-500 hover:text-zinc-200 transition-colors rounded-md hover:bg-white/5"
-            data-testid="button-prev-month"
-          >
-            <ChevronLeft className="w-4 h-4" />
-          </button>
-          <button
-            onClick={() => setViewMonth(addMonths(viewMonth, 1))}
-            className="w-7 h-7 flex items-center justify-center text-zinc-500 hover:text-zinc-200 transition-colors rounded-md hover:bg-white/5"
-            data-testid="button-next-month"
-          >
-            <ChevronRight className="w-4 h-4" />
-          </button>
-        </div>
-      </div>
-
-      {/* divider */}
-      <div className="border-t border-[#222222]" />
-
-      {/* ── Day-of-week headers ── */}
-      <div className="grid grid-cols-7 px-4 pt-3 pb-2">
-        {DAY_HEADERS.map((d) => (
-          <div
-            key={d}
-            className="text-center text-[10px] font-semibold tracking-[0.1em] text-zinc-600 uppercase"
-          >
-            {d}
+        {/* ── Header ── */}
+        <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center", marginBottom: "24px" }}>
+          <h2 style={{ fontSize: "1.2rem", margin: 0, fontWeight: 700 }}>
+            {format(viewMonth, "MMMM")}{" "}
+            <span style={{ color: "#a1a1aa", fontWeight: 400 }}>{format(viewMonth, "yyyy")}</span>
+          </h2>
+          <div style={{ display: "flex", gap: "12px", color: "#52525b", fontSize: "1rem", userSelect: "none" }}>
+            <button
+              onClick={() => setViewMonth(subMonths(viewMonth, 1))}
+              style={{ color: "#52525b", background: "none", border: "none", cursor: "pointer", padding: "0 2px", fontSize: "1rem", lineHeight: 1 }}
+              className="hover:text-white transition-colors"
+              data-testid="button-prev-month"
+            >
+              &#8249;
+            </button>
+            <button
+              onClick={() => setViewMonth(addMonths(viewMonth, 1))}
+              style={{ color: "#52525b", background: "none", border: "none", cursor: "pointer", padding: "0 2px", fontSize: "1rem", lineHeight: 1 }}
+              className="hover:text-white transition-colors"
+              data-testid="button-next-month"
+            >
+              &#8250;
+            </button>
           </div>
-        ))}
-      </div>
+        </div>
 
-      {/* ── Calendar grid ── */}
-      <div className="grid grid-cols-7 px-3 pb-4 gap-y-1">
-        {calDays.map((day, i) => {
-          const inMonth = isSameMonth(day, viewMonth);
-          const avail = isAvailable(day);
-          const sel = isSameDay(day, selected);
-          const todayDay = isToday(day);
-          const outside = !inMonth;
+        {/* ── Days grid ── */}
+        <div style={{ display: "grid", gridTemplateColumns: "repeat(7, 1fr)", gap: "8px", textAlign: "center" }}>
 
-          return (
-            <div key={i} className="flex flex-col items-center justify-end h-11">
-              {/* Outside-month abbreviation */}
-              {outside && avail && (
-                <span className="text-[8px] font-semibold text-zinc-600 leading-none mb-0.5">
-                  {MONTH_ABBR[day.getMonth()]}
-                </span>
-              )}
+          {/* Day name headers */}
+          {DAY_HEADERS.map((d) => (
+            <div
+              key={d}
+              style={{ color: "#a1a1aa", fontSize: "0.75rem", fontWeight: 700, paddingBottom: "12px", textTransform: "uppercase" }}
+            >
+              {d}
+            </div>
+          ))}
 
-              <button
+          {/* Day cells */}
+          {calDays.map((day, i) => {
+            const inMonth = isSameMonth(day, viewMonth);
+            const avail = isAvailable(day);
+            const sel = isSameDay(day, selected);
+            const todayDay = isToday(day);
+            const muted = !avail || !inMonth;
+
+            let bg = "transparent";
+            let color = "#3f3f46";
+            let fontWeight = 400;
+            let cursor = "default";
+
+            if (sel) {
+              bg = "#ffffff";
+              color = "#000000";
+              fontWeight = 700;
+              cursor = "pointer";
+            } else if (avail && inMonth) {
+              bg = "#27272a";
+              color = "#ffffff";
+              fontWeight = 600;
+              cursor = "pointer";
+            }
+
+            return (
+              <div
+                key={i}
                 onClick={() => selectDay(day)}
-                disabled={!avail}
-                className={cn(
-                  "w-9 h-9 rounded-xl text-[13px] font-medium transition-all duration-100 relative",
-                  sel
-                    ? "bg-white text-zinc-900 font-bold"
-                    : avail
-                    ? "bg-[#272727] text-zinc-200 hover:bg-[#323232]"
-                    : "bg-transparent text-zinc-700 cursor-default"
-                )}
                 data-testid={`day-${format(day, "yyyy-MM-dd")}`}
+                style={{
+                  aspectRatio: "1",
+                  display: "flex",
+                  alignItems: "center",
+                  justifyContent: "center",
+                  borderRadius: "8px",
+                  cursor,
+                  fontSize: "0.95rem",
+                  fontWeight,
+                  transition: "all 0.2s",
+                  position: "relative",
+                  background: bg,
+                  color,
+                }}
+                className={cn(
+                  avail && inMonth && !sel ? "hover:bg-[#3f3f46]" : ""
+                )}
               >
                 {format(day, "d")}
                 {todayDay && !sel && (
-                  <span className="absolute bottom-1 left-1/2 -translate-x-1/2 w-[3px] h-[3px] rounded-full bg-white" />
+                  <span
+                    style={{
+                      position: "absolute",
+                      bottom: "6px",
+                      width: "4px",
+                      height: "4px",
+                      background: "white",
+                      borderRadius: "50%",
+                      left: "50%",
+                      transform: "translateX(-50%)",
+                    }}
+                  />
                 )}
+              </div>
+            );
+          })}
+        </div>
+
+        {/* ── Footer ── */}
+        <div style={{ marginTop: "24px", borderTop: "1px solid #27272a", paddingTop: "20px" }}>
+
+          {/* Date label + 12h/24h toggle */}
+          <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center", marginBottom: "12px" }}>
+            <strong style={{ fontSize: "0.95rem" }}>
+              {format(selected, "EEE d")}
+            </strong>
+            <div
+              style={{
+                fontSize: "12px",
+                background: "#121212",
+                padding: "4px 10px",
+                borderRadius: "4px",
+                border: "1px solid #27272a",
+                display: "flex",
+                gap: "6px",
+                userSelect: "none",
+              }}
+            >
+              {(["12h", "24h"] as const).map((f) => (
+                <button
+                  key={f}
+                  onClick={() => setFmt(f)}
+                  style={{
+                    background: "none",
+                    border: "none",
+                    cursor: "pointer",
+                    padding: 0,
+                    color: fmt === f ? "#ffffff" : "#52525b",
+                    fontWeight: fmt === f ? 700 : 400,
+                    fontSize: "12px",
+                    transition: "color 0.15s",
+                  }}
+                  data-testid={`toggle-${f}`}
+                >
+                  {f}
+                </button>
+              ))}
+            </div>
+          </div>
+
+          {/* Time box */}
+          <div style={{ position: "relative", display: "flex", alignItems: "center" }}>
+            <div
+              style={{
+                width: "100%",
+                border: "1px solid #27272a",
+                padding: "12px 48px 12px 12px",
+                textAlign: "center",
+                borderRadius: "8px",
+                background: "transparent",
+                color: "white",
+                fontSize: "1rem",
+                fontWeight: 600,
+                letterSpacing: "0.05em",
+              }}
+              data-testid="time-display"
+            >
+              {currentTime}
+            </div>
+            <div style={{ position: "absolute", right: "10px", display: "flex", flexDirection: "column", gap: "2px" }}>
+              <button
+                onClick={() => stepTime(-1)}
+                style={{ background: "none", border: "none", cursor: "pointer", color: "#a1a1aa", padding: "2px", display: "flex", alignItems: "center" }}
+                className="hover:text-white transition-colors"
+                data-testid="button-time-up"
+              >
+                <ChevronUp className="w-3.5 h-3.5" />
+              </button>
+              <button
+                onClick={() => stepTime(1)}
+                style={{ background: "none", border: "none", cursor: "pointer", color: "#a1a1aa", padding: "2px", display: "flex", alignItems: "center" }}
+                className="hover:text-white transition-colors"
+                data-testid="button-time-down"
+              >
+                <ChevronDown className="w-3.5 h-3.5" />
               </button>
             </div>
-          );
-        })}
-      </div>
+          </div>
 
-      {/* divider */}
-      <div className="border-t border-[#222222]" />
-
-      {/* ── Date label + 12h/24h toggle ── */}
-      <div className="flex items-center justify-between px-5 py-4">
-        <span className="text-white font-bold text-sm">
-          {format(selected, "EEE")}{" "}
-          <span className="font-bold">{format(selected, "d")}</span>
-        </span>
-        <div className="flex items-center bg-[#1c1c1c] rounded-full p-[3px] gap-px">
-          {(["12h", "24h"] as const).map((f) => (
-            <button
-              key={f}
-              onClick={() => setFmt(f)}
-              className={cn(
-                "px-3 py-[5px] rounded-full text-[11px] font-semibold transition-all duration-150",
-                fmt === f
-                  ? "bg-[#3a3a3a] text-white"
-                  : "text-zinc-600 hover:text-zinc-300"
-              )}
-              data-testid={`toggle-${f}`}
-            >
-              {f}
-            </button>
-          ))}
-        </div>
-      </div>
-
-      {/* divider */}
-      <div className="border-t border-[#1e1e1e]" />
-
-      {/* ── Time slots ── */}
-      <div className="px-4 py-4 flex flex-col gap-2 max-h-72 overflow-y-auto">
-        {displayTimes.map((t, i) => (
-          <button
-            key={i}
-            onClick={() => setSelectedTime(t)}
-            className={cn(
-              "w-full py-3 rounded-xl text-[13px] font-medium transition-all duration-100",
-              selectedTime === t
-                ? "bg-white text-zinc-900"
-                : "bg-[#1a1a1a] text-zinc-300 border border-[#2a2a2a] hover:border-[#3a3a3a] hover:text-white"
-            )}
-            data-testid={`time-slot-${i}`}
-          >
-            {t}
-          </button>
-        ))}
-      </div>
-
-      {/* ── Confirm button ── */}
-      {selectedTime && (
-        <div className="px-4 pb-4">
+          {/* Confirm button */}
           <button
             onClick={() => setConfirmed(true)}
-            className="w-full py-3 rounded-xl bg-white text-zinc-900 text-sm font-bold hover:bg-zinc-100 transition-colors"
+            style={{
+              width: "100%",
+              marginTop: "12px",
+              padding: "12px",
+              borderRadius: "8px",
+              background: "#ffffff",
+              color: "#000000",
+              fontSize: "0.9rem",
+              fontWeight: 700,
+              border: "none",
+              cursor: "pointer",
+              transition: "background 0.15s",
+            }}
+            className="hover:bg-zinc-200"
             data-testid="button-confirm-booking"
           >
-            Confirm {format(selected, "MMM d")} at {selectedTime}
+            Confirm — {format(selected, "MMM d")} at {currentTime}
           </button>
         </div>
-      )}
+
+      </div>
     </div>
   );
 }
