@@ -14,8 +14,10 @@ import {
   addMonths,
   subMonths,
 } from "date-fns";
-import { Check } from "lucide-react";
+import { Check, ChevronUp, ChevronDown } from "lucide-react";
 import { cn } from "@/lib/utils";
+
+const SLOTS_PER_PAGE = 4;
 
 const DAY_HEADERS = ["SUN", "MON", "TUE", "WED", "THU", "FRI", "SAT"];
 const MONTH_ABBR = ["JAN","FEB","MAR","APR","MAY","JUN","JUL","AUG","SEP","OCT","NOV","DEC"];
@@ -55,6 +57,7 @@ export default function BookingCalendar() {
   const [fmt, setFmt] = useState<"12h" | "24h">("24h");
   const [selectedTime, setSelectedTime] = useState<string | null>(null);
   const [confirmed, setConfirmed] = useState(false);
+  const [slotOffset, setSlotOffset] = useState(0);
 
   const calDays = useMemo(() => {
     const ms = startOfMonth(viewMonth);
@@ -71,6 +74,7 @@ export default function BookingCalendar() {
     if (!isAvailable(d)) return;
     setSelected(d);
     setSelectedTime(null);
+    setSlotOffset(0);
   };
 
   const reset = () => {
@@ -365,19 +369,35 @@ export default function BookingCalendar() {
           </div>
         </div>
 
-        {/* Time slots list */}
-        <div
-          style={{
-            display: "flex",
-            flexDirection: "column",
-            gap: "10px",
-          }}
-        >
-          {displayTimes.map((t, i) => (
+        {/* Time slots list with chevron navigation */}
+        <div style={{ display: "flex", flexDirection: "column", gap: "8px" }}>
+          {/* Up chevron */}
+          <button
+            onClick={() => setSlotOffset((o) => Math.max(0, o - 1))}
+            disabled={slotOffset === 0}
+            data-testid="button-slots-up"
+            style={{
+              background: "none",
+              border: "none",
+              cursor: slotOffset === 0 ? "default" : "pointer",
+              color: slotOffset === 0 ? "#3f3f46" : "#a1a1aa",
+              display: "flex",
+              alignItems: "center",
+              justifyContent: "center",
+              padding: "4px 0",
+              transition: "color 0.15s",
+            }}
+            className={slotOffset === 0 ? "" : "hover:text-white"}
+          >
+            <ChevronUp size={20} />
+          </button>
+
+          {/* Visible slots */}
+          {displayTimes.slice(slotOffset, slotOffset + SLOTS_PER_PAGE).map((t, i) => (
             <button
-              key={i}
+              key={slotOffset + i}
               onClick={() => setSelectedTime(t)}
-              data-testid={`time-slot-${i}`}
+              data-testid={`time-slot-${slotOffset + i}`}
               className="transition-colors"
               style={{
                 width: "100%",
@@ -397,6 +417,41 @@ export default function BookingCalendar() {
               {t}
             </button>
           ))}
+
+          {/* Down chevron */}
+          <button
+            onClick={() =>
+              setSlotOffset((o) =>
+                Math.min(displayTimes.length - SLOTS_PER_PAGE, o + 1)
+              )
+            }
+            disabled={slotOffset >= displayTimes.length - SLOTS_PER_PAGE}
+            data-testid="button-slots-down"
+            style={{
+              background: "none",
+              border: "none",
+              cursor:
+                slotOffset >= displayTimes.length - SLOTS_PER_PAGE
+                  ? "default"
+                  : "pointer",
+              color:
+                slotOffset >= displayTimes.length - SLOTS_PER_PAGE
+                  ? "#3f3f46"
+                  : "#a1a1aa",
+              display: "flex",
+              alignItems: "center",
+              justifyContent: "center",
+              padding: "4px 0",
+              transition: "color 0.15s",
+            }}
+            className={
+              slotOffset >= displayTimes.length - SLOTS_PER_PAGE
+                ? ""
+                : "hover:text-white"
+            }
+          >
+            <ChevronDown size={20} />
+          </button>
         </div>
 
         {/* Confirm button — only when a time is selected */}
