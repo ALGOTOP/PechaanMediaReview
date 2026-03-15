@@ -431,12 +431,12 @@ export default function BookingCalendar() {
             fontWeight = 700;
             cursor = "pointer";
           } else if (avail && inMonth) {
-            bg = "#3f3f46";
+            bg = "#2a2a2d";
             color = "#ffffff";
             fontWeight = 600;
             cursor = "pointer";
           } else if (avail && !inMonth) {
-            bg = "#3f3f46";
+            bg = "#2a2a2d";
             color = "#ffffff";
             fontWeight = 600;
             cursor = "pointer";
@@ -448,7 +448,7 @@ export default function BookingCalendar() {
               onClick={() => selectDay(day)}
               data-testid={`day-${format(day, "yyyy-MM-dd")}`}
               className={cn(
-                (avail && !sel) ? "hover:bg-[#52525b]" : ""
+                (avail && !sel) ? "hover:bg-[#3a3a3e]" : ""
               )}
               style={{
                 aspectRatio: "1",
