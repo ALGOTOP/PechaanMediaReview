@@ -9,6 +9,9 @@ import avatarRohan from "@assets/generated_images/avatars/rohan_mehta.png";
 import avatarPriya from "@assets/generated_images/avatars/priya_sundaram.png";
 import avatarJames from "@assets/generated_images/avatars/james_okafor.png";
 import avatarSana from "@assets/generated_images/avatars/sana_mirza.png";
+import avatarMia from "@assets/generated_images/avatars/mia_johansson.png";
+import avatarYousuf from "@assets/generated_images/avatars/yousuf_malik.png";
+import avatarIngrid from "@assets/generated_images/avatars/ingrid_larsson.png";
 
 interface Testimonial {
   quote: string;
@@ -143,14 +146,14 @@ const testimonials: Testimonial[] = [
     author: "Ingrid Larsson",
     role: "VP Communications",
     company: "Nordic Ventures",
-    avatar: "https://i.pravatar.cc/150?u=ingrid_larsson_nordic",
+    avatar: avatarIngrid,
   },
   {
     quote: "The redesign was methodical. They didn't just make it look better, they restructured how information was presented. Time on site went up and the bounce rate went down. Both without any paid traffic changes.",
-    author: "Yusuf Adeyemi",
+    author: "Yousuf Malik",
     role: "Founder",
     company: "Clavis Digital",
-    avatar: "https://i.pravatar.cc/150?u=yusuf_adeyemi_clavis",
+    avatar: avatarYousuf,
   },
   {
     quote: "What stood out to me was the quality of the interaction design. Every hover state, every transition. It wasn't decorative. It guided attention where we actually needed it.",
@@ -192,7 +195,7 @@ const testimonials: Testimonial[] = [
     author: "Mia Johansson",
     role: "Brand Strategist",
     company: "Solberg Agency",
-    avatar: "https://i.pravatar.cc/150?u=mia_johansson_solberg",
+    avatar: avatarMia,
   },
 ];
 
