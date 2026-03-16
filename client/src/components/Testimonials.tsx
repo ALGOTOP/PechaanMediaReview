@@ -12,6 +12,16 @@ import avatarSana from "@assets/generated_images/avatars/sana_mirza.png";
 import avatarMia from "@assets/generated_images/avatars/mia_johansson.png";
 import avatarYousuf from "@assets/generated_images/avatars/yousuf_malik.png";
 import avatarIngrid from "@assets/generated_images/avatars/ingrid_larsson.png";
+import avatarAaron from "@assets/generated_images/avatars/aaron_vance.png";
+import avatarNadia from "@assets/generated_images/avatars/nadia_hassan.png";
+import avatarTariq from "@assets/generated_images/avatars/tariq_ibrahim.png";
+import avatarElena from "@assets/generated_images/avatars/elena_vasquez.png";
+import avatarKabir from "@assets/generated_images/avatars/kabir_nair.png";
+import avatarMarcus from "@assets/generated_images/avatars/marcus_chen.png";
+import avatarSophie from "@assets/generated_images/avatars/sophie_bernard.png";
+import avatarLeila from "@assets/generated_images/avatars/leila_ahmadi.png";
+import avatarRania from "@assets/generated_images/avatars/rania_khalil.png";
+import avatarDavid from "@assets/generated_images/avatars/david_osei.png";
 
 interface Testimonial {
   quote: string;
@@ -97,35 +107,35 @@ const testimonials: Testimonial[] = [
     author: "Aaron Vance",
     role: "Head of Growth",
     company: "Fieldspark",
-    avatar: "https://i.pravatar.cc/150?u=aaron_vance_fieldspark",
+    avatar: avatarAaron,
   },
   {
     quote: "What I noticed was how much they cared about the strategy underneath the content. Most teams just produce. They think first, then produce. That difference shows in the results.",
     author: "Nadia Hassan",
     role: "Brand Manager",
     company: "Lumi Foods",
-    avatar: "https://i.pravatar.cc/150?u=nadia_hassan_lumi",
+    avatar: avatarNadia,
   },
   {
     quote: "They took a product that most of our target audience didn't understand and built a content strategy that educated without dumbing down. Our sales team says leads are coming in warmer than before.",
     author: "Tariq Ibrahim",
     role: "Co-founder",
     company: "Axiom Wellness",
-    avatar: "https://i.pravatar.cc/150?u=tariq_ibrahim_axiom",
+    avatar: avatarTariq,
   },
   {
     quote: "The six-month plan they put together was detailed in the right places and flexible where it needed to be. We've adjusted some things along the way and they've been easy to work with throughout.",
     author: "Elena Vasquez",
     role: "CMO",
     company: "Drift Analytics",
-    avatar: "https://i.pravatar.cc/150?u=elena_vasquez_drift",
+    avatar: avatarElena,
   },
   {
     quote: "The showreel opened conversations we couldn't get into before. Three distributors reached out within a week of it going live. The footage was exactly what we needed and the edit was clean.",
     author: "Kabir Nair",
     role: "Director",
     company: "Pulse Films",
-    avatar: "https://i.pravatar.cc/150?u=kabir_nair_pulse",
+    avatar: avatarKabir,
   },
   {
     quote: "They shot our brand documentary over two days and turned it into something that actually moved people. A few of our clients mentioned watching it more than once.",
@@ -139,7 +149,7 @@ const testimonials: Testimonial[] = [
     author: "Marcus Chen",
     role: "Creative Producer",
     company: "Siren Creative",
-    avatar: "https://i.pravatar.cc/150?u=marcus_chen_siren",
+    avatar: avatarMarcus,
   },
   {
     quote: "Our previous brand video felt like every other one in the industry. This one doesn't. The pacing is different, the script is different, and the response from our audience confirmed that.",
@@ -160,7 +170,7 @@ const testimonials: Testimonial[] = [
     author: "Sophie Bernard",
     role: "Product Lead",
     company: "Atelier Lab",
-    avatar: "https://i.pravatar.cc/150?u=sophie_bernard_atelier",
+    avatar: avatarSophie,
   },
   {
     quote: "I came to them with a reference board and they pushed back on half of it, with good reasons. The final site is better than what I originally had in mind.",
@@ -174,21 +184,21 @@ const testimonials: Testimonial[] = [
     author: "Leila Ahmadi",
     role: "Operations Director",
     company: "Croft Studio",
-    avatar: "https://i.pravatar.cc/150?u=leila_ahmadi_croft",
+    avatar: avatarLeila,
   },
   {
     quote: "Working with them felt different from the first call. They already understood what we were trying to say before we knew how to say it. The final work reflected that clarity.",
     author: "Rania Khalil",
     role: "Creative Director",
     company: "Forma Bureau",
-    avatar: "https://i.pravatar.cc/150?u=rania_khalil_forma",
+    avatar: avatarRania,
   },
   {
     quote: "Small team, big output. That's the honest summary. They delivered at a level that teams twice their size have failed to reach for us before.",
     author: "David Osei",
     role: "Founder",
     company: "Caslon Partners",
-    avatar: "https://i.pravatar.cc/150?u=david_osei_caslon",
+    avatar: avatarDavid,
   },
   {
     quote: "I'd worked with bigger studios and smaller freelancers. Neither extreme worked for what we needed. Pehchaan sat in a place where the quality was serious and the process wasn't painful.",
