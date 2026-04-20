@@ -21,8 +21,8 @@ const projects: ReelProject[] = [
     category: "Film & Motion",
     tools: "Blender · After Effects · Premiere Pro · DaVinci",
     description: "3D motion identity and full brand campaign for an energy drink built around kinetic force",
-    thumbnail: "/thumbnails/kenetik_thumb.png",
-    featured: "/thumbnails/kenetik_hero.png",
+    thumbnail: "/thumbnails/kenetik_thumb.webp",
+    featured: "/thumbnails/kenetik_hero.webp",
     video: "https://ia803108.us.archive.org/17/items/ketone.-drink.-2025.final-6/Ketone.Drink.2025.final%286%29.mp4",
     year: "2025",
   },
@@ -32,8 +32,8 @@ const projects: ReelProject[] = [
     category: "Film & Production",
     tools: "Cinema 4D · Redshift · After Effects",
     description: "4D graphic post-production and high-impact advertising campaign for a lifestyle brand",
-    thumbnail: "/thumbnails/truly_thumb.png",
-    featured: "/thumbnails/truly_hero.png",
+    thumbnail: "/thumbnails/truly_thumb.webp",
+    featured: "/thumbnails/truly_hero.webp",
     video: "https://ia601506.us.archive.org/2/items/110c-2cbf-42fc-32faec-789114fdda-0196/110c2cbf42fc32faec789114fdda0196.mp4",
     year: "2025",
   },
@@ -43,8 +43,8 @@ const projects: ReelProject[] = [
     category: "Film & Production",
     tools: "Sony FX3 · DaVinci Resolve · Lightroom",
     description: "Cinematic fragrance campaign shot on location, colour-graded to a signature editorial tone",
-    thumbnail: "/thumbnails/denver_thumb.png",
-    featured: "/thumbnails/denver_hero.png",
+    thumbnail: "/thumbnails/denver_thumb.webp",
+    featured: "/thumbnails/denver_hero.webp",
     video: "https://ia601506.us.archive.org/2/items/110c-2cbf-42fc-32faec-789114fdda-0196/Denver%20Fragrance%20Videography%20adverts%20Final.Cut%289%29~2.mp4",
     year: "2025",
   },
@@ -54,8 +54,8 @@ const projects: ReelProject[] = [
     category: "Brand Identity",
     tools: "Canon R5 · After Effects · Adobe Premiere Pro · Cinema 4D",
     description: "Full motion campaign and major visual rebranding for the Kintsu Kitchen Collection by Brizo",
-    thumbnail: "/thumbnails/kinstu_thumb.png",
-    featured: "/thumbnails/kinstu_hero.png",
+    thumbnail: "/thumbnails/kinstu_thumb.webp",
+    featured: "/thumbnails/kinstu_hero.webp",
     video: "https://ia600504.us.archive.org/32/items/from-klick-pin-cf-kintsur-kitchen-collection-by-brizo-video-in-2025-kitchen-coll/From%20KlickPin%20CF%20Kintsu%C2%AE%20Kitchen%20Collection%20by%20Brizo%20%5BVideo%5D%20in%202025%20_%20Kitchen%20collection%20Motion%20design%20Motion%20design%20video.mp4",
     year: "2025",
   },
@@ -65,8 +65,8 @@ const projects: ReelProject[] = [
     category: "Brand Identity",
     tools: "Illustrator · After Effects · Premiere Pro · Maxon Cinema 4D",
     description: "Creative direction and motion design for a luxury Swiss skincare brand",
-    thumbnail: "/thumbnails/cellcosmet_thumb.png",
-    featured: "/thumbnails/cellcosmet_hero.png",
+    thumbnail: "/thumbnails/cellcosmet_thumb.webp",
+    featured: "/thumbnails/cellcosmet_hero.webp",
     video: "https://ia601506.us.archive.org/2/items/110c-2cbf-42fc-32faec-789114fdda-0196/From%20KlickPin%20CF%20Motion%20inspiration%20-%20cellCosmet%20%5BVideo%5D%20en%202025%20_%20Anuncios%20creativos%20Disenos%20de%20unas%20Fondos%20para%20fotografia.mp4",
     year: "2025",
   },
@@ -76,8 +76,8 @@ const projects: ReelProject[] = [
     category: "Film & Motion",
     tools: "Blender · After Effects · Premiere Pro",
     description: "Luxury 3D motion ad for a high-end serum and oils brand, shot in a single cinematic sequence",
-    thumbnail: "/thumbnails/uree_thumb.png",
-    featured: "/thumbnails/uree_hero.png",
+    thumbnail: "/thumbnails/uree_thumb.webp",
+    featured: "/thumbnails/uree_hero.webp",
     video: "https://ia600501.us.archive.org/26/items/ure-e-serums-oils-luxury-graphic-design-motion-graphics-design-cut-8-finalized/UR%C3%88E%20Serums%20%26%20Oils%20Luxury%20graphic%20design%20Motion%20graphics%20design%20Cut%288%29%20Finalized.mp4",
     year: "2025",
   },
@@ -454,6 +454,7 @@ function ProjectRow({
               src={project.featured}
               alt={project.title}
               className="w-full h-full object-cover"
+              loading="lazy"
             />
             <div className="absolute inset-0 bg-gradient-to-r from-black/60 to-transparent" />
             <div className="absolute bottom-4 left-4">

@@ -1,6 +1,6 @@
 import { Button } from "@/components/ui/button";
 import { useEffect, useState } from "react";
-import heroImage from "@assets/generated_images/hero_film_production_scene.png";
+import heroImage from "@assets/generated_images/hero_film_production_scene.webp";
 
 export default function Hero() {
   const [isVisible, setIsVisible] = useState(false);
@@ -42,6 +42,7 @@ export default function Hero() {
           src={heroImage}
           alt="Creative production"
           className="w-full h-[120%] object-cover"
+          fetchpriority="high"
         />
         <div className="absolute inset-0 bg-gradient-to-b from-black/80 via-black/60 to-black/80" />
       </div>

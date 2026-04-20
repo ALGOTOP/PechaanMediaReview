@@ -1,27 +1,27 @@
 import "./TestimonialsWall.css";
-import avatarAyesha from "@assets/generated_images/avatars/ayesha_khan.png";
-import avatarSara from "@assets/generated_images/avatars/sara_ahmed.png";
-import avatarOmar from "@assets/generated_images/avatars/omar_farooq.png";
-import avatarDaniel from "@assets/generated_images/avatars/daniel_kim.png";
-import avatarLina from "@assets/generated_images/avatars/lina_rodriguez.png";
-import avatarMeera from "@assets/generated_images/avatars/meera_patel.png";
-import avatarRohan from "@assets/generated_images/avatars/rohan_mehta.png";
-import avatarPriya from "@assets/generated_images/avatars/priya_sundaram.png";
-import avatarJames from "@assets/generated_images/avatars/james_okafor.png";
-import avatarSana from "@assets/generated_images/avatars/sana_mirza.png";
-import avatarMia from "@assets/generated_images/avatars/mia_johansson.png";
-import avatarYousuf from "@assets/generated_images/avatars/yousuf_malik.png";
-import avatarIngrid from "@assets/generated_images/avatars/ingrid_larsson.png";
-import avatarAaron from "@assets/generated_images/avatars/aaron_vance.png";
-import avatarNadia from "@assets/generated_images/avatars/nadia_hassan.png";
-import avatarTariq from "@assets/generated_images/avatars/tariq_ibrahim.png";
-import avatarElena from "@assets/generated_images/avatars/elena_vasquez.png";
-import avatarKabir from "@assets/generated_images/avatars/kabir_nair.png";
-import avatarMarcus from "@assets/generated_images/avatars/marcus_chen.png";
-import avatarSophie from "@assets/generated_images/avatars/sophie_bernard.png";
-import avatarLeila from "@assets/generated_images/avatars/leila_ahmadi.png";
-import avatarRania from "@assets/generated_images/avatars/rania_khalil.png";
-import avatarDavid from "@assets/generated_images/avatars/david_osei.png";
+import avatarAyesha from "@assets/generated_images/avatars/ayesha_khan.webp";
+import avatarSara from "@assets/generated_images/avatars/sara_ahmed.webp";
+import avatarOmar from "@assets/generated_images/avatars/omar_farooq.webp";
+import avatarDaniel from "@assets/generated_images/avatars/daniel_kim.webp";
+import avatarLina from "@assets/generated_images/avatars/lina_rodriguez.webp";
+import avatarMeera from "@assets/generated_images/avatars/meera_patel.webp";
+import avatarRohan from "@assets/generated_images/avatars/rohan_mehta.webp";
+import avatarPriya from "@assets/generated_images/avatars/priya_sundaram.webp";
+import avatarJames from "@assets/generated_images/avatars/james_okafor.webp";
+import avatarSana from "@assets/generated_images/avatars/sana_mirza.webp";
+import avatarMia from "@assets/generated_images/avatars/mia_johansson.webp";
+import avatarYousuf from "@assets/generated_images/avatars/yousuf_malik.webp";
+import avatarIngrid from "@assets/generated_images/avatars/ingrid_larsson.webp";
+import avatarAaron from "@assets/generated_images/avatars/aaron_vance.webp";
+import avatarNadia from "@assets/generated_images/avatars/nadia_hassan.webp";
+import avatarTariq from "@assets/generated_images/avatars/tariq_ibrahim.webp";
+import avatarElena from "@assets/generated_images/avatars/elena_vasquez.webp";
+import avatarKabir from "@assets/generated_images/avatars/kabir_nair.webp";
+import avatarMarcus from "@assets/generated_images/avatars/marcus_chen.webp";
+import avatarSophie from "@assets/generated_images/avatars/sophie_bernard.webp";
+import avatarLeila from "@assets/generated_images/avatars/leila_ahmadi.webp";
+import avatarRania from "@assets/generated_images/avatars/rania_khalil.webp";
+import avatarDavid from "@assets/generated_images/avatars/david_osei.webp";
 
 interface Testimonial {
   quote: string;
@@ -225,6 +225,7 @@ function TestimonialCard({ testimonial }: { testimonial: Testimonial }) {
           src={testimonial.avatar}
           alt={testimonial.author}
           className="tw-avatar"
+          loading="lazy"
           onError={(e) => {
             const target = e.currentTarget;
             target.style.display = "none";

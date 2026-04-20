@@ -2,10 +2,10 @@ import { Card } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { useState, useRef, useEffect } from "react";
 import { useStaggeredReveal } from "@/hooks/useScrollReveal";
-import luminaImage from "@assets/10001_(3)_(1)_1773614757212.png";
-import halvaImage from "@assets/10001_1773615095169.png";
-import amwajImage from "@assets/10001_1773615811419.png";
-import zarrafaImage from "@assets/10002_1773617422555.jpeg";
+import luminaImage from "@assets/10001_(3)_(1)_1773614757212.webp";
+import halvaImage from "@assets/10001_1773615095169.webp";
+import amwajImage from "@assets/10001_1773615811419.webp";
+import zarrafaImage from "@assets/10002_1773617422555.webp";
 
 interface Project {
   title: string;
@@ -116,6 +116,7 @@ function MobileCarousel({ items }: { items: Project[] }) {
               src={project.image}
               alt={project.title}
               className="absolute inset-0 w-full h-full object-cover transition-transform duration-500 group-active:scale-105"
+              loading="lazy"
             />
             <div className="absolute inset-0 bg-gradient-to-t from-black/90 via-black/40 to-transparent" />
             <div className="absolute bottom-0 left-0 right-0 p-5 text-white">
@@ -235,6 +236,7 @@ export default function Portfolio() {
                   src={project.image}
                   alt={project.title}
                   className="absolute inset-0 w-full h-full object-cover transition-transform duration-500 group-hover:scale-110"
+                  loading="lazy"
                 />
                 <div className="absolute inset-0 bg-gradient-to-t from-black/90 via-black/50 to-transparent opacity-80 group-hover:opacity-100 transition-opacity" />
                 <div className="absolute bottom-0 left-0 right-0 p-6 text-white transform translate-y-2 group-hover:translate-y-0 transition-transform">
