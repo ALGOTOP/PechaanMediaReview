@@ -8,7 +8,7 @@ import { fromZodError } from "zod-validation-error";
 const resend = new Resend(process.env.RESEND_API_KEY);
 
 const NOTIFY_EMAIL = "infopehchaanmedia@gmail.com";
-const FROM_EMAIL = "onboarding@resend.dev";
+const FROM_EMAIL = "bookings@pnmh.site";
 
 export async function registerRoutes(app: Express): Promise<Server> {
   app.post("/api/booking", async (req, res) => {
