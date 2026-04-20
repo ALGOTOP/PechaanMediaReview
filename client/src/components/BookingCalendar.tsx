@@ -123,6 +123,17 @@ export default function BookingCalendar() {
     setFormName(""); setFormEmail(""); setFormAbout(""); setFormNotes(""); setFormGuests(""); setShowGuests(false);
   };
 
+  const isValidEmail = (v: string) => /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(v.trim());
+  const nameErr   = formName.trim().length < 2   ? "Name must be at least 2 characters." : "";
+  const emailErr  = !isValidEmail(formEmail)      ? "Please enter a valid email address." : "";
+  const aboutErr  = formAbout.trim().length < 10  ? "Please write at least 10 characters." : "";
+  const guestsErr = showGuests && formGuests.trim().length > 0
+    ? formGuests.split(",").map((e) => e.trim()).filter(Boolean).some((e) => !isValidEmail(e))
+      ? "One or more guest emails are invalid."
+      : ""
+    : "";
+  const formValid = !nameErr && !emailErr && !aboutErr && !guestsErr;
+
   const handleConfirm = async () => {
     if (!formValid || !selectedTime) return;
     setIsSubmitting(true);
@@ -185,16 +196,6 @@ export default function BookingCalendar() {
   }
 
   if (showForm) {
-    const isValidEmail = (v: string) => /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(v.trim());
-    const nameErr   = formName.trim().length < 2   ? "Name must be at least 2 characters." : "";
-    const emailErr  = !isValidEmail(formEmail)      ? "Please enter a valid email address." : "";
-    const aboutErr  = formAbout.trim().length < 10  ? "Please write at least 10 characters." : "";
-    const guestsErr = showGuests && formGuests.trim().length > 0
-      ? formGuests.split(",").map((e) => e.trim()).filter(Boolean).some((e) => !isValidEmail(e))
-        ? "One or more guest emails are invalid."
-        : ""
-      : "";
-    const formValid = !nameErr && !emailErr && !aboutErr && !guestsErr;
 
     const inputBase: React.CSSProperties = {
       width: "100%",
