@@ -65,6 +65,8 @@ export default function BookingCalendar() {
   const [formNotes, setFormNotes] = useState("");
   const [formGuests, setFormGuests] = useState("");
   const [showGuests, setShowGuests] = useState(false);
+  const [isSubmitting, setIsSubmitting] = useState(false);
+  const [submitError, setSubmitError] = useState<string | null>(null);
   const [slotOffset, setSlotOffset] = useState(0);
   const [slotDir, setSlotDir] = useState<1 | -1>(1);
   const touchStartY = useRef<number | null>(null);
@@ -116,7 +118,38 @@ export default function BookingCalendar() {
     setSelectedTime(null);
     setConfirmed(false);
     setShowForm(false);
+    setIsSubmitting(false);
+    setSubmitError(null);
     setFormName(""); setFormEmail(""); setFormAbout(""); setFormNotes(""); setFormGuests(""); setShowGuests(false);
+  };
+
+  const handleConfirm = async () => {
+    if (!formValid || !selectedTime) return;
+    setIsSubmitting(true);
+    setSubmitError(null);
+    try {
+      const res = await fetch("/api/booking", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          name: formName,
+          email: formEmail,
+          about: formAbout,
+          notes: formNotes,
+          guests: formGuests,
+          date: format(selected, "EEEE, MMMM d, yyyy"),
+          time: selectedTime,
+        }),
+      });
+      const data = await res.json();
+      if (!res.ok) throw new Error(data.message || "Something went wrong.");
+      setConfirmed(true);
+      setShowForm(false);
+    } catch (err: any) {
+      setSubmitError(err.message || "Something went wrong. Please try again.");
+    } finally {
+      setIsSubmitting(false);
+    }
   };
 
   if (confirmed) {
@@ -286,43 +319,45 @@ export default function BookingCalendar() {
 
           {/* Fine print */}
           <p style={{ fontSize: "12px", color: "#71717a", lineHeight: "1.5", margin: 0 }}>
-            By proceeding, you agree to Cal.com's{" "}
-            <span style={{ textDecoration: "underline", cursor: "pointer" }}>Terms</span>{" "}
-            and{" "}
-            <span style={{ textDecoration: "underline", cursor: "pointer" }}>Privacy Policy</span>.
+            By proceeding, you confirm you'd like Pehchaan Media to reach out and schedule this call.
           </p>
+
+          {/* Error message */}
+          {submitError && (
+            <p style={{ fontSize: "12px", color: "#f87171", margin: 0, lineHeight: "1.5" }} data-testid="submit-error">
+              {submitError}
+            </p>
+          )}
 
           {/* Back + Confirm */}
           <div style={{ display: "flex", justifyContent: "flex-end", alignItems: "center", gap: "16px", marginTop: "4px" }}>
             <button
-              onClick={() => setShowForm(false)}
-              style={{ background: "none", border: "none", cursor: "pointer", color: "#a1a1aa", fontSize: "14px", fontWeight: 500 }}
+              onClick={() => { setShowForm(false); setSubmitError(null); }}
+              disabled={isSubmitting}
+              style={{ background: "none", border: "none", cursor: isSubmitting ? "default" : "pointer", color: "#a1a1aa", fontSize: "14px", fontWeight: 500 }}
               className="hover:text-white transition-colors"
               data-testid="button-form-back"
             >
               Back
             </button>
             <button
-              onClick={() => {
-                if (!formValid) return;
-                setConfirmed(true);
-                setShowForm(false);
-              }}
-              disabled={!formValid}
+              onClick={handleConfirm}
+              disabled={!formValid || isSubmitting}
               style={{
                 padding: "10px 22px",
                 borderRadius: "8px",
-                background: formValid ? "#ffffff" : "#3f3f46",
-                color: formValid ? "#000000" : "#71717a",
+                background: formValid && !isSubmitting ? "#ffffff" : "#3f3f46",
+                color: formValid && !isSubmitting ? "#000000" : "#71717a",
                 fontSize: "14px",
                 fontWeight: 700,
                 border: "none",
-                cursor: formValid ? "pointer" : "not-allowed",
+                cursor: formValid && !isSubmitting ? "pointer" : "not-allowed",
                 transition: "all 0.2s",
+                minWidth: "100px",
               }}
               data-testid="button-form-confirm"
             >
-              Confirm
+              {isSubmitting ? "Sending…" : "Confirm"}
             </button>
           </div>
         </div>

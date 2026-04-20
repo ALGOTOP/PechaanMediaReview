@@ -1,5 +1,18 @@
 import { z } from "zod";
 
+// Contact / booking form submission
+export const bookingSubmissionSchema = z.object({
+  name: z.string().min(2, "Name must be at least 2 characters"),
+  email: z.string().email("Please enter a valid email address"),
+  about: z.string().min(10, "Please write at least 10 characters"),
+  notes: z.string().optional(),
+  guests: z.string().optional(),
+  date: z.string().min(1, "Date is required"),
+  time: z.string().min(1, "Time is required"),
+});
+
+export type BookingSubmission = z.infer<typeof bookingSubmissionSchema>;
+
 // Audit scoring dimensions
 export const auditDimensionSchema = z.object({
   name: z.string(),
