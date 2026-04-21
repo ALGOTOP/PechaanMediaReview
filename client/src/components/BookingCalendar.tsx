@@ -738,22 +738,14 @@ export default function BookingCalendar() {
           </button>
         )}
 
-        <div style={{
-          marginTop: "20px",
-          paddingTop: "14px",
-          borderTop: "1px solid #2a2a2e",
+        <p style={{
+          marginTop: "10px",
+          fontSize: "12px",
+          color: "#71717a",
           textAlign: "center",
         }}>
-          <span style={{
-            fontSize: "11px",
-            fontWeight: 600,
-            letterSpacing: "0.08em",
-            textTransform: "uppercase",
-            color: "#71717a",
-          }}>
-            🕐 All times are in UTC
-          </span>
-        </div>
+          All times are in UTC
+        </p>
       </div>
     </div>
   );
