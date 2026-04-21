@@ -15,31 +15,43 @@ const dom = new JSDOM("<!DOCTYPE html><html><body></body></html>", {
 });
 const { window } = dom;
 
+// Safe setter that handles read-only globals (e.g. navigator on Node v24+)
+function setGlobal(key, value) {
+  try {
+    const desc = Object.getOwnPropertyDescriptor(globalThis, key);
+    if (desc && !desc.writable && !desc.set) {
+      Object.defineProperty(globalThis, key, { value, writable: true, configurable: true });
+    } else {
+      globalThis[key] = value;
+    }
+  } catch (_) {}
+}
+
 // Inject all browser globals needed by React, Radix UI, framer-motion, etc.
 for (const key of Object.getOwnPropertyNames(window)) {
   if (!(key in globalThis)) {
     try { globalThis[key] = window[key]; } catch (_) {}
   }
 }
-globalThis.window = window;
-globalThis.document = window.document;
-globalThis.navigator = window.navigator;
-globalThis.location = window.location;
-globalThis.SVGElement = window.SVGElement;
-globalThis.HTMLElement = window.HTMLElement;
-globalThis.Element = window.Element;
-globalThis.Node = window.Node;
-globalThis.Event = window.Event;
-globalThis.CustomEvent = window.CustomEvent;
-globalThis.MutationObserver = window.MutationObserver;
-globalThis.requestAnimationFrame = (cb) => setTimeout(cb, 0);
-globalThis.cancelAnimationFrame = (id) => clearTimeout(id);
-globalThis.IntersectionObserver = class {
+setGlobal("window", window);
+setGlobal("document", window.document);
+setGlobal("navigator", window.navigator);
+setGlobal("location", window.location);
+setGlobal("SVGElement", window.SVGElement);
+setGlobal("HTMLElement", window.HTMLElement);
+setGlobal("Element", window.Element);
+setGlobal("Node", window.Node);
+setGlobal("Event", window.Event);
+setGlobal("CustomEvent", window.CustomEvent);
+setGlobal("MutationObserver", window.MutationObserver);
+setGlobal("requestAnimationFrame", (cb) => setTimeout(cb, 0));
+setGlobal("cancelAnimationFrame", (id) => clearTimeout(id));
+setGlobal("IntersectionObserver", class {
   observe() {} unobserve() {} disconnect() {}
-};
-globalThis.ResizeObserver = class {
+});
+setGlobal("ResizeObserver", class {
   observe() {} unobserve() {} disconnect() {}
-};
+});
 
 console.log("🔨 Building SSR bundle...");
 
