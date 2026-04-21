@@ -45,9 +45,6 @@ export default function Footer() {
           </div>
         </div>
 
-        <p className="absolute bottom-6 right-6 text-xs text-muted-foreground">
-          © {new Date().getFullYear()} Pehchaan Media. All rights reserved.
-        </p>
       </div>
     </footer>
   );
