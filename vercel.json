@@ -1,5 +1,5 @@
 {
-  "buildCommand": "npx vite build",
+  "buildCommand": "npx vite build && node scripts/prerender.mjs",
   "outputDirectory": "dist/public",
   "framework": null,
   "rewrites": [
