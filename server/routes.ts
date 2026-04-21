@@ -5,7 +5,7 @@ import { Resend } from "resend";
 import { bookingSubmissionSchema } from "@shared/schema";
 import { fromZodError } from "zod-validation-error";
 
-const resend = new Resend(process.env.RESEND_API_KEY);
+const resend = process.env.RESEND_API_KEY ? new Resend(process.env.RESEND_API_KEY) : null;
 
 const NOTIFY_EMAIL = "infopehchaanmedia@gmail.com";
 const FROM_EMAIL = "bookings@pnmh.site";
@@ -101,6 +101,11 @@ export async function registerRoutes(app: Express): Promise<Server> {
         <p style="font-size:13px;color:#52525b;margin:24px 0 0;">— The Pehchaan Media Team</p>
       </div>
     `;
+
+    if (!resend) {
+      console.warn("RESEND_API_KEY not set — skipping email send");
+      return res.status(200).json({ message: "Booking received" });
+    }
 
     // Send both emails in parallel — independently so one can't block the other
     const [notifyResult, confirmResult] = await Promise.allSettled([
