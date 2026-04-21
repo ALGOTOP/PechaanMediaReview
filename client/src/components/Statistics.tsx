@@ -6,13 +6,14 @@ interface Stat {
   decimals?: number;
   label: string;
   sub: string;
+  ariaLabel: string;
 }
 
 const stats: Stat[] = [
-  { value: 40,  suffix: "+", label: "International\nBrands",     sub: "Worldwide" },
-  { value: 3.2, suffix: "×", decimals: 1, label: "Higher\nNoticeability", sub: "On Average" },
-  { value: 2,   suffix: "+", label: "Years of\nCraft",           sub: "& Counting" },
-  { value: 70,  suffix: "+", label: "Global\nCampaigns",         sub: "Delivered" },
+  { value: 40,  suffix: "+", label: "International\nBrands",     sub: "Worldwide",  ariaLabel: "40+ International Clients" },
+  { value: 3.2, suffix: "×", decimals: 1, label: "Higher\nNoticeability", sub: "On Average", ariaLabel: "3.2× Higher Noticeability" },
+  { value: 2,   suffix: "+", label: "Years of\nCraft",           sub: "& Counting", ariaLabel: "2+ Years of Craft" },
+  { value: 70,  suffix: "+", label: "Global\nCampaigns",         sub: "Delivered",  ariaLabel: "70+ Global Campaigns" },
 ];
 
 const tickerItems = [
@@ -52,6 +53,7 @@ function StatCell({
   active: boolean;
   outline: boolean;
 }) {
+
   const count = useCountUp(stat.value, 1800 + index * 150, active, stat.decimals ?? 0);
   const [hovered, setHovered] = useState(false);
   const displayOutline = outline !== hovered;
@@ -67,6 +69,7 @@ function StatCell({
       style={{ transitionDelay: `${index * 100}ms`, minHeight: "clamp(220px, 28vw, 380px)" }}
       onMouseEnter={() => setHovered(true)}
       onMouseLeave={() => setHovered(false)}
+      aria-label={stat.ariaLabel}
       data-testid={`stat-cell-${index}`}
     >
       <div
@@ -165,6 +168,14 @@ export default function Statistics() {
       style={{ backgroundColor: "hsl(0 0% 4%)" }}
       data-testid="section-statistics"
     >
+      <noscript>
+        <ul style={{ position: "absolute", width: 1, height: 1, overflow: "hidden", clip: "rect(0,0,0,0)", whiteSpace: "nowrap" }}>
+          <li>40+ International Clients</li>
+          <li>3.2× Higher Noticeability</li>
+          <li>2+ Years of Craft</li>
+          <li>70+ Global Campaigns</li>
+        </ul>
+      </noscript>
       <style>{`
         @keyframes stats-ticker {
           from { transform: translateX(0); }

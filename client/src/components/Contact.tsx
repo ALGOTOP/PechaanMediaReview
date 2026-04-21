@@ -24,9 +24,12 @@ export default function Contact() {
               <span className="text-gray-400">for you</span>
             </h2>
 
-            <p className="text-base md:text-lg text-gray-500 leading-relaxed max-w-sm mb-10">
+            <p className="text-base md:text-lg text-gray-500 leading-relaxed max-w-sm mb-4">
               Schedule a quick, 15 minute guided call with us to see if we can
               help you in anyway.
+            </p>
+            <p className="text-sm text-gray-400 leading-relaxed max-w-sm mb-10">
+              We work with product brands, startups, and established businesses on brand identity, film production, advertising campaigns, and web design.
             </p>
 
             <div className="flex flex-col gap-3">

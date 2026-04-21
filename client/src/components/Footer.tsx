@@ -6,7 +6,7 @@ export default function Footer() {
           <div>
             <h3 className="text-xl font-bold mb-4">Pehchaan Media</h3>
             <p className="text-muted-foreground text-sm leading-relaxed">
-              Full-service creative agency crafting stories that connect, inspire, and move audiences globally.
+              Pehchaan Media is a full-service creative agency offering brand identity design, film production, ad creatives, motion graphics, and digital strategy for brands worldwide.
             </p>
           </div>
 

@@ -25,7 +25,7 @@ const leftColumn: Service[] = [
     num: "01",
     title: "Brand Identity & Design",
     description:
-      "From logos to full brand systems, we design visuals that communicate your essence and create lasting impressions.",
+      "From logo design to full brand systems and visual identity, we craft visuals that communicate your essence and create lasting impressions.",
     image: brandImage,
     height: "h-[480px]",
   },
@@ -33,7 +33,7 @@ const leftColumn: Service[] = [
     num: "02",
     title: "Marketing & Strategy",
     description:
-      "Integrated campaigns combining creativity with data-driven growth strategies for measurable impact.",
+      "Integrated marketing campaigns combining creativity with data-driven growth strategy for measurable impact.",
     image: marketingImage,
     height: "h-72",
     titleClass: "text-lg md:text-xl font-bold",
@@ -47,7 +47,7 @@ const rightColumn: Service[] = [
     num: "03",
     title: "Film & Production",
     description:
-      "Cinematic storytelling that builds emotional connections and elevates your message through powerful visuals.",
+      "Cinematic brand video production, 3D motion ads, and commercial production that build emotional connections and elevate your message.",
     image: filmImage,
     height: "h-72",
   },
@@ -55,7 +55,7 @@ const rightColumn: Service[] = [
     num: "04",
     title: "Web & Digital",
     description:
-      "Responsive, elegant, and high-performance digital experiences that engage and convert.",
+      "High-performance websites and conversion-focused web design — responsive, elegant digital experiences that engage and convert.",
     image: webImage,
     height: "h-72",
   },

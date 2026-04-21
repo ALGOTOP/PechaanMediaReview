@@ -31,6 +31,9 @@ export default function About() {
       <div className="max-w-5xl mx-auto px-6">
         {/* Scroll-reveal statement */}
         <div className="mb-24 md:mb-32">
+          <p className="sr-only">
+            Pehchaan Media is a creative agency based in Pakistan, crafting brand identities, films, and digital experiences for global brands.
+          </p>
           <h2
             className="text-4xl md:text-5xl lg:text-6xl font-bold text-center leading-tight tracking-tight"
             data-testid="text-about-title"

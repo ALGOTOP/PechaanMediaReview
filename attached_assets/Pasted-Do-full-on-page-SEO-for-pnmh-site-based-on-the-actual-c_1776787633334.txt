@@ -1,0 +1,37 @@
+Do full on-page SEO for pnmh.site based on the actual content already on the site. Here is exactly what to do:
+Title & Meta Description — update index.html:
+
+Title: Pehchaan Media — Brand Identity, Film & Creative Agency | pnmh.site
+Meta description: Pehchaan Media is a full-service creative agency specialising in brand identity, film production, ad creatives, and digital strategy. Trusted by 40+ brands worldwide. Book a free 15-min call.
+
+Keywords to target — weave these naturally into existing text on the page, don't add fake sections:
+
+Primary: creative agency, brand identity agency, film production agency, brand design agency
+Secondary: ad creatives agency, digital marketing agency, packaging design, motion graphics agency, 3D motion ad, brand strategy
+Long-tail: creative agency for startups, brand identity design for product brands, cinematic brand video production, full service creative agency Pakistan
+
+Hero section — the H1 currently says "We make brands unforgettable" — add a subtitle or aria-label that includes: full-service creative agency specialising in brand identity, film, and strategy
+Services section — each service card (Brand Identity & Design, Marketing & Strategy, Film & Production, Web & Digital) should have its description text updated to naturally include 1-2 keywords each. For example:
+
+Brand Identity card: mention "logo design", "brand system", "visual identity"
+Film & Production card: mention "cinematic brand video", "3D motion ads", "commercial production"
+Web & Digital card: mention "high-performance websites", "conversion-focused web design"
+Marketing & Strategy card: mention "integrated marketing campaigns", "growth strategy"
+
+Portfolio section — each project card description should be slightly expanded to include searchable terms. For example:
+
+KENETIK: add "3D motion ad, brand identity, energy drink branding"
+WHIPPED: add "beauty brand identity, logo design, creative direction"
+SPHINX: add "website redesign, engineering company web development"
+HALVA: add "food packaging design, brand identity"
+TRULY: add "4D graphic post production, advertising campaign"
+KINSTU BY BRIZO: add "motion ad, brand rebranding, fashion brand identity"
+
+About section — the animated word-by-word H2 text "We are Pehchaan Media, a creative agency, crafting digital landmarks..." is great but crawlers may miss it due to the opacity:0.15 inline style. Add a hidden <p> or aria-label with the full text at normal opacity for crawlers: Pehchaan Media is a creative agency based in Pakistan, crafting brand identities, films, and digital experiences for global brands.
+Stats section — the counters start at 0 and animate up via JS so crawlers see "0+". Add static fallback text in a <noscript> tag or as hidden aria labels: 40+ International Clients, 3.2× Higher Noticeability, 2+ Years of Craft, 70+ Global Campaigns
+Testimonials — these are already great for SEO since they contain real text. Make sure the client names and company names are in plain <p> tags (they already are — no changes needed here).
+Contact section — the H2 "See if Pehchaan is the right fit for you" is good. Add a <p> below it that includes: We work with product brands, startups, and established businesses on brand identity, film production, advertising campaigns, and web design.
+Footer — the description currently says "Full-service creative agency crafting stories that connect, inspire, and move audiences globally." Update to: Pehchaan Media is a full-service creative agency offering brand identity design, film production, ad creatives, motion graphics, and digital strategy for brands worldwide.
+JSON-LD — update the existing structured data in index.html to add a hasOfferCatalog with the 4 services listed, and update sameAs to include all social handles
+Do not change any design, layout, animations, colors, fonts, or backend logic. Only update text content and meta tags. Do not remove any existing functionality.
+
