@@ -97,8 +97,8 @@ export default function Hero() {
                 : "opacity-0 translate-y-12"
             }`}
           >
-            Full-service creative agency specialising in brand identity, film production,
-            and digital strategy — crafting stories that connect, inspire, and move audiences worldwide
+            Full-service creative agency crafting stories that connect, inspire,
+            and move audiences
           </p>
 
           <div
