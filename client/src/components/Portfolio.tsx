@@ -3,8 +3,9 @@ import { Badge } from "@/components/ui/badge";
 import { useState, useRef, useEffect } from "react";
 import { useStaggeredReveal } from "@/hooks/useScrollReveal";
 import luminaImage from "@assets/10001_(3)_(1)_1773614757212.webp";
-import halvaImage from "@assets/10001_1773615095169.webp";
-import amwajImage from "@assets/10001_1773615811419.webp";
+import halvaImage from "@assets/halva_hd.webp";
+import sphinxImage from "@assets/sphinx_hd.webp";
+import trulyImage from "@assets/truly_hd.webp";
 import zarrafaImage from "@assets/10002_1773617422555.webp";
 
 interface Project {
@@ -27,7 +28,7 @@ const projects: Project[] = [
     title: "SPHINX",
     category: "Web",
     description: "Website redesign and development for an engineering service management eco-system",
-    image: amwajImage,
+    image: sphinxImage,
     aspectRatio: "portrait",
   },
   {
@@ -55,7 +56,7 @@ const projects: Project[] = [
     title: "TRULY",
     category: "Film",
     description: "4D graphic post production and advertising campaign",
-    image: "https://i.ibb.co/cKYw95TN/573922484-17864593854498906-87146158841521532-n.jpg",
+    image: trulyImage,
     aspectRatio: "portrait",
   },
 ];
