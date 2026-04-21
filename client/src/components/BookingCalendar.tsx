@@ -737,6 +737,23 @@ export default function BookingCalendar() {
             Confirm — {format(selected, "MMM d")} at {selectedTime}
           </button>
         )}
+
+        <div style={{
+          marginTop: "20px",
+          paddingTop: "14px",
+          borderTop: "1px solid #2a2a2e",
+          textAlign: "center",
+        }}>
+          <span style={{
+            fontSize: "11px",
+            fontWeight: 600,
+            letterSpacing: "0.08em",
+            textTransform: "uppercase",
+            color: "#71717a",
+          }}>
+            🕐 All times are in UTC
+          </span>
+        </div>
       </div>
     </div>
   );
