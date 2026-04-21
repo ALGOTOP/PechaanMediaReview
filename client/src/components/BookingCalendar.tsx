@@ -24,6 +24,7 @@ const DAY_HEADERS = ["SUN", "MON", "TUE", "WED", "THU", "FRI", "SAT"];
 const MONTH_ABBR = ["JAN","FEB","MAR","APR","MAY","JUN","JUL","AUG","SEP","OCT","NOV","DEC"];
 
 const TIME_SLOTS_24 = [
+  "10:00","10:15","10:30","10:45",
   "20:00","20:15","20:30","20:45",
   "21:00","21:15","21:30","21:45",
   "22:00","22:15","22:30","22:45",
