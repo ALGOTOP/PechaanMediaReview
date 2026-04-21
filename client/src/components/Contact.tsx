@@ -36,16 +36,14 @@ export default function Contact() {
                 data-testid="link-email"
                 className="group flex items-center gap-3 px-5 py-3 rounded-full w-fit transition-all duration-300 hover:shadow-md"
                 style={{
-                  background: "rgba(255,255,255,0.6)",
-                  backdropFilter: "blur(20px)",
-                  WebkitBackdropFilter: "blur(20px)",
+                  background: "#f0f0f0",
                   border: "1px solid rgba(0,0,0,0.09)",
-                  boxShadow: "0 2px 16px rgba(0,0,0,0.06), inset 0 1px 0 rgba(255,255,255,0.85)",
+                  boxShadow: "0 2px 16px rgba(0,0,0,0.06)",
                 }}
               >
                 <div
                   className="w-7 h-7 rounded-full flex items-center justify-center transition-transform duration-300 group-hover:scale-110 shrink-0"
-                  style={{ background: "rgba(0,0,0,0.05)", border: "1px solid rgba(0,0,0,0.07)" }}
+                  style={{ background: "#e4e4e4", border: "1px solid rgba(0,0,0,0.07)" }}
                 >
                   <Mail className="w-3.5 h-3.5 text-gray-600" />
                 </div>
@@ -60,16 +58,14 @@ export default function Contact() {
                 data-testid="link-phone"
                 className="group flex items-center gap-3 px-5 py-3 rounded-full w-fit transition-all duration-300 hover:shadow-md"
                 style={{
-                  background: "rgba(255,255,255,0.6)",
-                  backdropFilter: "blur(20px)",
-                  WebkitBackdropFilter: "blur(20px)",
+                  background: "#f0f0f0",
                   border: "1px solid rgba(0,0,0,0.09)",
-                  boxShadow: "0 2px 16px rgba(0,0,0,0.06), inset 0 1px 0 rgba(255,255,255,0.85)",
+                  boxShadow: "0 2px 16px rgba(0,0,0,0.06)",
                 }}
               >
                 <div
                   className="w-7 h-7 rounded-full flex items-center justify-center transition-transform duration-300 group-hover:scale-110 shrink-0"
-                  style={{ background: "rgba(0,0,0,0.05)", border: "1px solid rgba(0,0,0,0.07)" }}
+                  style={{ background: "#e4e4e4", border: "1px solid rgba(0,0,0,0.07)" }}
                 >
                   <Phone className="w-3.5 h-3.5 text-gray-600" />
                 </div>

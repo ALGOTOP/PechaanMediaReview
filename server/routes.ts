@@ -11,6 +11,46 @@ const NOTIFY_EMAIL = "infopehchaanmedia@gmail.com";
 const FROM_EMAIL = "bookings@pnmh.site";
 
 export async function registerRoutes(app: Express): Promise<Server> {
+  // Sitemap for search engine crawlers
+  app.get("/sitemap.xml", (_req, res) => {
+    const lastmod = new Date().toISOString().split("T")[0];
+    const sitemap = `<?xml version="1.0" encoding="UTF-8"?>
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+  <url>
+    <loc>https://pnmh.site/</loc>
+    <lastmod>${lastmod}</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>1.0</priority>
+  </url>
+  <url>
+    <loc>https://pnmh.site/#work</loc>
+    <lastmod>${lastmod}</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://pnmh.site/#services</loc>
+    <lastmod>${lastmod}</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://pnmh.site/#about</loc>
+    <lastmod>${lastmod}</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://pnmh.site/#contact</loc>
+    <lastmod>${lastmod}</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.9</priority>
+  </url>
+</urlset>`;
+    res.setHeader("Content-Type", "application/xml");
+    res.send(sitemap);
+  });
+
   app.post("/api/booking", async (req, res) => {
     const result = bookingSubmissionSchema.safeParse(req.body);
     if (!result.success) {

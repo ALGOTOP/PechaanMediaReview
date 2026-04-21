@@ -1,0 +1,38 @@
+My website is built with React/Next.js on Replit. I need you to make the entire site fully visible to AI crawlers, search engines, and social media platforms. Here's exactly what to do:
+1. Server-Side Rendering (SSR) / Static Generation
+
+Convert all pages to use getServerSideProps or getStaticProps so content is rendered in the HTML response, not just in JavaScript. Every page must return fully rendered HTML with all text, headings, and content — not an empty div that JavaScript fills later.
+
+2. Meta Tags & Open Graph (for social media link previews)
+
+Add proper <meta> tags to every page using Next.js <Head>: title, description, og:title, og:description, og:image, og:url, og:type, twitter:card, twitter:title, twitter:description, twitter:image. Use absolute URLs for images.
+
+3. robots.txt
+
+Create a public/robots.txt file that allows all crawlers: User-agent: * Allow: / and add Sitemap: https://pnmh.site/sitemap.xml
+
+4. sitemap.xml
+
+Generate a sitemap.xml that lists every page of the site with <loc>, <lastmod>, and <changefreq> tags. Serve it at /sitemap.xml.
+
+5. In-App Browser Compatibility (Instagram, TikTok, WhatsApp, Facebook, Snapchat)
+
+Remove any code that detects or blocks non-Chrome browsers
+Make sure no features use window.chrome or Chrome-specific APIs
+Replace any backdrop-filter CSS with solid fallbacks since many in-app browsers don't support it
+Avoid CSS position: sticky inside scroll containers — use position: fixed alternatives
+Make all fonts load from Google Fonts CDN or bundle them locally — don't rely on system fonts
+Ensure all images use standard <img> tags or Next.js <Image> with proper alt tags
+Test that all fetch() or axios calls use absolute URLs with https://
+Add a <meta name="viewport" content="width=device-width, initial-scale=1.0"> to every page
+
+6. Structured Data (JSON-LD)
+
+Add a JSON-LD schema block to the homepage <Head> for Organization type with name, url, logo, sameAs (social media links), and description
+
+7. Performance for slow in-app browsers
+
+Lazy load all images below the fold using loading="lazy"
+Make sure the site works without JavaScript enabled (at least shows content) — this also helps AI crawlers that don't execute JS
+
+
