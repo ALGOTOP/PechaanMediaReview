@@ -106,7 +106,7 @@ function MobileAccordion() {
                 <span className="text-xs font-mono text-muted-foreground tracking-widest tabular-nums">
                   {service.num}
                 </span>
-                <span className="text-xl font-bold leading-tight">{service.title}</span>
+                <h3 className="text-xl font-bold leading-tight">{service.title}</h3>
               </div>
               <span className="shrink-0 ml-4 text-muted-foreground">
                 {isOpen ? <Minus className="w-4 h-4" /> : <Plus className="w-4 h-4" />}

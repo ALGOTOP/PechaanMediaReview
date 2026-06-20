@@ -23,28 +23,10 @@ export async function registerRoutes(app: Express): Promise<Server> {
     <priority>1.0</priority>
   </url>
   <url>
-    <loc>https://pnmh.site/#work</loc>
-    <lastmod>${lastmod}</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.8</priority>
-  </url>
-  <url>
-    <loc>https://pnmh.site/#services</loc>
-    <lastmod>${lastmod}</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.8</priority>
-  </url>
-  <url>
-    <loc>https://pnmh.site/#about</loc>
+    <loc>https://pnmh.site/audit-report</loc>
     <lastmod>${lastmod}</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
-  </url>
-  <url>
-    <loc>https://pnmh.site/#contact</loc>
-    <lastmod>${lastmod}</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.9</priority>
   </url>
 </urlset>`;
     res.setHeader("Content-Type", "application/xml");
