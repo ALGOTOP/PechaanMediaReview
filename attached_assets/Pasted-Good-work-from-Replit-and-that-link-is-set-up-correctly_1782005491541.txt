@@ -1,0 +1,29 @@
+Good work from Replit, and that link is set up correctly. But don't skip past what they just told you — **that empty curl result is worth double-checking before you deploy.**
+
+Your site previously got SSR/prerendering work done specifically so Google could read your pages without executing JavaScript (per your earlier SEO fixes). If `curl` on `/audit-report` returns just `<div id="root">` with no content, that could mean prerendering didn't carry over to this *new* route — it might only be configured for routes that existed before. Let me check directly.Stop — before you deploy anything else, there's a real problem. I just fetched `/audit-report` directly and it's not serving the audit report content at all. It's returning **the exact same homepage** — same title, same hero text ("We make brands unforgettable"), same testimonials, and critically:
+
+```
+canonical: https://pnmh.site/
+```
+
+The canonical tag on `/audit-report` points back to the **homepage**, not to itself. That's a serious problem: even if Google indexes `/audit-report`, this canonical tag tells Google "ignore this URL, the real page is the homepage" — so Google will likely just fold it back into the homepage and never index it as a separate page. This defeats the entire point of what we just did.
+
+Also worth noting: the footer I just pulled still shows the old anchor links (`#work`, `#services`, `#contact`) with **no "View a Sample Audit Report" link present yet** — so either the deploy hasn't gone out yet, or there's a caching/prerendering issue serving stale content.
+
+This points to the same root cause Replit flagged earlier ("it's a React SPA, curl came up empty") — except it's not empty, it's silently serving the homepage's prerendered HTML for every route. That's a classic mistake in prerendering setups: a script prerenders `/` and `/audit-report` separately, but something (Express fallback in `server/routes.ts`, or the prerender script itself) is serving the homepage's static HTML file for both routes instead of the actual page content.
+
+**Send this to Replit:**
+
+---
+
+I checked `/audit-report` directly and it's returning the homepage's content and the homepage's canonical tag (`https://pnmh.site/`), not the audit report. This needs to be fixed before I deploy further:
+
+1. The prerendered/SSR'd HTML for `/audit-report` must contain `/audit-report`'s actual content (title, meta description, body), not a copy of the homepage's.
+2. The canonical tag on `/audit-report` must be `<link rel="canonical" href="https://pnmh.site/audit-report" />`, self-referencing — not pointing to the homepage.
+3. Confirm the new footer link ("View a Sample Audit Report") appears in the prerendered HTML output of every page, not just in the dev/live React tree.
+
+Check whatever generates the static/prerendered HTML (likely a prerender script, `vite-plugin-prerender`, or similar in `server/routes.ts` or the build config) — it's probably either reusing one template for all routes, or not passing route-specific meta/canonical data into the prerender step.
+
+---
+
+Once they fix it, ping me and I'll re-check the live URL before you touch GSC.
