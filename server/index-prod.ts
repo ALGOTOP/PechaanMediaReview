@@ -14,10 +14,21 @@ export async function serveStatic(app: Express, _server: Server) {
     );
   }
 
-  app.use(express.static(distPath));
+  // Serve static assets (JS, CSS, images, etc.) — redirect:false prevents
+  // express from 301-redirecting /audit-report → /audit-report/ so the
+  // prerendered index.html is served cleanly at the original URL.
+  app.use(express.static(distPath, { redirect: false }));
 
-  // fall through to index.html if the file doesn't exist
-  app.use("*", (_req, res) => {
+  // For every non-asset request, check whether a prerendered index.html
+  // exists for that route and serve it; otherwise fall back to the SPA shell.
+  app.use("*", (req, res) => {
+    const cleanPath = req.path.replace(/\/+$/, ""); // strip trailing slashes
+    if (cleanPath) {
+      const prerendered = path.resolve(distPath, cleanPath.slice(1), "index.html");
+      if (fs.existsSync(prerendered)) {
+        return res.sendFile(prerendered);
+      }
+    }
     res.sendFile(path.resolve(distPath, "index.html"));
   });
 }

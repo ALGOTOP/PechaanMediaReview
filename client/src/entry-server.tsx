@@ -1,18 +1,16 @@
 import { renderToString } from "react-dom/server";
 import { Router } from "wouter";
-import { QueryClientProvider } from "@tanstack/react-query";
-import { queryClient } from "./lib/queryClient";
-import Home from "@/pages/Home";
+import App from "./App";
 
-const staticLocationHook = () =>
-  ["/", () => {}] as [string, (path: string) => void];
+export { routes } from "./routes.config";
 
-export function render() {
+export function render(url: string) {
+  const staticLocationHook = () =>
+    [url, () => {}] as [string, (path: string) => void];
+
   return renderToString(
-    <QueryClientProvider client={queryClient}>
-      <Router hook={staticLocationHook}>
-        <Home />
-      </Router>
-    </QueryClientProvider>
+    <Router hook={staticLocationHook}>
+      <App />
+    </Router>
   );
 }

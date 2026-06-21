@@ -15,7 +15,6 @@ const dom = new JSDOM("<!DOCTYPE html><html><body></body></html>", {
 });
 const { window } = dom;
 
-// Safe setter that handles read-only globals (e.g. navigator on Node v24+)
 function setGlobal(key, value) {
   try {
     const desc = Object.getOwnPropertyDescriptor(globalThis, key);
@@ -27,7 +26,6 @@ function setGlobal(key, value) {
   } catch (_) {}
 }
 
-// Inject all browser globals needed by React, Radix UI, framer-motion, etc.
 for (const key of Object.getOwnPropertyNames(window)) {
   if (!(key in globalThis)) {
     try { globalThis[key] = window[key]; } catch (_) {}
@@ -90,31 +88,60 @@ if (!ssrBundlePath) {
   process.exit(1);
 }
 
-// ── Step 4: Render to HTML string ──
-console.log("⚙️  Rendering app to HTML...");
-const { render } = await import(ssrBundlePath);
-let appHtml = "";
-try {
-  appHtml = render();
-} catch (err) {
-  console.error("❌ SSR render error:", err.message);
-  console.error(err.stack);
+// ── Step 4: Import render() and routes from the SSR bundle ──
+const { render, routes } = await import(ssrBundlePath);
+
+if (!Array.isArray(routes) || routes.length === 0) {
+  console.error("❌ No routes exported from SSR bundle");
   process.exit(1);
 }
 
-if (!appHtml || appHtml.length < 100) {
-  console.error("❌ render() returned empty or near-empty output");
-  process.exit(1);
-}
-
-// ── Step 5: Inject into built index.html ──
-const htmlPath = path.resolve(root, "dist/public/index.html");
-const template = fs.readFileSync(htmlPath, "utf-8");
-const output = template.replace(
-  '<div id="root"></div>',
-  `<div id="root">${appHtml}</div>`
+// ── Step 5: Load the HTML template once ──
+const htmlTemplate = fs.readFileSync(
+  path.resolve(root, "dist/public/index.html"),
+  "utf-8"
 );
-fs.writeFileSync(htmlPath, output);
 
-const tagCount = (output.match(/<(p|h1|h2|h3|h4|section|article|nav|header|footer)[^>]*>/gi) || []).length;
-console.log(`✅ Pre-render complete — ${tagCount} content tags injected`);
+console.log(`⚙️  Rendering ${routes.length} route(s)...`);
+
+// ── Step 6: Render each route and write its index.html ──
+for (const route of routes) {
+  // Keep JSDOM location in sync (for any code that reads window.location.pathname)
+  try { dom.reconfigure({ url: `https://pnmh.site${route.path}` }); } catch (_) {}
+
+  let appHtml = "";
+  try {
+    appHtml = render(route.path);
+  } catch (err) {
+    console.error(`❌ Render error for ${route.path}:`, err.message);
+    process.exit(1);
+  }
+
+  if (!appHtml || appHtml.length < 50) {
+    console.error(`❌ render("${route.path}") returned empty output`);
+    process.exit(1);
+  }
+
+  const output = htmlTemplate.replace(
+    '<div id="root"></div>',
+    `<div id="root">${appHtml}</div>`
+  );
+
+  // / → dist/public/index.html
+  // /audit-report → dist/public/audit-report/index.html
+  let outDir;
+  if (route.path === "/") {
+    outDir = path.resolve(root, "dist/public");
+  } else {
+    outDir = path.resolve(root, `dist/public${route.path}`);
+    fs.mkdirSync(outDir, { recursive: true });
+  }
+
+  fs.writeFileSync(path.join(outDir, "index.html"), output);
+
+  const tagCount =
+    (output.match(/<(p|h1|h2|h3|h4|section|article|nav|header|footer)[^>]*>/gi) || []).length;
+  console.log(`  ✅ ${route.path} — ${tagCount} content tags`);
+}
+
+console.log("✅ Pre-render complete");
