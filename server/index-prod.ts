@@ -14,21 +14,26 @@ export async function serveStatic(app: Express, _server: Server) {
     );
   }
 
-  // Serve static assets (JS, CSS, images, etc.) — redirect:false prevents
-  // express from 301-redirecting /audit-report → /audit-report/ so the
-  // prerendered index.html is served cleanly at the original URL.
-  app.use(express.static(distPath, { redirect: false }));
-
-  // For every non-asset request, check whether a prerendered index.html
-  // exists for that route and serve it; otherwise fall back to the SPA shell.
-  app.use("*", (req, res) => {
-    const cleanPath = req.path.replace(/\/+$/, ""); // strip trailing slashes
-    if (cleanPath) {
-      const prerendered = path.resolve(distPath, cleanPath.slice(1), "index.html");
+  // Check for a prerendered index.html BEFORE serving static assets.
+  // Using app.use(fn) without a path argument means req.path is the real
+  // request path (Express does not strip anything), so /audit-report correctly
+  // resolves to dist/public/audit-report/index.html without a redirect.
+  app.use((req, res, next) => {
+    const urlPath = req.path.replace(/\/+$/, ""); // strip trailing slashes
+    if (urlPath) {
+      const prerendered = path.resolve(distPath, urlPath.slice(1), "index.html");
       if (fs.existsSync(prerendered)) {
         return res.sendFile(prerendered);
       }
     }
+    next();
+  });
+
+  // Serve static assets (JS, CSS, images, fonts, etc.)
+  app.use(express.static(distPath));
+
+  // Fallback: SPA shell for any route without a prerendered file
+  app.use((_req, res) => {
     res.sendFile(path.resolve(distPath, "index.html"));
   });
 }
