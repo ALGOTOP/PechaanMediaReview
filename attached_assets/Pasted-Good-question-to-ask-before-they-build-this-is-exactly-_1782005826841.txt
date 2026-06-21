@@ -1,0 +1,29 @@
+Good question to ask before they build — this is exactly the right moment to think ahead instead of redoing it later. Short answer: **prerendering still holds at 7-8 pages.** It doesn't stop working at scale — that's literally what most marketing sites built with Next.js (SSG mode), Astro, or Gatsby do for hundreds of pages. SSR only becomes necessary when content is *dynamic per request* (logged-in dashboards, real-time data, personalized content) — your service pages won't be that.
+
+What does need to change in the prompt at this scale is **how the prerendering and sitemap are wired**, so adding page #6 later doesn't mean manually editing 3 different files by hand every time. Two things to add:
+
+1. **Route list should be the single source of truth.** Whatever defines your routes (Wouter's route config) should be the same list the prerender script reads from, and the same list the sitemap generator reads from. Add a page once, in one place, and prerendering + sitemap both pick it up automatically. If they're built as 3 separate hand-maintained lists, you'll get drift and the exact orphan-page bug we just fixed will come back every time someone adds a page and forgets a step.
+
+2. **Each new page needs an internal link from day one**, not bolted on later like we just did with `/audit-report`. Bake "where does this link from" into the page-creation process itself.
+
+Here's the updated prompt:
+
+---
+
+**Prompt for Replit:**
+
+> We're scaling from 2 pages to 7-8 pages over time (additional service pages, possibly heavier content sections), so build the prerendering setup to handle this growth cleanly, not as a one-off script for 2 hardcoded routes.
+>
+> Requirements:
+> 1. Implement build-time static prerendering (not SSR — confirmed this is the right call even at 7-8 pages since all content is static, no per-user/dynamic data).
+> 2. **Single source of truth for routes**: define all routes in one place (e.g. a `routes.ts` config used by Wouter). The prerender script and the sitemap generator should both read from this same list — not maintain separate hardcoded URL lists. When a new page/route is added to that one config, it should automatically: (a) get prerendered at build time, (b) appear in the sitemap, with no manual duplication.
+> 3. Sitemap generation should be dynamic (generated from the routes config at build time), not a hand-edited static XML file like it is now — so it can't drift out of sync as pages get added.
+> 4. Confirm the prerendered output for each route returns full HTML (content, headings, links) when curled from the production build, not just `<div id="root">`.
+> 5. Don't change visual design or existing functionality — build process and SEO infra only.
+> 6. As new pages get added going forward, each one should have at least one internal link pointing to it from an existing indexed page (nav menu, footer, or a relevant content section) as part of the page being shipped — flag this as a checklist item for future page additions, not something to retrofit later.
+>
+> Show me the routes config file and confirm how a new page would be added (what files I'd touch) before implementing, so I can review the structure.
+
+---
+
+This setup means once it's built, adding service page #6 is just: add one entry to a routes file, write the content, link to it from somewhere — sitemap and prerendering handle themselves. Worth getting this right now, before you're retrofitting it across 8 pages instead of 2.
