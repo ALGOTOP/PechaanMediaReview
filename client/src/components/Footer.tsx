@@ -33,6 +33,11 @@ export default function Footer() {
                   Contact
                 </a>
               </li>
+              <li>
+                <a href="/audit-report" className="text-muted-foreground hover:text-foreground transition-colors">
+                  View a Sample Audit Report
+                </a>
+              </li>
             </ul>
           </div>
 
