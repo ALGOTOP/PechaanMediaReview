@@ -129,7 +129,7 @@ export default function Hero() {
               className="text-sm px-8 py-4 h-auto bg-white/5 backdrop-blur-md text-white border-white/20 hover:bg-white/10 font-semibold"
               data-testid="button-get-started"
             >
-              Get Started
+              Book A Call
             </Button>
           </div>
         </div>
