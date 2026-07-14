@@ -110,15 +110,6 @@ export default function Hero() {
           >
             <Button
               size="lg"
-              variant="outline"
-              onClick={scrollToWork}
-              className="text-sm px-8 py-4 h-auto bg-white/5 backdrop-blur-md text-white border-white/20 hover:bg-white/10 font-semibold"
-              data-testid="button-view-work"
-            >
-              View Our Work
-            </Button>
-            <Button
-              size="lg"
               variant="default"
               onClick={() => {
                 const element = document.querySelector("#contact");
@@ -130,6 +121,15 @@ export default function Hero() {
               data-testid="button-get-started"
             >
               Book A Call
+            </Button>
+            <Button
+              size="lg"
+              variant="outline"
+              onClick={scrollToWork}
+              className="text-sm px-8 py-4 h-auto bg-white/5 backdrop-blur-md text-white border-white/20 hover:bg-white/10 font-semibold"
+              data-testid="button-view-work"
+            >
+              View Our Work
             </Button>
           </div>
         </div>
