@@ -110,23 +110,23 @@ export default function Hero() {
           >
             <Button
               size="lg"
-              variant="default"
+              variant="outline"
               onClick={scrollToWork}
-              className="text-sm px-8 py-4 h-auto bg-white text-black hover:bg-white/90 border border-white/20 font-semibold"
+              className="text-sm px-8 py-4 h-auto bg-white/5 backdrop-blur-md text-white border-white/20 hover:bg-white/10 font-semibold"
               data-testid="button-view-work"
             >
               View Our Work
             </Button>
             <Button
               size="lg"
-              variant="outline"
+              variant="default"
               onClick={() => {
                 const element = document.querySelector("#contact");
                 if (element) {
                   element.scrollIntoView({ behavior: "smooth" });
                 }
               }}
-              className="text-sm px-8 py-4 h-auto bg-white/5 backdrop-blur-md text-white border-white/20 hover:bg-white/10 font-semibold"
+              className="text-sm px-8 py-4 h-auto bg-white text-black hover:bg-white/90 border border-white/20 font-semibold"
               data-testid="button-get-started"
             >
               Book A Call
