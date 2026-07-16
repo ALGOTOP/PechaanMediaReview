@@ -290,13 +290,7 @@ export default function Showreel() {
       {/* ── BOTTOM BAR ── */}
       <div className="max-w-[1680px] mx-auto px-6 md:px-10">
         <div className="border-t border-white/10 py-8 flex items-center justify-between">
-          <div className="flex items-center gap-8 text-white/30 text-[11px] font-mono tracking-widest uppercase">
-            <span>120+ Projects</span>
-            <span className="hidden md:inline text-white/10">·</span>
-            <span className="hidden md:inline">2 Years</span>
-            <span className="hidden md:inline text-white/10">·</span>
-            <span className="hidden md:inline">80+ Clients</span>
-          </div>
+          <div />
           <a
             href="#work"
             className="group flex items-center gap-2 text-sm font-medium text-white/50 hover:text-white transition-colors duration-300"
