@@ -12,8 +12,8 @@ interface Stat {
 const stats: Stat[] = [
   { value: 70,  suffix: "+", label: "International\nBrands",     sub: "Worldwide",  ariaLabel: "70+ International Clients" },
   { value: 3.2, suffix: "×", decimals: 1, label: "Higher\nNoticeability", sub: "On Average", ariaLabel: "3.2× Higher Noticeability" },
-  { value: 2,   suffix: "+", label: "Years of\nCraft",           sub: "& Counting", ariaLabel: "2+ Years of Craft" },
-  { value: 70,  suffix: "+", label: "Global\nCampaigns",         sub: "Delivered",  ariaLabel: "70+ Global Campaigns" },
+  { value: 3,   suffix: "+", label: "Years of\nCraft",           sub: "& Counting", ariaLabel: "3+ Years of Craft" },
+  { value: 150, suffix: "+", label: "Global\nClients",           sub: "Delivered",  ariaLabel: "150+ Global Clients" },
 ];
 
 const tickerItems = [
@@ -172,8 +172,8 @@ export default function Statistics() {
         <ul style={{ position: "absolute", width: 1, height: 1, overflow: "hidden", clip: "rect(0,0,0,0)", whiteSpace: "nowrap" }}>
           <li>70+ International Clients</li>
           <li>3.2× Higher Noticeability</li>
-          <li>2+ Years of Craft</li>
-          <li>70+ Global Campaigns</li>
+          <li>3+ Years of Craft</li>
+          <li>150+ Global Clients</li>
         </ul>
       </noscript>
       <style>{`
