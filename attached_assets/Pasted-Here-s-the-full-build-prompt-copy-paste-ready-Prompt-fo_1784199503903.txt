@@ -1,0 +1,51 @@
+Here's the full build prompt, copy-paste ready:
+
+---
+
+**Prompt for Replit:**
+
+I need to build a new service page for pnmh.site targeting the keyword "web design agency." This is a Vite + React + Wouter site with build-time static prerendering. Here's the full spec.
+
+**1. Routing setup**
+- Add a new route in `client/src/routes.config.ts` for `/services/web-design-agency`
+- Confirm `scripts/prerender.mjs` picks up this new route and generates static HTML for it
+- Confirm `scripts/generate-sitemap.mjs` includes this new URL in the sitemap
+- Do not touch `entry-server.tsx`, it's unused dead code from an old SSR attempt
+
+**2. Internal linking**
+- Add a link to this new page from `client/src/components/Footer.tsx` (Quick Links section, same pattern used for /audit-report)
+- Add at least one contextual link to this page from the homepage content, not just the footer
+
+**3. Page metadata (per-route, injected at build time)**
+- Title tag: under 60 characters, includes "web design agency," ends with brand name. Example: "Web Design Agency | Pehchaan Media"
+- Meta description: under 155 characters, written to earn a click, not just describe the page
+- One H1 only, containing the keyword
+- Add Service or Organization schema markup (JSON-LD), not LocalBusiness, since we don't claim a specific country/city on the site
+
+**4. Page structure and content sections, in order:**
+
+- **Hero section**: H1 headline containing "web design agency," one-line subheading explaining what we do, one visible CTA button. Everything here must be visible without scrolling on both desktop and mobile.
+- **Proof strip**: directly under the hero, show 3-4 real project visuals or placeholder slots for them if we don't have final assets yet. Don't fabricate client logos or stats.
+- **Service breakdown**: H2 heading, then bullet points (not paragraphs) covering what's included, e.g. custom design, mobile-responsive builds, SEO-ready structure, fast load times, easy content editing
+- **Process section**: H2 heading, 3-5 numbered steps showing how a project runs from discovery to launch
+- **Why us / differentiation**: H2 heading, one honest paragraph, no invented statistics or unverifiable claims
+- **FAQ block**: H2 heading, 3-4 real questions a prospect would ask before hiring (e.g. "How long does a website take?", "Do you handle hosting?"), each as its own H3. This section carries extra weight for ranking since it's where we add real substance without cluttering the visual design.
+- **CTA repeated**: place a CTA button after the hero, again after the service breakdown or process section, and once more at the very bottom
+
+**5. Design constraints**
+- Max two font families: one for headings, one for body text, with a clear size scale between them
+- Consistent spacing and padding throughout, no cramped or uneven sections
+- Smooth hover states on buttons and cards, keep transitions lightweight, nothing that slows page load
+- Fully responsive, test on mobile viewport specifically since most search traffic is mobile
+- All images need real, descriptive alt text, and must be compressed before upload, don't let visual polish slow down the page
+
+**6. Performance checks before calling this done**
+- Confirm the new route's static HTML actually contains the title, meta description, and H1 (view page source after build, don't just trust the dev server)
+- Confirm no console errors on the new route
+- Confirm the page loads fast, no unnecessary heavy libraries added just for this one page
+
+Once this is built and deployed, I'll verify the live HTML myself, then submit the URL in Google Search Console for indexing.
+
+---
+
+One more thing before you run this: if you don't have real project images ready yet for the proof strip, tell Replit to use clearly-labeled placeholder blocks instead of stock photos pretending to be your work. Stock images pretending to be client work is the kind of thing that erodes trust fast if anyone notices.

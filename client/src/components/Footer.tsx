@@ -38,6 +38,11 @@ export default function Footer() {
                   View a Sample Audit Report
                 </a>
               </li>
+              <li>
+                <a href="/services/web-design-agency" className="text-muted-foreground hover:text-foreground transition-colors">
+                  Web Design Agency
+                </a>
+              </li>
             </ul>
           </div>
 

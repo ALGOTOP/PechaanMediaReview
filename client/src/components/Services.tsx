@@ -15,6 +15,7 @@ interface Service {
   image: string;
   height: string;
   num: string;
+  href?: string;
   titleClass?: string;
   descClass?: string;
   titleMargin?: string;
@@ -58,6 +59,7 @@ const rightColumn: Service[] = [
       "High-performance websites and conversion-focused web design — responsive, elegant digital experiences that engage and convert.",
     image: webImage,
     height: "h-72",
+    href: "/services/web-design-agency",
   },
 ];
 
@@ -82,6 +84,15 @@ function ServiceCard({ service, index, visibleItems }: { service: Service; index
         <div className="absolute bottom-0 left-0 right-0 p-6 md:p-8 text-white">
           <h3 className={`${service.titleClass ?? "text-xl md:text-2xl font-bold"} ${service.titleMargin ?? "mb-3"}`}>{service.title}</h3>
           <p className={service.descClass ?? "text-white/90 text-sm leading-relaxed"}>{service.description}</p>
+          {service.href && (
+            <a
+              href={service.href}
+              className="inline-block mt-3 text-xs font-mono tracking-widest text-white/50 hover:text-white transition-colors uppercase"
+              onClick={(e) => e.stopPropagation()}
+            >
+              Learn more →
+            </a>
+          )}
         </div>
       </div>
     </Card>

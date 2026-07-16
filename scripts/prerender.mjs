@@ -122,10 +122,19 @@ for (const route of routes) {
     process.exit(1);
   }
 
-  const output = htmlTemplate.replace(
+  let output = htmlTemplate.replace(
     '<div id="root"></div>',
     `<div id="root">${appHtml}</div>`
   );
+  if (route.title) {
+    output = output.replace(/<title>[^<]*<\/title>/, `<title>${route.title}</title>`);
+  }
+  if (route.description) {
+    output = output.replace(
+      /(<meta name="description" content=")[^"]*"/,
+      `$1${route.description}"`
+    );
+  }
 
   // / → dist/public/index.html
   // /audit-report → dist/public/audit-report/index.html
