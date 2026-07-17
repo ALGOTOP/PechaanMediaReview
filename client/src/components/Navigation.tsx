@@ -27,12 +27,17 @@ export default function Navigation() {
   }, [isOpen]);
 
   const scrollToSection = (href: string) => {
+    setIsOpen(false);
     if (href === "#hero") {
       window.scrollTo({ top: 0, behavior: "smooth" });
-    } else {
-      document.querySelector(href)?.scrollIntoView({ behavior: "smooth", block: "start" });
+      return;
     }
-    setIsOpen(false);
+    // On mobile, scroll Contact link directly to the calendar widget
+    if (href === "#contact" && window.innerWidth < 768) {
+      const cal = document.querySelector("#booking-calendar");
+      if (cal) { cal.scrollIntoView({ behavior: "smooth", block: "start" }); return; }
+    }
+    document.querySelector(href)?.scrollIntoView({ behavior: "smooth", block: "start" });
   };
 
   return (

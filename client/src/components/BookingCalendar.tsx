@@ -57,7 +57,7 @@ export default function BookingCalendar() {
     new Date(initial.getFullYear(), initial.getMonth(), 1)
   );
   const [selected, setSelected] = useState<Date>(initial);
-  const [fmt, setFmt] = useState<"12h" | "24h">("24h");
+  const [fmt, setFmt] = useState<"12h" | "24h">("12h");
   const [selectedTime, setSelectedTime] = useState<string | null>(null);
   const [confirmed, setConfirmed] = useState(false);
   const [showForm, setShowForm] = useState(false);

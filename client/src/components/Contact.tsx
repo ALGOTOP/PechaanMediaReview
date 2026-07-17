@@ -1,4 +1,4 @@
-import { Mail, Phone } from "lucide-react";
+import { Mail } from "lucide-react";
 import BookingCalendar from "./BookingCalendar";
 
 export default function Contact() {
@@ -55,32 +55,13 @@ export default function Contact() {
                 </span>
               </a>
 
-              {/* Phone pill */}
-              <a
-                href="tel:+923355312242"
-                data-testid="link-phone"
-                className="group flex items-center gap-3 px-5 py-3 rounded-full w-fit transition-all duration-300 hover:shadow-md"
-                style={{
-                  background: "#f0f0f0",
-                  border: "1px solid rgba(0,0,0,0.09)",
-                  boxShadow: "0 2px 16px rgba(0,0,0,0.06)",
-                }}
-              >
-                <div
-                  className="w-7 h-7 rounded-full flex items-center justify-center transition-transform duration-300 group-hover:scale-110 shrink-0"
-                  style={{ background: "#e4e4e4", border: "1px solid rgba(0,0,0,0.07)" }}
-                >
-                  <Phone className="w-3.5 h-3.5 text-gray-600" />
-                </div>
-                <span className="text-sm font-medium text-gray-700 group-hover:text-gray-900 transition-colors">
-                  +92 335 5312242
-                </span>
-              </a>
             </div>
           </div>
 
           {/* ── RIGHT — Custom booking calendar ── */}
-          <BookingCalendar />
+          <div id="booking-calendar">
+            <BookingCalendar />
+          </div>
 
         </div>
 
