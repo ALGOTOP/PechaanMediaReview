@@ -139,18 +139,6 @@ export default function WebDesignAgency() {
         className="pt-[64px] min-h-[100svh] flex flex-col md:flex-row"
         data-testid="section-hero"
       >
-        {/* Image panel */}
-        <div className="relative w-full md:w-1/2 h-[42vw] md:h-auto min-h-[260px]">
-          <img
-            src={webImage}
-            alt="Web design work by Pehchaan Media — custom website design agency"
-            className="absolute inset-0 w-full h-full object-cover"
-            fetchpriority="high"
-          />
-          {/* subtle dark vignette on the right edge so text side reads cleanly */}
-          <div className="absolute inset-y-0 right-0 w-16 bg-gradient-to-r from-transparent to-white hidden md:block" />
-        </div>
-
         {/* Text panel */}
         <div className="w-full md:w-1/2 flex items-center px-6 md:px-14 lg:px-20 py-12 md:py-0">
           <div className="max-w-lg">
@@ -186,6 +174,17 @@ export default function WebDesignAgency() {
               </Button>
             </div>
           </div>
+        </div>
+
+        {/* Image panel */}
+        <div className="relative w-full md:w-1/2 h-[42vw] md:h-auto min-h-[260px]">
+          <img
+            src={webImage}
+            alt="Web design work by Pehchaan Media — custom website design agency"
+            className="absolute inset-0 w-full h-full object-cover"
+            fetchpriority="high"
+          />
+          <div className="absolute inset-y-0 left-0 w-16 bg-gradient-to-l from-transparent to-white hidden md:block" />
         </div>
       </section>
 
