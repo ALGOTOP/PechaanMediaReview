@@ -28,7 +28,7 @@ export default function Contact() {
               Schedule a quick, 15 minute guided call with us to see if we can
               help you in anyway.
             </p>
-            <p className="text-sm text-gray-400 leading-relaxed max-w-sm mb-10">
+            <p className="hidden md:block text-sm text-gray-400 leading-relaxed max-w-sm mb-10">
               We work with product brands, startups, and established businesses on brand identity, film production, advertising campaigns, and web design.
             </p>
 
