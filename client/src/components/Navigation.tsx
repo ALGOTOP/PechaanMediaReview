@@ -5,7 +5,7 @@ import { Button } from "@/components/ui/button";
 const navItems = [
   { label: "Home", href: "#hero" },
   { label: "Work", href: "#work" },
-  { label: "Services", href: "#services" },
+  { label: "Services", href: "/services" },
   { label: "About", href: "#about" },
   { label: "Contact", href: "#contact" },
 ];
@@ -28,6 +28,11 @@ export default function Navigation() {
 
   const scrollToSection = (href: string) => {
     setIsOpen(false);
+    // Page-level navigation (not a hash anchor)
+    if (!href.startsWith("#")) {
+      window.location.href = href;
+      return;
+    }
     if (href === "#hero") {
       window.scrollTo({ top: 0, behavior: "smooth" });
       return;
