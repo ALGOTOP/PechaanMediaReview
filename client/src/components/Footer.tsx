@@ -39,6 +39,11 @@ export default function Footer() {
                 </a>
               </li>
               <li>
+                <a href="/services" className="text-muted-foreground hover:text-foreground transition-colors">
+                  Our Services
+                </a>
+              </li>
+              <li>
                 <a href="/services/web-design-agency" className="text-muted-foreground hover:text-foreground transition-colors">
                   Web Design Agency
                 </a>

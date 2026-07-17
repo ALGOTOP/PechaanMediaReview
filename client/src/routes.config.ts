@@ -20,6 +20,13 @@ export const routes: RouteConfig[] = [
     changefreq: "monthly",
   },
   {
+    path: "/services",
+    priority: 0.9,
+    changefreq: "monthly",
+    title: "Services | Pehchaan Media — Brand, Marketing, Film & Web",
+    description: "Explore Pehchaan Media's four core services: Brand Identity & Design, Marketing & Strategy, Film & Production, and Web & Digital. One agency, every discipline.",
+  },
+  {
     path: "/services/web-design-agency",
     priority: 0.9,
     changefreq: "monthly",
