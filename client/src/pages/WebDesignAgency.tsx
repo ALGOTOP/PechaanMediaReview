@@ -147,10 +147,10 @@ const featureCards = [
 ];
 
 const stats = [
-  { value: 98, suffix: "%", label: "Client satisfaction" },
-  { value: 70, suffix: "+", label: "Brands served" },
-  { value: 24, suffix: "/7", label: "Support available" },
-  { value: 5, suffix: "+", label: "Years of craft" },
+  { value: 98, suffix: "%", label: "Client satisfaction", desc: "Clients rate quality and delivery as exceptional" },
+  { value: 70, suffix: "+", label: "Brands served",       desc: "From early-stage startups to established names" },
+  { value: 24, suffix: "/7", label: "Support available",  desc: "Ongoing support from launch through growth" },
+  { value: 5,  suffix: "+", label: "Years of craft",      desc: "Proven track record across industries worldwide" },
 ];
 
 const projectCards = [
@@ -205,9 +205,9 @@ export default function WebDesignAgency() {
   useEffect(() => {
     const ctx = gsap.context(() => {
       /* Hero */
-      gsap.fromTo(".hero-label", { y: 14, opacity: 0 }, { y: 0, opacity: 1, duration: 0.7, ease: "power3.out", delay: 0.2 });
+      gsap.fromTo(".hero-label",    { y: 14, opacity: 0 }, { y: 0, opacity: 1, duration: 0.7, ease: "power3.out", delay: 0.2 });
       gsap.fromTo(".hero-headline", { y: 30, opacity: 0 }, { y: 0, opacity: 1, duration: 0.9, ease: "power3.out", delay: 0.35 });
-      gsap.fromTo(".hero-sub", { y: 20, opacity: 0 }, { y: 0, opacity: 1, duration: 0.7, ease: "power3.out", delay: 0.55 });
+      gsap.fromTo(".hero-sub",      { y: 20, opacity: 0 }, { y: 0, opacity: 1, duration: 0.7, ease: "power3.out", delay: 0.55 });
       gsap.fromTo(".hero-img-wrap", { scale: 1.04, opacity: 0 }, { scale: 1, opacity: 1, duration: 1.2, ease: "power3.out", delay: 0.5 });
 
       /* Section reveals */
@@ -279,13 +279,13 @@ export default function WebDesignAgency() {
             <span className="text-[11px] font-mono tracking-[0.2em] uppercase text-[#999]">Web Design Agency</span>
           </div>
 
-          {/* Headline + sub split */}
-          <div className="grid md:grid-cols-2 gap-8 pb-8 items-end">
+          {/* Headline + sub split — heading LEFT, copy+CTAs RIGHT */}
+          <div className="grid md:grid-cols-2 gap-8 pb-8 items-start">
             <h1 className="hero-headline text-[36px] md:text-[50px] lg:text-[60px] font-bold leading-[1.05] tracking-tight text-[#111]">
               High-performance websites built for<br />
               <span className="italic font-light text-[#555]">modern brands.</span>
             </h1>
-            <div className="hero-sub flex flex-col gap-4 justify-end pb-2">
+            <div className="hero-sub flex flex-col gap-4 pt-1">
               <p className="text-[14px] text-[#666] leading-relaxed max-w-sm">
                 We design and build websites that are fast, credible, and conversion-focused — from landing pages to full brand experiences. No templates. No shortcuts.
               </p>
@@ -306,16 +306,41 @@ export default function WebDesignAgency() {
             </div>
           </div>
 
-          {/* Hero image */}
-          <div className="hero-img-wrap relative w-full overflow-hidden" style={{ height: "clamp(320px,52vw,660px)" }}>
-            <img
-              src="https://images.unsplash.com/photo-1498050108023-c5249f4df085?w=1400&auto=format&fit=crop&q=85"
-              alt="Web design studio"
-              className="w-full h-full object-cover"
-              fetchpriority="high"
-            />
-            {/* Overlay chip */}
-            <div className="absolute bottom-5 left-5 bg-white/90 backdrop-blur-sm px-4 py-2.5 flex items-center gap-2">
+          {/* Hero image — geometric treatment with rounded corners + diagonal accent */}
+          <div className="hero-img-wrap relative w-full" style={{ height: "clamp(320px,52vw,660px)" }}>
+            {/* Main image with rounded corners */}
+            <div className="absolute inset-0 overflow-hidden rounded-2xl">
+              <img
+                src="https://images.unsplash.com/photo-1498050108023-c5249f4df085?w=1400&auto=format&fit=crop&q=85"
+                alt="Web design studio"
+                className="w-full h-full object-cover"
+                fetchpriority="high"
+              />
+              {/* Diagonal geometric overlay line */}
+              <svg
+                className="absolute inset-0 w-full h-full pointer-events-none"
+                viewBox="0 0 100 100" preserveAspectRatio="none"
+              >
+                <line x1="30" y1="0" x2="70" y2="100" stroke="rgba(255,255,255,0.12)" strokeWidth="0.4" />
+                <line x1="55" y1="0" x2="95" y2="100" stroke="rgba(255,255,255,0.07)" strokeWidth="0.3" />
+              </svg>
+              {/* Dark gradient bottom */}
+              <div className="absolute inset-0" style={{ background: "linear-gradient(to top, rgba(0,0,0,0.35) 0%, transparent 45%)" }} />
+            </div>
+
+            {/* "100% Trusted" badge — bottom-left */}
+            <div className="absolute bottom-5 left-5 bg-white/95 backdrop-blur-sm px-4 py-3 rounded-xl shadow-lg flex items-center gap-3">
+              <div className="w-8 h-8 rounded-full bg-[#D42B2B] flex items-center justify-center shrink-0">
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="white" strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
+              </div>
+              <div>
+                <p className="text-[12px] font-bold text-[#111] leading-none mb-0.5">100% Trusted</p>
+                <p className="text-[10px] text-[#888]">by brands worldwide</p>
+              </div>
+            </div>
+
+            {/* Explore chip — bottom-right */}
+            <div className="absolute bottom-5 right-5 bg-white/90 backdrop-blur-sm px-4 py-2.5 rounded-full flex items-center gap-2">
               <span className="text-[11px] font-medium text-[#111]">Explore our work</span>
               <svg width="12" height="12" viewBox="0 0 12 12" fill="none"><path d="M1 6h10M6 1l5 5-5 5" stroke="#111" strokeWidth="1.2" strokeLinecap="round" strokeLinejoin="round"/></svg>
             </div>
@@ -344,8 +369,8 @@ export default function WebDesignAgency() {
             </div>
           </div>
 
-          {/* 2×2 Feature card grid */}
-          <div className="feat-grid grid grid-cols-2 md:grid-cols-4 gap-3">
+          {/* 2×2 static grid — always 2 columns */}
+          <div className="feat-grid grid grid-cols-2 gap-3">
             {featureCards.map((card) => (
               <div
                 key={card.title}
@@ -361,21 +386,14 @@ export default function WebDesignAgency() {
             ))}
           </div>
 
-          {/* Pagination dots */}
-          <div className="flex items-center justify-between mt-8">
-            <div className="flex items-center gap-2">
-              {[0,1,2,3].map(i => (
-                <span key={i} className={`block rounded-full transition-all ${i === 0 ? "w-6 h-1.5 bg-[#111]" : "w-1.5 h-1.5 bg-[#ddd]"}`} />
-              ))}
+          {/* Divider strip with brand mark */}
+          <div className="relative mt-10 flex items-center">
+            <div className="flex-1 h-px bg-[#E8E8E8]" />
+            <div className="mx-4 flex items-center gap-1.5 px-4 py-2 border border-[#E8E8E8] rounded-full">
+              <span className="text-[12px] font-bold text-[#111] tracking-tight">Pehchaan</span>
+              <span className="text-[#D42B2B] font-bold text-base leading-none">*</span>
             </div>
-            <div className="flex items-center gap-1">
-              <button className="w-8 h-8 border border-[#e0e0e0] flex items-center justify-center text-[#bbb] hover:border-[#111] hover:text-[#111] transition-colors">
-                <svg width="10" height="10" viewBox="0 0 10 10" fill="none"><path d="M7 5H1M4 2L1 5l3 3" stroke="currentColor" strokeWidth="1.1" strokeLinecap="round" strokeLinejoin="round"/></svg>
-              </button>
-              <button className="w-8 h-8 border border-[#e0e0e0] flex items-center justify-center text-[#bbb] hover:border-[#111] hover:text-[#111] transition-colors">
-                <svg width="10" height="10" viewBox="0 0 10 10" fill="none"><path d="M3 5h6M6 2l3 3-3 3" stroke="currentColor" strokeWidth="1.1" strokeLinecap="round" strokeLinejoin="round"/></svg>
-              </button>
-            </div>
+            <div className="flex-1 h-px bg-[#E8E8E8]" />
           </div>
         </div>
       </section>
@@ -395,7 +413,8 @@ export default function WebDesignAgency() {
                     0{s.suffix}
                   </span>
                 </div>
-                <p className="text-[11px] font-mono tracking-widest uppercase text-[#999]">{s.label}</p>
+                <p className="text-[12px] font-semibold text-[#111] mb-1">{s.label}</p>
+                <p className="text-[11px] text-[#999] leading-snug max-w-[140px]">{s.desc}</p>
               </div>
             ))}
           </div>
@@ -403,17 +422,34 @@ export default function WebDesignAgency() {
       </div>
 
       {/* ══ FULL-BLEED IMAGE ════════════════════════════════════════ */}
-      <div className="fullbleed-section relative overflow-hidden" style={{ height: "clamp(280px,42vw,560px)" }}>
-        <img
-          src="https://images.unsplash.com/photo-1524253482453-3fed8d2fe12b?w=1600&auto=format&fit=crop&q=85"
-          alt="Creative workspace"
-          loading="lazy"
-          className="fullbleed-img absolute inset-0 w-full h-full object-cover"
-        />
-        {/* Chip */}
-        <div className="absolute bottom-6 right-6 bg-white/90 backdrop-blur-sm px-4 py-2.5 flex items-center gap-3">
-          <span className="w-1.5 h-1.5 rounded-full bg-[#D42B2B]" />
-          <span className="text-[11px] font-medium text-[#111]">Discover our approach</span>
+      <div className="fullbleed-section px-6 md:px-10 py-10">
+        <div
+          className="relative overflow-hidden rounded-2xl"
+          style={{ height: "clamp(280px,42vw,560px)" }}
+        >
+          <img
+            src="https://images.unsplash.com/photo-1524253482453-3fed8d2fe12b?w=1600&auto=format&fit=crop&q=85"
+            alt="Creative workspace"
+            loading="lazy"
+            className="fullbleed-img absolute inset-0 w-full h-full object-cover"
+          />
+
+          {/* Status tag — top-left */}
+          <div className="absolute top-5 left-5 flex items-center gap-2 bg-white/90 backdrop-blur-sm px-3 py-1.5 rounded-full">
+            <span className="w-1.5 h-1.5 rounded-full bg-[#22c55e] shadow-[0_0_6px_2px_rgba(34,197,94,0.5)]" />
+            <span className="text-[11px] font-medium text-[#111]">Available for projects</span>
+          </div>
+
+          {/* Floating card CTA — bottom-right */}
+          <div className="absolute bottom-5 right-5 bg-white rounded-xl shadow-xl px-5 py-4 flex items-center gap-4">
+            <div>
+              <p className="text-[12px] font-bold text-[#111] leading-none mb-0.5">Discover our approach</p>
+              <p className="text-[10px] text-[#888]">Strategy-led design</p>
+            </div>
+            <div className="w-8 h-8 bg-[#111] flex items-center justify-center rounded-lg shrink-0">
+              <svg width="12" height="12" viewBox="0 0 12 12" fill="none"><path d="M1 11L11 1M11 1H4M11 1v7" stroke="white" strokeWidth="1.3" strokeLinecap="round" strokeLinejoin="round"/></svg>
+            </div>
+          </div>
         </div>
       </div>
 
@@ -446,11 +482,11 @@ export default function WebDesignAgency() {
             </div>
           </div>
 
-          {/* Project cards */}
+          {/* Project cards — portrait aspect ratio */}
           <div className="proj-grid grid md:grid-cols-3 gap-4">
             {projectCards.map((p) => (
               <div key={p.title} className="proj-card group cursor-pointer">
-                <div className="relative overflow-hidden aspect-[4/3] mb-4">
+                <div className="relative overflow-hidden aspect-[4/5] mb-4 rounded-lg">
                   <img
                     src={p.img}
                     alt={p.title}
@@ -504,40 +540,78 @@ export default function WebDesignAgency() {
                 </button>
               </div>
 
-              {/* Trust badges */}
-              <div className="reveal flex items-center gap-6 pt-4 border-t border-[#E8E8E8]">
-                <RedStar />
-                <div className="flex items-center gap-4">
-                  <div className="text-center">
-                    <p className="text-[20px] font-black text-[#111]">70+</p>
-                    <p className="text-[10px] font-mono tracking-widest uppercase text-[#999]">Brands</p>
-                  </div>
-                  <div className="w-px h-8 bg-[#E8E8E8]" />
-                  <div className="text-center">
-                    <p className="text-[20px] font-black text-[#111]">98%</p>
-                    <p className="text-[10px] font-mono tracking-widest uppercase text-[#999]">Satisfaction</p>
-                  </div>
-                  <div className="w-px h-8 bg-[#E8E8E8]" />
-                  <div className="flex items-center gap-1">
-                    {[1,2,3,4,5].map(i => (
-                      <svg key={i} width="12" height="12" viewBox="0 0 12 12" fill="#D42B2B"><path d="M6 1l1.4 2.8L10.5 4l-2.25 2.2.53 3.1L6 7.77 3.22 9.3l.53-3.1L1.5 4l3.1-.2L6 1z"/></svg>
+              {/* Trust badges + avatar cluster */}
+              <div className="reveal flex flex-col gap-4 pt-4 border-t border-[#E8E8E8]">
+                {/* Avatar cluster */}
+                <div className="flex items-center gap-3">
+                  <div className="flex -space-x-2">
+                    {["#D42B2B","#111","#6366f1","#059669","#f59e0b"].map((c, i) => (
+                      <div
+                        key={i}
+                        className="w-8 h-8 rounded-full border-2 border-white flex items-center justify-center text-white text-[10px] font-bold"
+                        style={{ background: c, zIndex: 5 - i }}
+                      >
+                        {["P","M","S","A","K"][i]}
+                      </div>
                     ))}
+                  </div>
+                  <div>
+                    <p className="text-[13px] font-bold text-[#111] leading-none">Loved by 250+ brands</p>
+                    <p className="text-[11px] text-[#999] mt-0.5">across 12 countries</p>
+                  </div>
+                </div>
+
+                {/* Stats row */}
+                <div className="flex items-center gap-4">
+                  <RedStar />
+                  <div className="flex items-center gap-4">
+                    <div className="text-center">
+                      <p className="text-[20px] font-black text-[#111]">70+</p>
+                      <p className="text-[10px] font-mono tracking-widest uppercase text-[#999]">Brands</p>
+                    </div>
+                    <div className="w-px h-8 bg-[#E8E8E8]" />
+                    <div className="text-center">
+                      <p className="text-[20px] font-black text-[#111]">98%</p>
+                      <p className="text-[10px] font-mono tracking-widest uppercase text-[#999]">Satisfaction</p>
+                    </div>
+                    <div className="w-px h-8 bg-[#E8E8E8]" />
+                    <div className="flex items-center gap-1">
+                      {[1,2,3,4,5].map(i => (
+                        <svg key={i} width="12" height="12" viewBox="0 0 12 12" fill="#D42B2B"><path d="M6 1l1.4 2.8L10.5 4l-2.25 2.2.53 3.1L6 7.77 3.22 9.3l.53-3.1L1.5 4l3.1-.2L6 1z"/></svg>
+                      ))}
+                    </div>
                   </div>
                 </div>
               </div>
             </div>
 
-            {/* Right – tall image */}
-            <div className="reveal relative overflow-hidden" style={{ height: "clamp(360px,55vw,640px)" }}>
-              <img
-                src="https://images.unsplash.com/photo-1581291518633-83b4ebd1d83e?w=800&auto=format&fit=crop&q=85"
-                alt="Design process"
-                loading="lazy"
-                className="w-full h-full object-cover hover:scale-105 transition-transform duration-700"
-              />
-              {/* Red asterisk decoration */}
-              <div className="absolute top-5 right-5">
-                <span className="text-white text-2xl font-bold">*</span>
+            {/* Right – two overlapping images */}
+            <div className="reveal relative" style={{ height: "clamp(360px,55vw,640px)" }}>
+              {/* Main tall image */}
+              <div className="absolute inset-0 overflow-hidden rounded-xl">
+                <img
+                  src="https://images.unsplash.com/photo-1581291518633-83b4ebd1d83e?w=800&auto=format&fit=crop&q=85"
+                  alt="Design process"
+                  loading="lazy"
+                  className="w-full h-full object-cover hover:scale-105 transition-transform duration-700"
+                />
+                {/* Red asterisk decoration */}
+                <div className="absolute top-5 right-5">
+                  <span className="text-white text-2xl font-bold">*</span>
+                </div>
+              </div>
+
+              {/* Smaller overlapping image — bottom-left */}
+              <div
+                className="absolute -bottom-6 -left-6 overflow-hidden rounded-xl border-4 border-white shadow-2xl"
+                style={{ width: "clamp(120px,28%,200px)", height: "clamp(100px,22%,165px)" }}
+              >
+                <img
+                  src="https://images.unsplash.com/photo-1542744173-8e7e53415bb0?w=400&auto=format&fit=crop&q=85"
+                  alt="Team collaboration"
+                  loading="lazy"
+                  className="w-full h-full object-cover"
+                />
               </div>
             </div>
           </div>
@@ -566,7 +640,7 @@ export default function WebDesignAgency() {
         </div>
       </section>
 
-      {/* ══ DARK CTA SECTION (Prime Location equivalent) ═══════════ */}
+      {/* ══ DARK CTA SECTION ════════════════════════════════════════ */}
       <section id="contact" className="bg-[#0A0A0A] text-white py-24 md:py-36 relative overflow-hidden">
         {/* Abstract grid bg */}
         <div
@@ -608,11 +682,6 @@ export default function WebDesignAgency() {
           >
             Book A Call →
           </button>
-
-          {/* Bottom text */}
-          <p className="reveal mt-24 md:mt-36 text-[28px] md:text-[48px] lg:text-[64px] font-black text-white/[0.07] tracking-tight uppercase leading-none">
-            Built for Performance, Designed for Brands
-          </p>
         </div>
       </section>
 

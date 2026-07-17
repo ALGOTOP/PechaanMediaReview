@@ -1,0 +1,44 @@
+Here's a single prompt you can paste directly into Replit:
+
+---
+
+**Prompt for Replit:**
+
+Fix the following design/UX issues on the site to match the Luxi reference design exactly. Go section by section:
+
+**1. Hero section**
+- Change the layout so the heading sits on the left and the description + "Book A Call"/"See services" buttons sit in a row to the right, top-aligned with the heading (not stacked below it).
+- Add geometric image treatment to the hero photo: diagonal/rounded cutout shapes breaking the image into sections (not a plain rectangle).
+- Add a small overlay badge card on the bottom-left of the hero image (e.g. "100% Trusted" style tag), similar to Luxi's badge.
+
+**2. "Crafting websites defined by" cards section**
+- Rebuild this as a static 2x2 grid with all 4 cards equal width and height (currently they're mismatched: two narrow, one wide red, one narrower black).
+- Remove the carousel dots/arrow navigation under this section entirely — this should be a static grid, not a slider.
+- Add a thin horizontal divider strip below the grid with a small brand mark centered in it (matching Luxi's layout).
+
+**3. Stats row (98% / 70+ / 24/7 / 5+)**
+- Add a second descriptive line under each stat number (e.g. under "98%" add a line like "Client satisfaction with quality and service" — write copy appropriate to Pehchaan Media).
+- Add vertical divider lines between each stat block.
+
+**4. Full-bleed image banner**
+- Round the corners of the image (currently sharp/square).
+- Add a status tag overlay in the top-left corner of the image (small pill/tag style).
+- Replace the bottom-right pill button with a white card element containing the CTA text and arrow, styled like a small floating card rather than a flat button.
+
+**5. "Explore latest work" section**
+- Change the project card image aspect ratio from wide/landscape to a tighter square or portrait ratio (closer to 1:1 or 4:5) to match Luxi's proportions.
+- Keep the filter pills (All / E-Commerce / SaaS / Agency / Portfolio) as-is, this is already correct.
+
+**6. "Redefining web design through performance, clarity" section**
+- Add a second smaller image overlapping the bottom-left of the main image (stacked/overlapping two-image layout instead of a single flat image).
+- Add an avatar cluster (small circular profile images, stacked/overlapping) with a "Loved by 250+ brands" (or similar) line next to the existing stats (70+, 98%).
+
+**7. Bottom CTA section ("Ready to build")**
+- Remove the large ghost text reading "BUILT FOR PERFORMANCE, DESIGNED FOR BRANDS" in the footer area — this doesn't exist in the reference design and should be stripped out to match it exactly.
+- Optionally expand the map graphic to include multiple pins and dashed connecting route lines instead of a single simplified pin, to match the reference's level of detail.
+
+Do not change the footer content/structure (Company, Services, Contact columns) — that part already matches. Focus only on the fixes listed above.
+
+---
+
+Want me to also draft the actual stat descriptions and CTA copy so Replit doesn't have to invent placeholder text for those new lines?
