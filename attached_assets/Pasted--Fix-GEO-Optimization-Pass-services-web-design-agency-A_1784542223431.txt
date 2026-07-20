@@ -1,0 +1,157 @@
+# Fix + GEO Optimization Pass — /services/web-design-agency
+
+Apply the following changes to the existing page. Keep the current section structure (hero, proof strip, what's included, how it works, why us, FAQ, final CTA) and current tone — direct, humanized, no AI-sounding phrasing. Do not use em dashes anywhere on this page, in copy or alt text, going forward.
+
+---
+
+## 1. Copy fixes
+
+**Hero subheadline**
+Before: "We design and build high-performance websites — custom, conversion-focused, and fast. No templates. No shortcuts."
+After: "We design and build high-performance websites: custom, conversion-focused, and fast. No templates. No shortcuts."
+
+**What's Included bullets** — replace em dashes with commas or periods:
+- "Custom design from scratch, no templates, no recycled layouts"
+- "Conversion-focused layout. Every section earns its place"
+
+**Why Pehchaan Media paragraph 2**
+Before: "...Strategy, design, and development stay under one roof — so nothing gets lost..."
+After: "...Strategy, design, and development stay under one roof, so nothing gets lost..."
+
+**How It Works step labels** — remove dash, use colon:
+"Step 01: Discovery", "Step 02: Strategy", "Step 03: Design", "Step 04: Build", "Step 05: Launch & Handoff"
+
+**FAQ A3** — remove dash:
+Before: "...over time — we won't promise otherwise."
+After: "...over time. We won't promise otherwise."
+
+**All image alt text** — remove dashes, rewrite to be descriptive, not just branded (see section 3).
+
+**Meta description** — replace with one that includes the actual target keyword and stays under 150 characters:
+"Custom web design agency for brands worldwide. Mobile-responsive, SEO-ready sites built to convert. Book a free 15-min call."
+
+**Final CTA button** — make consistent with the other two CTAs:
+Before: "Book A Call →"
+After: "Book A Free Call →"
+
+---
+
+## 2. Schema markup fixes
+
+**Replace the existing Service JSON-LD** (drop the `offers.availability` field — "InStock" is meant for physical products, not services — and add `serviceType` and `areaServed` to match the location-agnostic positioning):
+
+```json
+{
+  "@context": "https://schema.org",
+  "@type": "Service",
+  "serviceType": "Web Design",
+  "name": "Web Design Agency",
+  "provider": {
+    "@type": "Organization",
+    "name": "Pehchaan Media",
+    "url": "https://pnmh.site",
+    "sameAs": [
+      "REPLACE_WITH_INSTAGRAM_URL",
+      "REPLACE_WITH_LINKEDIN_URL"
+    ]
+  },
+  "areaServed": "Worldwide",
+  "description": "Custom web design agency for brands worldwide. Mobile-responsive, SEO-ready sites built to convert.",
+  "url": "https://pnmh.site/services/web-design-agency"
+}
+```
+Note: leave the `sameAs` placeholders as-is if real social URLs aren't ready yet, don't fabricate them. This is an easy follow-up.
+
+**Add FAQPage JSON-LD** (new addition, matches the 4 existing FAQ questions verbatim, this is one of the highest-value additions for both classic SEO rich results and AI citation):
+
+```json
+{
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  "mainEntity": [
+    {
+      "@type": "Question",
+      "name": "How long does a website project take?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Most projects run 3 to 6 weeks from kickoff to launch. Timeline depends on scope, how quickly feedback rounds move, and whether copy and assets are ready on your end."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Do you handle hosting and deployment?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Yes. We build, deploy to your domain, configure hosting, and hand over full access with documentation, so you're never locked in to us for maintenance."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Will the site rank on Google?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Every site we build ships with clean semantic HTML, proper meta tags, fast load times, a sitemap, and structured data where relevant. Ranking still depends on content quality and authority over time."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Can my team update the site after launch?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Yes. We structure the CMS and write handoff docs specifically so your team can edit content, add pages, and swap images without touching code."
+      }
+    }
+  ]
+}
+```
+
+**Add BreadcrumbList JSON-LD** — confirm first whether a `/services` hub page actually exists in routes.config.ts. If it does, use 3 levels; if not, use 2 and skip the middle item:
+
+```json
+{
+  "@context": "https://schema.org",
+  "@type": "BreadcrumbList",
+  "itemListElement": [
+    { "@type": "ListItem", "position": 1, "name": "Home", "item": "https://pnmh.site" },
+    { "@type": "ListItem", "position": 2, "name": "Web Design Agency", "item": "https://pnmh.site/services/web-design-agency" }
+  ]
+}
+```
+
+---
+
+## 3. Alt text rewrite (descriptive, not just branded)
+
+Replace with alt text that actually describes the image content, consistent format across both sections:
+
+Proof strip:
+- "Halva ecommerce website homepage design"
+- "Sphinx brand website design"
+- "Truly brand website design"
+- "Brand identity design system example"
+
+Why Pehchaan Media section:
+- "Truly website design project by Pehchaan Media"
+- "Sphinx website design project by Pehchaan Media"
+
+(Adjust the specific descriptions to match what each image actually shows.)
+
+---
+
+## 4. GEO additions (for AI Overviews, Gemini, Perplexity citation)
+
+**Add one definition-first sentence near the top of the page**, right after the hero subheadline, as its own short paragraph or standalone line. This kind of clean, quotable definition is what AI engines tend to lift directly when answering "what does a web design agency do" or "web design agency" type queries:
+
+"Pehchaan Media is a web design agency that builds custom, mobile-first websites designed to convert visitors into customers."
+
+**Add one real client result or stat, if available.** Research shows passages with a concrete statistic or a named quote get cited significantly more often than generic claims. This needs a real number or quote from an actual project, don't let Replit invent one. If nothing is ready yet, leave a clear placeholder comment in the code (`<!-- TODO: insert real client result/stat here -->`) rather than filler text.
+
+**Keep all existing lists as lists** (What's Included, How It Works steps). Don't convert them to paragraphs. Structured, scannable content is what AI systems extract from most easily.
+
+---
+
+## 5. Verify after changes
+
+- Re-run Google Rich Results Test to confirm both Service and FAQPage schema validate with no errors
+- Confirm FAQ answers in the JSON-LD match the visible page text exactly (mismatches can get schema ignored or flagged)
+- Re-check mobile view and PageSpeed Insights after the copy edits, in case new elements shift layout

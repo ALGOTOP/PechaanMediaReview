@@ -10,34 +10,84 @@ import sphinxImage from "@assets/sphinx_hd.webp";
 import trulyImage  from "@assets/truly_hd.webp";
 import brandImage  from "@assets/10002_1773591659727.webp";
 
-/* ─── JSON-LD schema ─────────────────────────────────────────────── */
-const schema = {
+/* ─── JSON-LD schemas ────────────────────────────────────────────── */
+const schemaService = {
   "@context": "https://schema.org",
   "@type": "Service",
+  serviceType: "Web Design",
   name: "Web Design Agency",
   provider: {
     "@type": "Organization",
     name: "Pehchaan Media",
     url: "https://pnmh.site",
+    sameAs: [
+      "REPLACE_WITH_INSTAGRAM_URL",
+      "REPLACE_WITH_LINKEDIN_URL",
+    ],
   },
+  areaServed: "Worldwide",
   description:
-    "Custom website design and development for brands worldwide. Mobile-responsive, SEO-ready, and built to convert.",
+    "Custom web design agency for brands worldwide. Mobile-responsive, SEO-ready sites built to convert.",
   url: "https://pnmh.site/services/web-design-agency",
-  offers: {
-    "@type": "Offer",
-    availability: "https://schema.org/InStock",
-    url: "https://pnmh.site/services/web-design-agency",
-  },
+};
+
+const schemaFaq = {
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  mainEntity: [
+    {
+      "@type": "Question",
+      name: "How long does a website project take?",
+      acceptedAnswer: {
+        "@type": "Answer",
+        text: "Most projects run 3 to 6 weeks from kickoff to launch. Timeline depends on scope, how quickly feedback rounds move, and whether copy and assets are ready on your end.",
+      },
+    },
+    {
+      "@type": "Question",
+      name: "Do you handle hosting and deployment?",
+      acceptedAnswer: {
+        "@type": "Answer",
+        text: "Yes. We build, deploy to your domain, configure hosting, and hand over full access with documentation, so you're never locked in to us for maintenance.",
+      },
+    },
+    {
+      "@type": "Question",
+      name: "Will the site rank on Google?",
+      acceptedAnswer: {
+        "@type": "Answer",
+        text: "Every site we build ships with clean semantic HTML, proper meta tags, fast load times, a sitemap, and structured data where relevant. Ranking still depends on content quality and authority over time.",
+      },
+    },
+    {
+      "@type": "Question",
+      name: "Can my team update the site after launch?",
+      acceptedAnswer: {
+        "@type": "Answer",
+        text: "Yes. We structure the CMS and write handoff docs specifically so your team can edit content, add pages, and swap images without touching code.",
+      },
+    },
+  ],
+};
+
+const schemaBreadcrumb = {
+  "@context": "https://schema.org",
+  "@type": "BreadcrumbList",
+  itemListElement: [
+    { "@type": "ListItem", position: 1, name: "Home", item: "https://pnmh.site" },
+    { "@type": "ListItem", position: 2, name: "Services", item: "https://pnmh.site/services" },
+    { "@type": "ListItem", position: 3, name: "Web Design Agency", item: "https://pnmh.site/services/web-design-agency" },
+  ],
 };
 
 /* ─── Data ───────────────────────────────────────────────────────── */
 const services = [
-  "Custom design from scratch — no templates, no recycled layouts",
+  "Custom design from scratch, no templates, no recycled layouts",
   "Mobile-first, fully responsive builds tested across devices",
   "SEO-ready semantic HTML, clean URLs, and proper meta structure",
   "Fast load times optimised for Core Web Vitals from day one",
   "Easy content editing with a clear post-launch handoff",
-  "Conversion-focused layout — every section earns its place",
+  "Conversion-focused layout. Every section earns its place.",
 ];
 
 const steps = [
@@ -51,15 +101,15 @@ const steps = [
 const faqs: { q: string; a: string }[] = [
   {
     q: "How long does a website project take?",
-    a: "Most projects run 3–6 weeks from kickoff to launch. Timeline depends on scope, how quickly feedback rounds move, and whether copy and assets are ready on your end. We'll give you an honest estimate after the discovery call.",
+    a: "Most projects run 3 to 6 weeks from kickoff to launch. Timeline depends on scope, how quickly feedback rounds move, and whether copy and assets are ready on your end. We'll give you an honest estimate after the discovery call.",
   },
   {
     q: "Do you handle hosting and deployment?",
-    a: "Yes. We build, deploy to your domain, configure hosting, and hand over full access with documentation — so you're never locked in to us for maintenance.",
+    a: "Yes. We build, deploy to your domain, configure hosting, and hand over full access with documentation, so you're never locked in to us for maintenance.",
   },
   {
     q: "Will the site rank on Google?",
-    a: "Every site we build ships with clean semantic HTML, proper meta tags, fast load times, a sitemap, and structured data where relevant. That's the technical foundation search engines need. Ranking still depends on content quality and authority over time — we won't promise otherwise.",
+    a: "Every site we build ships with clean semantic HTML, proper meta tags, fast load times, a sitemap, and structured data where relevant. That's the technical foundation search engines need. Ranking still depends on content quality and authority over time. We won't promise otherwise.",
   },
   {
     q: "Can my team update the site after launch?",
@@ -68,10 +118,10 @@ const faqs: { q: string; a: string }[] = [
 ];
 
 const proofImages = [
-  { src: halvaImage,  alt: "Halva — brand & web project by Pehchaan Media",  label: "Halva" },
-  { src: sphinxImage, alt: "Sphinx — brand & web project by Pehchaan Media",  label: "Sphinx" },
-  { src: trulyImage,  alt: "Truly — brand & web project by Pehchaan Media",   label: "Truly" },
-  { src: brandImage,  alt: "Brand identity project by Pehchaan Media",         label: "Brand" },
+  { src: halvaImage,  alt: "Halva ecommerce website homepage design",   label: "Halva" },
+  { src: sphinxImage, alt: "Sphinx brand website design",               label: "Sphinx" },
+  { src: trulyImage,  alt: "Truly brand website design",                label: "Truly" },
+  { src: brandImage,  alt: "Brand identity design system example",      label: "Brand" },
 ];
 
 /* ─── FAQ accordion row ──────────────────────────────────────────── */
@@ -123,11 +173,12 @@ export default function WebDesignAgency() {
 
   return (
     <div className="bg-white text-foreground font-sans overflow-x-hidden">
-      {/* JSON-LD */}
-      <script
-        type="application/ld+json"
-        dangerouslySetInnerHTML={{ __html: JSON.stringify(schema) }}
-      />
+      {/* JSON-LD: Service */}
+      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(schemaService) }} />
+      {/* JSON-LD: FAQPage */}
+      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(schemaFaq) }} />
+      {/* JSON-LD: BreadcrumbList */}
+      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(schemaBreadcrumb) }} />
 
       <Navigation />
 
@@ -151,8 +202,12 @@ export default function WebDesignAgency() {
               <span className="italic font-light text-muted-foreground">built for brands.</span>
             </h1>
 
-            <p className="text-base md:text-lg text-muted-foreground leading-relaxed mb-8 max-w-sm">
-              We design and build high-performance websites — custom, conversion-focused, and fast. No templates. No shortcuts.
+            <p className="text-base md:text-lg text-muted-foreground leading-relaxed mb-4 max-w-sm">
+              We design and build high-performance websites: custom, conversion-focused, and fast. No templates. No shortcuts.
+            </p>
+
+            <p className="text-sm text-muted-foreground leading-relaxed mb-8 max-w-sm">
+              Pehchaan Media is a web design agency that builds custom, mobile-first websites designed to convert visitors into customers.
             </p>
 
             <div className="flex flex-col sm:flex-row gap-3">
@@ -180,7 +235,7 @@ export default function WebDesignAgency() {
         <div className="relative w-full md:w-1/2 h-[42vw] md:h-auto min-h-[260px]">
           <img
             src={webImage}
-            alt="Web design work by Pehchaan Media — custom website design agency"
+            alt="Custom website design project by Pehchaan Media web design agency"
             className="absolute inset-0 w-full h-full object-cover"
             fetchpriority="high"
           />
@@ -229,7 +284,7 @@ export default function WebDesignAgency() {
                 <span className="italic font-light text-muted-foreground">to actually perform.</span>
               </h2>
               <p className="text-sm md:text-base text-muted-foreground leading-relaxed max-w-sm mb-8">
-                Every engagement covers the full stack — strategy, design, and development as a single unified team, not handed off between silos.
+                Every engagement covers the full stack: strategy, design, and development as a single unified team, not handed off between silos.
               </p>
               <Button size="lg" onClick={bookCall} className="px-8 font-semibold">
                 Start a Project
@@ -310,10 +365,11 @@ export default function WebDesignAgency() {
 
             <div className="flex flex-col gap-6">
               <p className="text-base md:text-lg text-muted-foreground leading-relaxed">
-                Most web design agencies pick from a library of themes and swap in your logo. We don't. Every project starts from a blank canvas — shaped by who your audience is, what action you want them to take, and how your brand needs to feel to get them there.
+                Most web design agencies pick from a library of themes and swap in your logo. We don't. Every project starts from a blank canvas, shaped by who your audience is, what action you want them to take, and how your brand needs to feel to get them there.
               </p>
+              {/* TODO: insert real client result/stat here */}
               <p className="text-base text-muted-foreground leading-relaxed">
-                We've built websites for product brands, SaaS startups, luxury retail, and service businesses. The work is different every time because the briefs are different every time. Strategy, design, and development stay under one roof — so nothing gets lost in handoffs and no one is making decisions without context.
+                We've built websites for product brands, SaaS startups, luxury retail, and service businesses. The work is different every time because the briefs are different every time. Strategy, design, and development stay under one roof, so nothing gets lost in handoffs and no one is making decisions without context.
               </p>
             </div>
           </div>
@@ -323,7 +379,7 @@ export default function WebDesignAgency() {
             <div className="relative overflow-hidden rounded-xl aspect-[4/3] bg-muted col-span-2 md:col-span-2">
               <img
                 src={trulyImage}
-                alt="Pehchaan Media web design project — Truly brand"
+                alt="Truly website design project by Pehchaan Media"
                 loading="lazy"
                 className="w-full h-full object-cover hover:scale-105 transition-transform duration-700"
               />
@@ -331,7 +387,7 @@ export default function WebDesignAgency() {
             <div className="relative overflow-hidden rounded-xl aspect-[4/3] bg-muted">
               <img
                 src={sphinxImage}
-                alt="Pehchaan Media web design project — Sphinx brand"
+                alt="Sphinx website design project by Pehchaan Media"
                 loading="lazy"
                 className="w-full h-full object-cover hover:scale-105 transition-transform duration-700"
               />
@@ -354,7 +410,7 @@ export default function WebDesignAgency() {
                 <span className="italic font-light text-muted-foreground">get asked first.</span>
               </h2>
               <p className="text-sm text-muted-foreground leading-relaxed max-w-xs">
-                If something isn't answered here, ask us on the call — that's what it's for.
+                If something isn't answered here, ask us on the call. That's what it's for.
               </p>
             </div>
 
@@ -389,7 +445,7 @@ export default function WebDesignAgency() {
             className="px-10 font-semibold bg-transparent text-background border-background/30 hover:bg-background hover:text-foreground transition-colors"
             data-testid="button-footer-cta"
           >
-            Book A Call →
+            Book A Free Call →
           </Button>
           <p className="text-xs text-background/30 mt-4">
             Or email us directly: infopehchaanmedia@gmail.com

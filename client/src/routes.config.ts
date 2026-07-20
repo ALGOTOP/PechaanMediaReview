@@ -31,6 +31,6 @@ export const routes: RouteConfig[] = [
     priority: 0.9,
     changefreq: "monthly",
     title: "Web Design Agency | Pehchaan Media",
-    description: "Custom website design and development for brands worldwide. Mobile-responsive, SEO-ready, and built to convert. Book a free 15-min call with Pehchaan Media.",
+    description: "Custom web design agency for brands worldwide. Mobile-responsive, SEO-ready sites built to convert. Book a free 15-min call.",
   },
 ];
