@@ -56,7 +56,7 @@ const services = [
     alt: "Halva brand identity by Pehchaan Media",
     imgRight: false,
     dark: false,
-    tinted: true,
+    tinted: false,
     cta: "Start a Brand Project",
     subject: "Brand%20Identity%20Enquiry",
   },
@@ -69,7 +69,7 @@ const services = [
     img: trulyImage,
     alt: "Marketing strategy project by Pehchaan Media",
     imgRight: true,
-    dark: true,
+    dark: false,
     tinted: false,
     cta: "Start a Campaign",
     subject: "Marketing%20Enquiry",
@@ -252,7 +252,7 @@ export default function Services() {
       {/* ══ HERO ══════════════════════════════════════════════════════ */}
       <section
         id="hero"
-        className="pt-[64px] min-h-[100svh] flex flex-col bg-[#0a0a0a] text-white"
+        className="pt-[64px] min-h-[100svh] flex flex-col bg-white text-foreground"
       >
         {/* Top — headline + image preview */}
         <div className="flex flex-col md:flex-row flex-1 px-6 md:px-14 lg:px-20 pt-14 md:pt-20 pb-6 gap-10">
@@ -263,7 +263,7 @@ export default function Services() {
               initial={{ opacity: 0, y: 12 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.6, delay: 0.1 }}
-              className="text-xs font-mono tracking-[0.22em] uppercase text-white/30 mb-8"
+              className="text-xs font-mono tracking-[0.22em] uppercase text-muted-foreground mb-8"
             >
               Pehchaan Media · Services
             </motion.p>
@@ -276,14 +276,14 @@ export default function Services() {
             >
               Three disciplines.
               <br />
-              <span className="italic font-light text-white/30">One agency.</span>
+              <span className="italic font-light text-muted-foreground">One agency.</span>
             </motion.h1>
 
             <motion.p
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
               transition={{ duration: 0.6, delay: 0.4 }}
-              className="mt-6 text-sm md:text-base text-white/40 max-w-sm leading-relaxed"
+              className="mt-6 text-sm md:text-base text-muted-foreground max-w-sm leading-relaxed"
             >
               Web. Brand. Marketing. Every discipline under one roof — so nothing gets lost in handoffs and every decision stays in context.
             </motion.p>
@@ -296,7 +296,7 @@ export default function Services() {
             transition={{ duration: 0.8, delay: 0.3 }}
             className="hidden md:flex md:w-2/5 items-center"
           >
-            <div className="relative w-full aspect-[4/3] rounded-2xl overflow-hidden bg-white/5">
+            <div className="relative w-full aspect-[4/3] rounded-2xl overflow-hidden bg-muted">
               <AnimatePresence mode="wait">
                 <motion.img
                   key={activeImgAlt}
@@ -311,14 +311,14 @@ export default function Services() {
               </AnimatePresence>
               {hoveredIdx === null && (
                 <div className="absolute inset-0 flex items-end p-5 pointer-events-none">
-                  <p className="text-xs font-mono text-white/25 tracking-widest uppercase">
+                  <p className="text-xs font-mono text-muted-foreground tracking-widest uppercase">
                     Hover a service
                   </p>
                 </div>
               )}
               {hoveredIdx !== null && (
                 <div className="absolute inset-0 bg-gradient-to-t from-black/40 to-transparent pointer-events-none flex items-end p-5">
-                  <p className="text-xs font-mono text-white/60 tracking-widest uppercase">
+                  <p className="text-xs font-mono text-white/80 tracking-widest uppercase">
                     {heroRows[hoveredIdx].label}
                   </p>
                 </div>
@@ -328,7 +328,7 @@ export default function Services() {
         </div>
 
         {/* Bottom — service index rows */}
-        <div className="border-t border-white/[0.08]">
+        <div className="border-t border-border">
           {heroRows.map((row, i) => (
             <motion.a
               key={row.n}
@@ -342,18 +342,18 @@ export default function Services() {
                 e.preventDefault();
                 document.querySelector(row.href)?.scrollIntoView({ behavior: "smooth" });
               }}
-              className="group flex items-center justify-between px-6 md:px-14 lg:px-20 py-5 border-b border-white/[0.08] cursor-pointer transition-colors duration-200 hover:bg-white/[0.04]"
+              className="group flex items-center justify-between px-6 md:px-14 lg:px-20 py-5 border-b border-border cursor-pointer transition-colors duration-200 hover:bg-muted/50"
             >
               <div className="flex items-center gap-5 md:gap-8">
-                <span className="text-xs font-mono text-white/25 w-6 shrink-0">{row.n}</span>
-                <span className="text-lg md:text-2xl lg:text-3xl font-bold tracking-tight text-white group-hover:translate-x-1 transition-transform duration-300">
+                <span className="text-xs font-mono text-muted-foreground w-6 shrink-0">{row.n}</span>
+                <span className="text-lg md:text-2xl lg:text-3xl font-bold tracking-tight text-foreground group-hover:translate-x-1 transition-transform duration-300">
                   {row.label}
                 </span>
               </div>
               <motion.span
                 animate={{ x: hoveredIdx === i ? 4 : 0 }}
                 transition={{ duration: 0.2 }}
-                className="text-white/20 group-hover:text-white/60 transition-colors text-lg font-light"
+                className="text-muted-foreground group-hover:text-foreground transition-colors text-lg font-light"
               >
                 →
               </motion.span>
@@ -368,7 +368,7 @@ export default function Services() {
       ))}
 
       {/* ══ WHY ONE AGENCY ════════════════════════════════════════════ */}
-      <section id="about" className="py-24 md:py-32 border-t border-border bg-[#f7f7f5]">
+      <section id="about" className="py-24 md:py-32 border-t border-border bg-white">
         <div className="max-w-7xl mx-auto px-6">
           <div className="grid md:grid-cols-3 gap-10 md:gap-16">
             <FadeUp className="md:col-span-1">
@@ -414,10 +414,10 @@ export default function Services() {
       </section>
 
       {/* ══ FINAL CTA ═════════════════════════════════════════════════ */}
-      <section id="contact" className="py-24 md:py-36 border-t border-border bg-foreground text-background">
+      <section id="contact" className="py-24 md:py-36 border-t border-border bg-white">
         <div className="max-w-7xl mx-auto px-6 text-center">
           <FadeUp>
-            <p className="text-xs font-mono tracking-[0.2em] uppercase text-background/40 mb-6">
+            <p className="text-xs font-mono tracking-[0.2em] uppercase text-muted-foreground mb-6">
               Let's work together
             </p>
           </FadeUp>
@@ -425,24 +425,23 @@ export default function Services() {
             <h2 className="text-4xl md:text-6xl lg:text-7xl font-bold tracking-tighter leading-[0.95] mb-6">
               Ready to build
               <br />
-              <span className="italic font-light text-background/30">something real?</span>
+              <span className="italic font-light text-muted-foreground">something real?</span>
             </h2>
           </FadeUp>
           <FadeUp delay={0.12}>
-            <p className="text-base md:text-lg text-background/50 max-w-md mx-auto leading-relaxed mb-10">
+            <p className="text-base md:text-lg text-muted-foreground max-w-md mx-auto leading-relaxed mb-10">
               Book a free 15-minute call. We'll tell you honestly what you need and whether we're the right team to deliver it.
             </p>
           </FadeUp>
           <FadeUp delay={0.18}>
             <Button
               size="lg"
-              variant="outline"
               onClick={bookCall}
-              className="px-10 font-semibold bg-transparent text-background border-background/30 hover:bg-background hover:text-foreground transition-colors"
+              className="px-10 font-semibold"
             >
               Book A Call →
             </Button>
-            <p className="text-xs text-background/25 mt-4">
+            <p className="text-xs text-muted-foreground mt-4">
               Or email us: infopehchaanmedia@gmail.com
             </p>
           </FadeUp>
