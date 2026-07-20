@@ -207,7 +207,7 @@ export default function WebDesignAgency() {
             </p>
 
             <p className="text-sm text-muted-foreground leading-relaxed mb-8 max-w-sm">
-              Pehchaan Media is a web design agency that builds custom, mobile-first websites designed to convert visitors into customers.
+              Pehchaan Media is a full-service creative agency, and web design &amp; development is one of our core services. We build custom, mobile-first websites designed to convert visitors into customers.
             </p>
 
             <div className="flex flex-col sm:flex-row gap-3">
