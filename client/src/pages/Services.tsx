@@ -4,9 +4,8 @@ import { Button } from "@/components/ui/button";
 import Navigation from "@/components/Navigation";
 import Footer from "@/components/Footer";
 
-import halvaImage  from "@assets/halva_hd.webp";
+import halvaImage from "@assets/halva_hd.webp";
 import trulyImage  from "@assets/truly_hd.webp";
-import sphinxImage from "@assets/sphinx_hd.webp";
 import webImage    from "@assets/web_digital_hd.webp";
 
 /* ─── JSON-LD ─────────────────────────────────────────────────────── */
@@ -26,69 +25,54 @@ const schema = {
 
 /* ─── Data ────────────────────────────────────────────────────────── */
 const heroRows = [
-  { n: "01", label: "Brand Identity & Design", img: halvaImage,  href: "#brand" },
-  { n: "02", label: "Marketing & Strategy",    img: trulyImage,  href: "#marketing" },
-  { n: "03", label: "Film & Production",       img: sphinxImage, href: "#film" },
-  { n: "04", label: "Web & Digital",           img: webImage,    href: "#web" },
+  { n: "01", label: "Web & Digital",           img: webImage,   href: "#web" },
+  { n: "02", label: "Brand Identity & Design", img: halvaImage, href: "#brand" },
+  { n: "03", label: "Marketing & Strategy",    img: trulyImage, href: "#marketing" },
 ];
 
 const services = [
   {
-    n: "01", id: "brand",
-    title: "Brand Identity",
-    sub: "& Design",
-    body: "We build visual identities that mean something — from the mark to the full system. Every decision traces back to who you are and who you're for. Not trends. Not templates.",
-    items: ["Logo & Mark System", "Brand Guidelines", "Typography & Colour", "Packaging Design", "Brand Collateral", "Visual Language"],
-    img: halvaImage,
-    alt: "Halva — brand identity by Pehchaan Media",
-    imgRight: true,
-    dark: false,
-    tinted: false,
-    cta: "Start a Brand Project",
-    subject: "Brand%20Identity%20Enquiry",
-  },
-  {
-    n: "02", id: "marketing",
-    title: "Marketing",
-    sub: "& Strategy",
-    body: "Strategy before tactics. We map where your audience lives, what they need to hear, and build the system that reaches them — then we measure everything and do it better.",
-    items: ["Market Positioning", "Content Strategy", "Social Media Systems", "Paid Media Planning", "Campaign Architecture", "Performance Analytics"],
-    img: trulyImage,
-    alt: "Marketing strategy by Pehchaan Media",
-    imgRight: false,
-    dark: false,
-    tinted: true,
-    cta: "Start a Campaign",
-    subject: "Marketing%20Enquiry",
-  },
-  {
-    n: "03", id: "film",
-    title: "Film",
-    sub: "& Production",
-    body: "From brand films to ad creatives, we produce content that moves. Every frame is intentional — directed, edited, and delivered ready to perform across every platform.",
-    items: ["Brand Films", "Ad Creatives", "Motion Graphics", "Social Content", "Product Showcase", "Corporate Videos"],
-    img: sphinxImage,
-    alt: "Film & production by Pehchaan Media",
-    imgRight: true,
-    dark: true,
-    tinted: false,
-    cta: "Start a Production",
-    subject: "Film%20Production%20Enquiry",
-  },
-  {
-    n: "04", id: "web",
+    n: "01", id: "web",
     title: "Web",
     sub: "& Digital",
     body: "Custom-built websites and digital experiences — responsive, fast, and designed to convert. No templates. No shortcuts. Full handoff, full control, from day one.",
     items: ["Custom Web Design", "Development & Build", "SEO & Performance", "CMS & Handoff", "Analytics Setup", "Conversion Optimisation"],
     img: webImage,
     alt: "Web design by Pehchaan Media",
-    imgRight: false,
+    imgRight: true,
     dark: false,
     tinted: false,
     cta: "See Web Design →",
     subject: "Web%20Design%20Enquiry",
     link: "/services/web-design-agency",
+  },
+  {
+    n: "02", id: "brand",
+    title: "Brand Identity",
+    sub: "& Design",
+    body: "We build visual identities that mean something — from the mark to the full system. Every decision traces back to who you are and who you're for. Not trends. Not templates.",
+    items: ["Logo & Mark System", "Brand Guidelines", "Typography & Colour", "Packaging Design", "Brand Collateral", "Visual Language"],
+    img: halvaImage,
+    alt: "Halva brand identity by Pehchaan Media",
+    imgRight: false,
+    dark: false,
+    tinted: true,
+    cta: "Start a Brand Project",
+    subject: "Brand%20Identity%20Enquiry",
+  },
+  {
+    n: "03", id: "marketing",
+    title: "Marketing",
+    sub: "& Strategy",
+    body: "Strategy before tactics. We map where your audience lives, what they need to hear, and build the system that reaches them — then we measure everything and do it better.",
+    items: ["Market Positioning", "Content Strategy", "Social Media Systems", "Paid Media Planning", "Campaign Architecture", "Performance Analytics"],
+    img: trulyImage,
+    alt: "Marketing strategy project by Pehchaan Media",
+    imgRight: true,
+    dark: true,
+    tinted: false,
+    cta: "Start a Campaign",
+    subject: "Marketing%20Enquiry",
   },
 ];
 
@@ -290,7 +274,7 @@ export default function Services() {
               transition={{ duration: 0.75, delay: 0.18, ease: [0.25, 0.46, 0.45, 0.94] }}
               className="text-5xl md:text-6xl lg:text-7xl xl:text-8xl font-bold tracking-tighter leading-[1.0]"
             >
-              Four disciplines.
+              Three disciplines.
               <br />
               <span className="italic font-light text-white/30">One agency.</span>
             </motion.h1>
@@ -301,7 +285,7 @@ export default function Services() {
               transition={{ duration: 0.6, delay: 0.4 }}
               className="mt-6 text-sm md:text-base text-white/40 max-w-sm leading-relaxed"
             >
-              Brand. Marketing. Film. Web. Every discipline under one roof — so nothing gets lost in handoffs and every decision stays in context.
+              Web. Brand. Marketing. Every discipline under one roof — so nothing gets lost in handoffs and every decision stays in context.
             </motion.p>
           </div>
 
