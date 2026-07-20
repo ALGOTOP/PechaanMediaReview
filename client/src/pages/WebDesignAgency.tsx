@@ -203,7 +203,7 @@ export default function WebDesignAgency() {
             </h1>
 
             <p className="text-base md:text-lg text-muted-foreground leading-relaxed mb-4 max-w-sm">
-              We design and build high-performance websites: custom, conversion-focused, and fast. No templates. No shortcuts.
+              Your website is often the first real impression someone gets of your business, so we build it like it matters, not like one more theme with your logo swapped in.
             </p>
 
             <p className="text-sm text-muted-foreground leading-relaxed mb-8 max-w-sm">
